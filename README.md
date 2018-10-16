@@ -11,6 +11,7 @@
 *   Betreuer: Julian Oppermann, Lukas Sommer
 *   [Vorlesungswebseite](https://www.esa.informatik.tu-darmstadt.de/twiki/bin/view/Lectures/EiCB18De.html)
 *   [Moodle](https://moodle.informatik.tu-darmstadt.de/)
+*   Notizen zu der Vorlesung: [[PDF](notizen.pdf)] (*work-in-progress*).
 
 ## Inhalt
 
