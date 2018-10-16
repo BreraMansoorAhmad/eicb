@@ -1,5 +1,7 @@
 \documentclass[ngerman]{scrartcl}
 \usepackage{babel}
+
+% typography
 \usepackage{fontspec}
 \setmainfont{Open Sans}[
   BoldFont={Open Sans Bold},
@@ -8,17 +10,32 @@
   BoldFont={Open Sans Bold},
   ItalicFont={Open Sans Italic}]
 \setmonofont{Menlo}
+\usepackage[factor=2000]{microtype}
+
+% graphics, drawings, etc.
 \usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{shapes.arrows}
+
+% highlighting, lists, code
 \usepackage{soul}
 \usepackage{enumitem}
 \usepackage{listings}
-\usepackage{graphicx}
 \lstset{basicstyle=\ttfamily,escapeinside=||}
-
 
 % nice tables
 \usepackage{booktabs}
 \newcommand{\tablespacing}[1]{\renewcommand{\arraystretch}{#1}}
+
+% links
+\usepackage[
+  colorlinks,
+  linkcolor={red!50!black},
+  citecolor={blue!50!black},
+  urlcolor={blue!80!black}
+]{hyperref}
 
 \title{Einführung in den Compilerbau}
 \date{Wintersemester 2018-2019}
@@ -142,22 +159,90 @@ Diese Details werden mithilfe von verschiedensten Algorithmen ergänzt, welche d
 
 \subsection{Auswirkungen der Zielmaschine}
 
-\begin{figure}
+\begin{figure}\label{fig:dlx}
 \includegraphics[width=\textwidth]{media/dlx}
 \caption{Die DLX RISC Prozessorarchitektur}
 \end{figure}
 \begin{figure}
 \includegraphics[width=\textwidth]{media/tigersharc}
-\caption{Analog Devices TigerSHARC}
+\caption{Analog Devices TigerSHARC}\label{fig:tigersharc}
 \end{figure}
+\begin{figure}
+\caption{Ein \emph{Synergistic Processing Element} eines Cell Prozessors.}\label{fig:spe}
+\end{figure}
+% TODO figure.
 
 Die Zielmaschine hat einen Einfluss auf die Architektur des Compilers. So basiert zum Beispiel die DLX Architektur von John Hennessy und David Patterson auf der MIPS Architektur, und ist nur leicht verändert um diese zu modernisieren. Damit ist es sehr einfach, einen Compiler zu bauen, der für diese Architektur Code generiert.
 
 Etwas komplizierter wird es mit der \emph{TigerSHARC} Architektur von Analog Devices. Dies ist ein Beispiel für ein DSP, also \emph{Digital Signalling Processor}. Es gibt hier zwei \emph{Computational Blocks}, damit parallel Rechnungen ausgeführt werden können. Diese können aber nicht kommunizieren, also muss der Compiler drauf achten, dass auf die Register nur von dem jeweiligen Block aus zugegriffen werden können. Außerdem besitzt diese Architektur separate Rechenblocks, um Adressen zu bestimmen. Ein Compiler für diese Architektur muss also wissen, wie die Architektur aufgebaut ist, um sie effizient zu nutzen.
 
-Am problematischsten wird das aber erst bei extremen Architekturen wie der des IBM/Sony \emph{Cell} Prozessors. Hierbei handelt es sich um eine sehr gewagte, und wie sich leider heraus
+Am problematischsten wird das aber erst bei extremen Architekturen wie der des IBM/Sony \emph{Cell} Prozessors. Hierbei handelt es sich um eine sehr gewagte, und wie sich leider herausgestellt hat, zu komplexe Architektur. Es gibt ein PowerPC-basierten Hauptprozessor, der aber nicht sehr leistungsstark ist. Die eigentliche Arbeit kann von \emph{Synergistic Processing Elements}, kurz SPE, ausgeführt werden. Diese sind so konstruiert, dass ein sorgfältig produzierter Instruktionsstream die Hardware maximal ausnutzen kann, mit parallelen Arithmetischen- und Speichereinheiten (siehe Abbildung \ref{fig:spe}).
 
+\subsection{Anforderungen an CPUs}
 
+Je nach Anwendungsgebiet sind die Anforderungen mehr oder weniger wichtig. 
+\begin{itemize}
+  \item Rechenleistung
+  \item Datentype (Gleitkomma, ganzzalig, Vektoren)
+  \item Operationen (Multiplikationen, MAC\footnote{Mir als \emph{fused multiply and add} bekannt, eine Operation, die vor allem für Matrizenmultiplikation signifikant ist.})
+  \item Speicherbandbreite (parallele Speicherzugriffe)
+  \item Energieeffizienz
+  \item Platzbedarf (für den Prozessorchip)
+\end{itemize}
+Oft können manche Anforderungen nur durch spezialisierte Prozessoren erfüllt werden.
+
+\subsection{Paralleles Rechnen}
+
+Paralleles Rechnen ist die Königsklasse der Forschung. Warum eigentlich? Das Wettrennen der Taktfrequenzen ist im großen und ganzen vorbei, mehr als \textasciitilde4\,GHz ist nicht realistisch. Also ist \hl{der Trend weg von hochgetakteten Einzelprozessoren und hin zu vielen (2-8, teilweise 16) Prozessoren}, die aber weniger schnell getaktet werden. Dadurch erreicht man mehr Rechenleistung. Aber wie kann man für solche parallele Rechenkapazitäten programmieren?
+
+Erste praktische Ansätze sind OpenMP, mit dem man für parallele CPUs programmieren kann. {OpenCL} kann mit heterogenen Systemen (GPUs, CPUs, experimentell auch FPGAs) arbeiten, und für NVidia Grafikkarten gibt es {CUDA}. \hl{Diese Lösungen erfordern aber aktuell noch, dass der Programmierer explizit für ein paralleles System programmiert. Es gibt noch keine automatische Parallelisierung}.
+
+\subsection{Compilerbau in der Lehre}
+
+Warum wird der Compilerbau so früh gelehrt? Es handelt sich hierbei um eine Kombination von verschiedenen Disziplinen. Zum Compilerbau benötigt man einen \emph{Parser}, welcher zur theoretischen Informatik gehört. Man braucht auch das Hintergrundwissen der \emph{Architektur der Zielmaschine}, welches zur technischen Informatik gehört. Außerdem braucht man zum Compilerbau Kenntnisse von Software-Engineering, was zur praktischen Informatik gehört. Damit vereint der Compilerbau drei wichtige Disziplinen.
+
+\section{Aufbau}
+
+\subsection{Vorgehen}
+
+Compiler arbeiten generell in mehreren Phasen. In Abbildung \ref{fig:compilerstages} sind diese Phasen aufgezeigt. Außerdem sind die  Zwischendarstellungen, die zum Informationsaustausch zwischen den Phasen genutzt werden, dargestellt.
+
+\begin{figure}\centering
+\begin{tikzpicture}[
+  stage/.style={diamond, draw=black, thick, text width=6em, text centered, inner sep=0.1em, rounded corners},
+  repr/.style={rectangle, draw=black, thick, text width=6em, text badly centered, inner sep=0.5em, rounded corners},
+  line/.style={draw, thick, ->, shorten >=2pt, rounded corners}]
+\matrix[column sep=2em, row sep=1em]{
+  \node[repr] (source) {Source Code};
+  & \node[stage] (syntax) {Syntactic Analysis};
+  & \node[repr] (ast) {AST};
+  & \node[stage] (context) {Contextual Analysis};\\
+  \coordinate (phantoml);
+  &&& \coordinate (phantomr);\\
+  \node[repr] (dast) {DAST};
+  & \node[stage] (generation) {Code Generation};
+  & \node[repr] (target) {Target Code};
+  &\\
+};
+\begin{scope} [every path/.style=line]
+\path (source) -- (syntax);
+\path (syntax) -- (ast);
+\path (ast) -- (context);
+\path (context) -- (phantomr) -- (phantoml) -- (dast);
+\path (dast) -- (generation);
+\path (generation) -- (target);
+\end{scope}
+\end{tikzpicture}
+\caption{Zwischendarstellungen für den Informationsaustausch}\label{fig:compilerstages}
+\end{figure}
+
+\subsection{Syntaxanalyse}
+
+Bei der Syntaxanalyse wird überprüft, ob das Programm Syntaxgerecht aufgebaut ist. 
+
+\subsection{Kontextanalyse}
+
+Bei der Kontextanalyse werden Variablen ihren Deklarationen zugeordnet. Ausßerdem werden die Typen von Ausdrücken berechnet.
 
 \end{document}
 
