@@ -2,6 +2,21 @@
 
 *Course taught at the Technical University of Darmstadt.*
 
+*   Credits: 2CP  
+*   Zeiten: Dienstags, 16:15--17:55
+*   Ort: S1|02 A03
+*   Dozent: Andreas Koch
+*   Betreuer: Julian Oppermann, Lukas Sommer
+
+## Inhalt
+
+Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlagen des Compilerbaus, speziell der benötigten Algorithmen und Datenstrukturen. Dabei werden alle Phasen der Übersetzung, vom Lexing/Parsing über die semantische Analyse bis hin zur Codeerzeugung behandelt. Weitere Themen umfassen die automatische Erzeugung von Lexern/Parsern durch Werkzeuge wie ANTLR und JavaCC, sowie die Laufzeitumgebung bei der Ausführung von Hochsprachen. Die Verfahren werden anhand eines in Java verfassten Beispielcompilers für die einfache Hochsprache Triangle erklärt.
+
+## Links
+
+*   [Vorlesungswebseite](https://www.esa.informatik.tu-darmstadt.de/twiki/bin/view/Lectures/EiCB18De.html)
+*   [Moodle](https://moddle.informatik.tu-darmstadt.de/)
+
 ## Vorlesungen
 
 *   2018-10-16: Einführung, Organisatorisches, Übersicht.
