@@ -1,5 +1,6 @@
 \documentclass[ngerman]{scrartcl}
 \usepackage{babel}
+\usepackage{csquotes}
 
 % typography
 \usepackage{fontspec}
@@ -15,15 +16,33 @@
 % graphics, drawings, etc.
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage[most]{tcolorbox}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{shapes.arrows}
+\newtcolorbox{anmerkung}{%
+  grow to left by=10pt,
+  colback=black!10,
+  colframe=white,
+  coltitle=black,
+  borderline west={4pt}{0pt}{black!30},
+  boxrule=0pt,
+  boxsep=0pt,
+  %breakable,
+  enhanced jigsaw,
+  title={Anmerkung\par},
+  fonttitle={\bfseries},
+  attach title to upper={}}
 
 % highlighting, lists, code
 \usepackage{soul}
 \usepackage{enumitem}
 \usepackage{listings}
-\lstset{basicstyle=\ttfamily,escapeinside=||}
+\lstset{
+  basicstyle=\ttfamily,
+  escapeinside=||,
+  keywordstyle=\color{blue!50!black},
+  stringstyle=\color{green!50!black}}
 
 % nice tables
 \usepackage{booktabs}
@@ -243,6 +262,83 @@ Bei der Syntaxanalyse wird überprüft, ob das Programm Syntaxgerecht aufgebaut 
 \subsection{Kontextanalyse}
 
 Bei der Kontextanalyse werden Variablen ihren Deklarationen zugeordnet. Ausßerdem werden die Typen von Ausdrücken berechnet.
+
+% TODO graphics, text.
+
+\subsection{Code-Erzeugung}
+
+Wenn das Programm syntaktisch und kontextuell korrekt ist, kann es in die Zielsprache übersetzt werden. Eine Zielsprache kann eine Low-Level Sprache wie die Maschinensprache oder Assembly, aber auch C oder eine andere Hochsprache.
+
+Dazu wird DAST-Teilen Instruktionen der Zielsprache zugeordnet. Variablen werden gehandhabt, indem zum Beispiel bei einer Deklaration Speicherplatz reserviert wird, und bei der Verwendung der zugeordnete Speicherplatz referenziert wird.
+
+\section{Optimierung}
+
+\subsection{Optimierender Compiler}
+
+% TODO graphic
+
+Bei einem optimierenden Compiler findet die Kompilierung in drei Phasen statt.
+
+\begin{description}
+\item[Front-End] Macht die syntaktische und kontextuelle Analyse und gibt den AST in einem IR-Format (\emph{Intermediate Representation}) aus.
+\item[Back-End] Liest das IR, und erzeugt den Code.
+\item[Middle-End] Transformation von Zwischendarstellungen. Dieses arbeitet auf der IR. Hier wird kein Code ausgegeben, sondern nur der IR optimiert. Intern werden hier auch oft zusätzliche Darstellungen verwendet werden.
+\end{description}
+
+\begin{anmerkung}
+LLVM ist ein sehr bekanntes Projekt, welches eine Art Plugin-basierte Architektur aufweist. Es können Front-Ends geschrieben werden, die unterschiedliche Programmiersprachen unterstützen (zum Beispiel \verb|clang| für C und C++, \verb|rubinius| für Ruby). Optimierungen können ebenso als Plugin geschrieben werden, und arbeiten auf dem LLVM IR. Es können außerdem Back-Ends geschrieben werden, die für unterschiedlichste Architekturen Code ausgeben. Somit funktioniert zum Beispiel das \emph{Emscripten} Projekt, mit welchem man C und C++ Code in JavaScript kompilieren kann.
+\end{anmerkung}
+
+\subsection{Beispiele für Optimierung}
+
+\begin{description}
+\item[Constant Folding] Bei dieser Optimierung werden Ausdrücke, die ein konstantes Ergebnis haben, von Optimierer ausgewertet. Hat man zum Beispiel den Code
+\begin{lstlisting}[language=C]
+int x = (2 + 3) * y;
+\end{lstlisting}
+Bei dem Constant Folding erkennt der Compiler, dass der ausdruck \verb|2 + 3| konstant ist. Er kann den Ausdruck dann bestimmen, und den Code in eine minimierte Version transformieren.
+\begin{lstlisting}[language=C]
+int x = 5 * y;
+\end{lstlisting}
+\begin{anmerkung}
+Sowohl C++ (seit C++11) als auch Rust haben mittlerweile Support für Constant Folding in die Sprache eingebaut. Mit dem \verb|constexpr| Keyword kann man dem Compiler sagen, dass er einen Funktion oder Variable als Konstante ansehen und diese während der Kompilierung auswerten soll.
+\end{anmerkung}
+\item[Common Subexpression Elimination] Hierbei werden Ausdrücke (\emph{Subexpressions}), die öfters im Code vorkomment (\emph{Common}) eliminiert. Hat man zum Beispiel folgenden Code:
+\begin{lstlisting}[language=C]
+int x = 5 * a + b;
+int y = 5 * a + c;
+\end{lstlisting}
+So kann der Compiler erkennen, dass der Ausdruck \verb|5 * a| mehrmals vorkommt. Wenn er garantieren kann, dass der Wert von \verb|a| während den Instruktionen konstant bleibt, kann er diese vereinfachen, indem er eine temporäre Variable einführt.
+\begin{lstlisting}[language=C]
+int _temp = 5 * a
+int x = _temp + b;
+int y = _temp + c;
+\end{lstlisting}
+\end{description}
+
+% TODO more
+
+\section{Syntax}
+
+\subsection{Syntax oder Grammatik}
+
+Der Syntax beschreibt die Satzstruktur von korrekten Programmen. Jede Sprache hat ihren eigenen Syntax. So ist zum Beispiel der folgende Ausdruck Syntaktisch korrekt in C.
+\begin{lstlisting}[language=C]
+int n = m + 1;
+\end{lstlisting}
+Der Satz \enquote{Ein Kreis hat zwei Ecken} ist wiederum eine syntaktisch korrekte Aussage im Deutschen (was aber nicht bedeutet, dass diese auch \emph{semantisch} korrekt ist).
+
+\subsection{Kontextuelle Einschränkungen}
+
+Nicht jede Aussage, die syntaktisch korrekt ist, ist in dem Kontext auch erlaubt. Es gibt gewisse Regeln, die vom Geltungsbereich (\emph{scope}) und dem Typ von Aussagen abhängen. So ist der folgende Code zum Beispiel nur dann korrekt, wenn die Variable \verb|x| deklariert ist.
+\begin{lstlisting}[language=C]
+int y = 2 * x;
+\end{lstlisting}
+Bei dem Satz \enquote{Ein Kreis hat zwei Ecken} ist der Fehler, dass ein Kreis keine Ecken besitzt. Hier passen die Typen nicht, ein Objekt der klasse \emph{eckige Geometrische Formen}, wie zum Beispiel das Dreieck, würde hier kontextuell passen (aber der Satz wäre dann semantisch immer noch falsch).
+
+\subsection{Semantik}
+
+
 
 \end{document}
 
