@@ -10,7 +10,7 @@
 *   Dozent: Andreas Koch
 *   Betreuer: Julian Oppermann, Lukas Sommer
 *   [Vorlesungswebseite](https://www.esa.informatik.tu-darmstadt.de/twiki/bin/view/Lectures/EiCB18De.html)
-*   [Moodle](https://moddle.informatik.tu-darmstadt.de/)
+*   [Moodle](https://moodle.informatik.tu-darmstadt.de/)
 
 ## Inhalt
 
