@@ -1,0 +1,67 @@
+\documentclass{scrartcl}
+\usepackage{fontspec}
+\setmainfont{Open Sans}[
+  BoldFont={Open Sans Bold},
+  ItalicFont={Open Sans Italic}]
+\setsansfont{Open Sans}[
+  BoldFont={Open Sans Bold},
+  ItalicFont={Open Sans Italic}]
+\setmonofont{Menlo}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{enumitem}
+
+\title{Einführung in den Compilerbau}
+\date{Wintersemester 2018-2019}
+\author{Andreas Koch}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+  \newpage
+  
+  %\KOMAoptions{twocolumn}
+  
+  \section{Organisatorisches}
+   
+  \subsection{Grundlage der Vorlesung}
+   
+  Die Vorlesung basiert \hl{fast vollständig} auf \emph{Programming Language Processors in Java}\footnote{von David Watt und Deryck Brown, Prentice-Hall 2000}. Auszugsweise noch weiteres Material, z.\ B.\ zum ANTLR-Parsergenerator.
+  
+  \subsection{Übersichtswerk}
+  
+  Einen guten allgemeinen Überblick, aber im Detail mit anderen Schwerpunkten als diese Vorlesung, bietet \emph{Compilers, 2. Auflage}\footnote{Von Aho, Sethi, Ullmann, Lam, Addison-Wesley 2006. Auch auf Deutsch verfügbar.}.
+   
+  \subsection{Aufbau der Veranstaltung}
+  
+  Diese Veranstaltung ist logisch in mehrere Teile gegliedert.
+  
+  \begin{itemize}
+    \item Überblick über Front-End (ca.\ 3 Wochen):
+    \begin{itemize}
+      \item Lexing und Parsing,
+      \item Zwischendarstellungen.
+    \end{itemize}
+    \item Überblick über Middle-End (ca.\ 2 Wochen):
+    \begin{itemize}
+      \item Semantische- und Kontextanalyse.
+    \end{itemize}
+    \item Übersicht über Back-End (ca.\ 4 Wochen):
+    \begin{itemize}
+      \item Laufzeitorganisation,
+      \item Code-Erzeugung.
+    \end{itemize}
+    \item Verwendung von Front-End-Generatoren (ca.\ 2--3 Wochen),
+    \item Java Virtuelle Maschine (ca.\ 1--2 Wochen).
+  \end{itemize}
+
+  Die ersten drei Teile der Veranstaltung richten sich an die Veranstaltungen:
+  
+  \begin{itemize}
+    \item IMT3052 von Ivar Farup, Universität Grøvik, Norwegen,
+    \item Vertalerbouw von Theu Ruys, Universität Twente, Niederlande.
+  \end{itemize}
+  
+  
+
+\end{document}
