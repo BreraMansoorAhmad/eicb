@@ -22,8 +22,11 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 
 *   2018-10-16: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181016.avi).
     *   Einführung
+    *   Zielmaschine
     *   Organisatorisches
-    *   Übersicht. 
+    *   Aufbau
+    *   Optimierung
+    *   Syntax
 
 
 ## Folien
