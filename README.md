@@ -4,14 +4,15 @@
 
 ## Übersicht
 
-*   Credits: 2CP  
-*   Zeiten: Dienstags, 16:15--17:55
-*   Ort: S1|02 A03
+*   Credits: 5 CP 
 *   Dozent: Andreas Koch
-*   Betreuer: Julian Oppermann, Lukas Sommer
-*   [Vorlesungswebseite](https://www.esa.informatik.tu-darmstadt.de/twiki/bin/view/Lectures/EiCB18De.html)
-*   [Moodle](https://moodle.informatik.tu-darmstadt.de/)
-*   Notizen zu der Vorlesung: [PDF](notizen.pdf) (*work-in-progress*).
+*   Vorlesung: Dienstags 16:15--17:55 in S1|02 A03.
+*   Prüfungsart: Übungen und Testate.
+*   Betreuer: Julian Oppermann, Lukas Sommer.
+*   Links: [Moodle](https://moodle.informatik.tu-darmstadt.de/), [Vorlesungswebseite](https://www.esa.informatik.tu-darmstadt.de/twiki/bin/view/Lectures/EiCB18De.html).
+*   Notizen zur Vorlesung: [PDF](notizen.pdf) (*work-in-progress*).
+
+Diese Veranstaltung wird aufgezeichnet.
 
 ## Inhalt
 
@@ -24,9 +25,17 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 ## Folien
 
 *   [Intro Handout](folien/into-handout.pdf)
+    *   Einleitung
+    *   Auswirkungen der Zielmaschine
+    *   Aufbau von Compilern
+    *   Optimierung
+    *   Organisatorisches
+    *   Syntax
+    *   Triangle
+    *   Kontextuelle Einschränkungen
+    *   Semantik
+    *   Zusammenfassung
 
 ## Materialien
 
 *   Programming Language Processors in Java. [PDF](http://www.cin.ufpe.br/~jml/programming-language-processors-in-java-compilers-and-interpreters.9780130257864.25356.pdf)
-
-
