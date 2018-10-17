@@ -1,4 +1,4 @@
-\documentclass[ngerman]{scrartcl}
+\documentclass[ngerman,abstract=true]{scrartcl}
 \usepackage{babel}
 \usepackage{csquotes}
 
@@ -61,86 +61,73 @@
 \author{Andreas Koch}
 
 \begin{document}
-  \maketitle
-  \tableofcontents
-  \newpage
+\maketitle
   
-  %\KOMAoptions{twocolumn}
+\tableofcontents
+\newpage
   
-  \section{Organisatorisches}
+\section{Organisatorisches}
    
-  \subsection{Grundlage der Vorlesung}
-   
-  Die Vorlesung basiert \hl{fast vollständig} auf \emph{Programming Language Processors in Java}\footnote{von David Watt und Deryck Brown, Prentice-Hall 2000}. Auszugsweise noch weiteres Material, z.\ B.\ zum ANTLR-Parsergenerator.
-  
-  \subsection{Übersichtswerk}
-  
-  Einen guten allgemeinen Überblick, aber im Detail mit anderen Schwerpunkten als diese Vorlesung, bietet \emph{Compilers, 2. Auflage}\footnote{Von Aho, Sethi, Ullmann, Lam, Addison-Wesley 2006. Auch auf Deutsch verfügbar.}.
-   
-  \subsection{Aufbau der Veranstaltung}
-  
-  Diese Veranstaltung ist logisch in mehrere Teile gegliedert.
-  
-  \begin{description}
-    \item[Front-End\footnotemark] Übersicht, ca.\ 3 Wochen.
-    \begin{itemize}
-      \item Lexing und Parsing,
-      \item Zwischendarstellungen.
-    \end{itemize}
-    \item[Middle-End] Übersicht, ca.\ 2 Wochen.
-    \begin{itemize}
-      \item Semantische- und Kontextanalyse.
-    \end{itemize}
-    \item[Back-End] Übersicht, ca.\ 4 Wochen.
-    \begin{itemize}
-      \item Laufzeitorganisation,
-      \item Code-Erzeugung.
-    \end{itemize}
-    \item[Front-End-Generatoren] Verwendung, ca.\ 2--3 Wochen.
-    \item[Java Virtuelle Maschine] ca.\ 1--2 Wochen.
-  \end{description}
-  \footnotetext{Die ersten drei Teile der Veranstaltung richten sich an die Veranstaltungen \emph{IMT3052} von Ivar Farup, Universität Grøvik, Norwegen; und \emph{Vertalerbouw} von Theu Ruys, Universität Twente, Niederlande.}
-  
-  \section{Einleitung}
-  
-  \subsection{Compiler}
-  
-  Ein Compiler ist eine Schnittstelle zwischen \emph{Mensch} und \emph{Maschine}. Er übersetzt von einer Programmiersprache (Menschenlesbar) in eine Maschinensprache (maschinenlesbar).
-  
-  \begin{description}
-    \item[Programmiersprache] Gut für Menschen lesbar. Beispiele für Programmiersprachen sind:
-    \begin{itemize}
-      \item Smalltalk, 
-      \item Java, 
-      \item C++.
-    \end{itemize}
-    \item[Maschinensprache] Getrimmt auf
-    \begin{itemize}
-      \item Ausführungsgeschwindigkeit,
-      \item Preis pro Chip, Fläche,
-      \item Energieverbrauch,
-      \item (nur selten) leichte Programmierbarkeit.
-    \end{itemize}
-  \end{description}
-  
-  \subsection{Auswirkung von Compilern}
-  Mit den Eigenschaften entscheidet ein Compiler über die dem Nutzer zugängliche Rechenleistung. Durch gewisse Abwägungen kann ein Compiler ein Programm so kompilieren, dass es am schnellsten läuft oder dass der Resultierende Code an kleinsten ist.
-  
-  \begin{table*}[h]
-  \centering
-  \tablespacing{1.2}
-  \begin{tabular}{@{}lp{.5cm}lp{.5cm}l@{}}
-    \toprule
-      Compiler && Ausführungszeit && Programmgröße\\
-      \midrule
-        GCC 3.3.6 && 7,5\,ms && 13\,KB\\
-        ICC 9.0 && 6,5\,ms && 511\,KB\\
-      \bottomrule
-  \end{tabular}
-  \caption{Bildkompression auf Dothan CPU, 2\,GHz}
-  \end{table*}
+\subsection{Literatur}
+ 
+Die Vorlesung basiert \hl{fast vollständig} auf \emph{Programming Language Processors in Java}\footnote{von David Watt und Deryck Brown, Prentice-Hall 2000}. Auszugsweise noch weiteres Material, z.\ B.\ zum ANTLR-Parsergenerator.
 
-  \subsection{Programmiersprachen}
+Einen guten allgemeinen Überblick, aber im Detail mit anderen Schwerpunkten als diese Vorlesung, bietet \emph{Compilers, 2. Auflage}\footnote{Von Aho, Sethi, Ullmann, Lam, Addison-Wesley 2006. Auch auf Deutsch verfügbar.}.
+ 
+\subsection{Aufbau der Veranstaltung}
+
+Diese Veranstaltung ist logisch in mehrere Teile gegliedert.
+
+\begin{description}
+  \item[Front-End\footnotemark] Übersicht, ca.\ 3 Wochen.
+  \begin{itemize}
+    \item Lexing und Parsing,
+    \item Zwischendarstellungen.
+  \end{itemize}
+  \item[Middle-End] Übersicht, ca.\ 2 Wochen.
+  \begin{itemize}
+    \item Semantische- und Kontextanalyse.
+  \end{itemize}
+  \item[Back-End] Übersicht, ca.\ 4 Wochen.
+  \begin{itemize}
+    \item Laufzeitorganisation,
+    \item Code-Erzeugung.
+  \end{itemize}
+  \item[Front-End-Generatoren] Verwendung, ca.\ 2--3 Wochen.
+  \item[Java Virtuelle Maschine] ca.\ 1--2 Wochen.
+\end{description}
+\footnotetext{Die ersten drei Teile der Veranstaltung richten sich an die Veranstaltungen \emph{IMT3052} von Ivar Farup, Universität Grøvik, Norwegen; und \emph{Vertalerbouw} von Theu Ruys, Universität Twente, Niederlande.}
+
+\section{Einleitung}
+
+\subsection{Compiler}
+
+\hl{Ein Compiler ist eine Schnittstelle zwischen \emph{Mensch} und \emph{Maschine}}. Er übersetzt von einer Programmiersprache (menschenlesbar) in eine Maschinensprache (maschinenlesbar).
+
+\begin{description}
+  \item[Programmiersprache] Gut für Menschen lesbar. Beispiele für Programmiersprachen sind Smalltalk, Java und C++.
+  \item[Maschinensprache] Getrimmt auf Ausführungsgeschwindigkeit, Preis (Fläche), Energieverbaucht, nur sehr selten auf leichte Programmierbarkeit.
+\end{description}
+
+\subsection{Auswirkung von Compilern}
+\begin{table*}[h]
+\centering
+\tablespacing{1.2}
+\begin{tabular}{@{}lp{.5cm}lp{.5cm}l@{}}
+  \toprule
+    Compiler && Ausführungszeit && Programmgröße\\
+    \midrule
+      GCC 3.3.6 && 7,5\,ms && 13\,KB\\
+      ICC 9.0 && 6,5\,ms && 511\,KB\\
+    \bottomrule
+\end{tabular}
+\caption{Bildkompression auf Dothan CPU, 2\,GHz}\label{fig:compilerspeed}
+\end{table*}
+\noindent
+Mit den Eigenschaften entscheidet ein Compiler über die dem Nutzer zugängliche Rechenleistung. Durch gewisse Abwägungen kann ein Compiler ein Programm so kompilieren, dass es am schnellsten läuft oder dass der Resultierende Code an kleinsten ist.
+In Tabelle \ref{fig:compilerspeed} ist zu erkennen, welche Tradeoffs unterschiedliche Compiler machen: der von GCC generierte Code ist zwar langsamer, aber auch kleiner, während ICC schnellen Code generiert, der dafür aber auch voluminöser ist.
+
+\subsection{Programmiersprachen}
 
 \begin{description}
 \item[Hohe Ebene] Smalltalk, Java, C++. Beispiel:
@@ -178,11 +165,11 @@ Diese Details werden mithilfe von verschiedensten Algorithmen ergänzt, welche d
 
 \subsection{Auswirkungen der Zielmaschine}
 
-\begin{figure}\label{fig:dlx}
+\begin{figure}[p]
 \includegraphics[width=\textwidth]{media/dlx}
-\caption{Die DLX RISC Prozessorarchitektur}
+\caption{Die DLX RISC Prozessorarchitektur}\label{fig:dlx}
 \end{figure}
-\begin{figure}
+\begin{figure}[p]
 \includegraphics[width=\textwidth]{media/tigersharc}
 \caption{Analog Devices TigerSHARC}\label{fig:tigersharc}
 \end{figure}
@@ -199,16 +186,7 @@ Am problematischsten wird das aber erst bei extremen Architekturen wie der des I
 
 \subsection{Anforderungen an CPUs}
 
-Je nach Anwendungsgebiet sind die Anforderungen mehr oder weniger wichtig. 
-\begin{itemize}
-  \item Rechenleistung
-  \item Datentype (Gleitkomma, ganzzalig, Vektoren)
-  \item Operationen (Multiplikationen, MAC\footnote{Mir als \emph{fused multiply and add} bekannt, eine Operation, die vor allem für Matrizenmultiplikation signifikant ist.})
-  \item Speicherbandbreite (parallele Speicherzugriffe)
-  \item Energieeffizienz
-  \item Platzbedarf (für den Prozessorchip)
-\end{itemize}
-Oft können manche Anforderungen nur durch spezialisierte Prozessoren erfüllt werden.
+Je nach Anwendungsgebiet sind die Anforderungen mehr oder weniger wichtig. CPUs werden mit Spezifikationen wie der gewünschten Rechenleistung, Datentype und Operationen, die effizient verarbeitet werden sollen (Gleitkomma, Vektoren, Matrizen, multiplikation, \emph{multiply-accumulate}), Speicherbandbreite, Energieeffizienz und Platzbedarf. Oft können manche Anforderungen nur durch spezialisierte Prozessoren erfüllt werden.
 
 \subsection{Paralleles Rechnen}
 
