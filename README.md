@@ -7,7 +7,7 @@
 *   Credits: 5 CP
 *   Dozent: Andreas Koch
 *   Vorlesung: Dienstags 16:15–17:55 in S1|02 A03.
-*   Prüfungsart: Übungen und Testate.
+*   Prüfungsart: Mehrere bewertete und testierte Abgaben über das Semester.
 *   Betreuer: Julian Oppermann, Lukas Sommer.
 *   Links: [Moodle](https://moodle.informatik.tu-darmstadt.de/), [Vorlesungswebseite](https://www.esa.informatik.tu-darmstadt.de/twiki/bin/view/Lectures/EiCB18De.html).
 *   Notizen zur Vorlesung: [PDF](notizen.pdf) (*work-in-progress*).
