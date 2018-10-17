@@ -20,6 +20,7 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{shapes.arrows}
+\usetikzlibrary{positioning}
 \newtcolorbox{anmerkung}{%
   grow to left by=10pt,
   colback=black!10,
@@ -78,23 +79,13 @@ Einen guten allgemeinen Überblick, aber im Detail mit anderen Schwerpunkten als
 
 Diese Veranstaltung ist logisch in mehrere Teile gegliedert.
 
+% TODO add more info.
 \begin{description}
-  \item[Front-End\footnotemark] Übersicht, ca.\ 3 Wochen.
-  \begin{itemize}
-    \item Lexing und Parsing,
-    \item Zwischendarstellungen.
-  \end{itemize}
-  \item[Middle-End] Übersicht, ca.\ 2 Wochen.
-  \begin{itemize}
-    \item Semantische- und Kontextanalyse.
-  \end{itemize}
-  \item[Back-End] Übersicht, ca.\ 4 Wochen.
-  \begin{itemize}
-    \item Laufzeitorganisation,
-    \item Code-Erzeugung.
-  \end{itemize}
-  \item[Front-End-Generatoren] Verwendung, ca.\ 2--3 Wochen.
-  \item[Java Virtuelle Maschine] ca.\ 1--2 Wochen.
+  \item[Front-End\footnotemark] Behandelt das Lexing und Parsing von Sprachen und Zwischendarstellungen, die in diesen Stages benutzt werden.
+  \item[Middle-End] Behandelt die semantische Analyse und die Kontextanalyse.
+  \item[Back-End] Behandelt die Laufzeitorganisation und Code-Erzeugung.
+  \item[Front-End-Generatoren] Behandelt deren Verwendung.
+  \item[Java Virtuelle Maschine] 
 \end{description}
 \footnotetext{Die ersten drei Teile der Veranstaltung richten sich an die Veranstaltungen \emph{IMT3052} von Ivar Farup, Universität Grøvik, Norwegen; und \emph{Vertalerbouw} von Theu Ruys, Universität Twente, Niederlande.}
 
@@ -157,9 +148,9 @@ STORE R1, (i)
 
 Auf den unteren Ebenen werden die Beschreibungen immer feiner, da man näher an der Zielmaschine (Hardware) arbeitet.
 
-Der Compiler ist dafür zuständig, Details hinzuzufügen. In den obenstehenden Codebeispielen musste der Compiler unter anderem Register wählen, in denen die Werte währen dem Programmablauf zwischengespeichert werden. Außerdem musste die Adresse der Variable \verb|i|, hinzugefügt werden, wobei hier \verb|00000110| verwendet wurde.
+Der Compiler ist dafür zuständig, Details hinzuzufügen. In den obenstehenden Codebeispielen musste der Compiler unter anderem Register wählen (hier \verb|R1| für den Wert von \verb|i|, \verb|R2| für die Konstante 1, und \verb|R1| für das Ergebnis der Addition), in denen die Werte währen dem Programmablauf zwischengespeichert werden. Außerdem musste die Adresse der Variable \verb|i|, hinzugefügt werden, wobei hier \verb|00000110| verwendet wurde.
 
-Diese Details werden mithilfe von verschiedensten Algorithmen ergänzt, welche die \hl{Programmeigeschaften Analysieren} und durch die \hl{Synthese von Details} die Beschreibung Verfeinern.
+Diese Details werden mithilfe von verschiedensten Algorithmen ergänzt, welche die \hl{Programmeigeschaften Analysieren und durch die Synthese von Details die Beschreibung Verfeinern}.
 
 \section{Zielmaschine}
 
@@ -178,37 +169,35 @@ Diese Details werden mithilfe von verschiedensten Algorithmen ergänzt, welche d
 \end{figure}
 % TODO figure.
 
-Die Zielmaschine hat einen Einfluss auf die Architektur des Compilers. So basiert zum Beispiel die DLX Architektur von John Hennessy und David Patterson auf der MIPS Architektur, und ist nur leicht verändert um diese zu modernisieren. Damit ist es sehr einfach, einen Compiler zu bauen, der für diese Architektur Code generiert.
+Die Zielmaschine hat einen Einfluss auf die Architektur des Compilers. So basiert zum Beispiel die DLX-Architektur von John Hennessy und David Patterson auf der MIPS Architektur, und ist nur leicht verändert um diese zu modernisieren. \hl{Damit ist es sehr einfach, einen Compiler zu bauen, der für diese Architektur Code generiert}.
 
-Etwas komplizierter wird es mit der \emph{TigerSHARC} Architektur von Analog Devices. Dies ist ein Beispiel für ein DSP, also \emph{Digital Signalling Processor}. Es gibt hier zwei \emph{Computational Blocks}, damit parallel Rechnungen ausgeführt werden können. Diese können aber nicht kommunizieren, also muss der Compiler drauf achten, dass auf die Register nur von dem jeweiligen Block aus zugegriffen werden können. Außerdem besitzt diese Architektur separate Rechenblocks, um Adressen zu bestimmen. Ein Compiler für diese Architektur muss also wissen, wie die Architektur aufgebaut ist, um sie effizient zu nutzen.
+Etwas komplizierter wird es mit der \emph{TigerSHARC} Architektur von Analog Devices. Dies ist ein Beispiel für ein DSP, also \emph{Digital Signalling Processor}. Es gibt hier zwei \emph{Computational Blocks}, damit parallel Rechnungen ausgeführt werden können. Diese können aber nicht kommunizieren, also muss der Compiler drauf achten, dass auf die Register nur von dem jeweiligen Block aus zugegriffen werden können. Außerdem besitzt diese Architektur separate Rechenblocks, um Adressen zu bestimmen. \hl{Ein Compiler für diese Architektur muss also wissen, wie die Architektur aufgebaut ist, um sie effizient zu nutzen}.
 
-Am problematischsten wird das aber erst bei extremen Architekturen wie der des IBM/Sony \emph{Cell} Prozessors. Hierbei handelt es sich um eine sehr gewagte, und wie sich leider herausgestellt hat, zu komplexe Architektur. Es gibt ein PowerPC-basierten Hauptprozessor, der aber nicht sehr leistungsstark ist. Die eigentliche Arbeit kann von \emph{Synergistic Processing Elements}, kurz SPE, ausgeführt werden. Diese sind so konstruiert, dass ein sorgfältig produzierter Instruktionsstream die Hardware maximal ausnutzen kann, mit parallelen Arithmetischen- und Speichereinheiten (siehe Abbildung \ref{fig:spe}).
+Am problematischsten wird das aber erst bei extremen Architekturen wie der des IBM/Sony \emph{Cell} Prozessors. Hierbei handelt es sich um eine sehr gewagte, und wie sich leider herausgestellt hat, zu komplexe Architektur. Es gibt ein PowerPC-basierten Hauptprozessor, der aber nicht sehr leistungsstark ist. Die eigentliche Arbeit kann von \emph{Synergistic Processing Elements}, kurz SPE, ausgeführt werden. Diese sind so konstruiert, dass ein sorgfältig produzierter Instruktionsstream die Hardware maximal ausnutzen kann, mit parallelen Arithmetischen- und Speichereinheiten (siehe Abbildung \ref{fig:spe}). \hl{Ein Compiler für diese Architektur hat es also wesentlich schwerer}.
 
 \subsection{Anforderungen an CPUs}
 
-Je nach Anwendungsgebiet sind die Anforderungen mehr oder weniger wichtig. CPUs werden mit Spezifikationen wie der gewünschten Rechenleistung, Datentype und Operationen, die effizient verarbeitet werden sollen (Gleitkomma, Vektoren, Matrizen, multiplikation, \emph{multiply-accumulate}), Speicherbandbreite, Energieeffizienz und Platzbedarf. Oft können manche Anforderungen nur durch spezialisierte Prozessoren erfüllt werden.
+Je nach Anwendungsgebiet sind die Anforderungen mehr oder weniger wichtig. CPUs werden mit Spezifikationen wie der gewünschten Rechenleistung, Datentype und Operationen, die effizient verarbeitet werden sollen (Gleitkomma, Vektoren, Matrizen, multiplikation, \emph{multiply-accumulate}), Speicherbandbreite, Energieeffizienz und Platzbedarf konstruiert. \hl{Oft können bestimmte Anforderungen nur durch spezialisierte Prozessoren realisiert werden}. Diese spezialisierten Prozessoren brauchen auch passende Compiler.
 
 \subsection{Paralleles Rechnen}
 
-Paralleles Rechnen ist die Königsklasse der Forschung. Warum eigentlich? Das Wettrennen der Taktfrequenzen ist im großen und ganzen vorbei, mehr als \textasciitilde4\,GHz ist nicht realistisch. Also ist \hl{der Trend weg von hochgetakteten Einzelprozessoren und hin zu vielen (2-8, teilweise 16) Prozessoren}, die aber weniger schnell getaktet werden. Dadurch erreicht man mehr Rechenleistung. Aber wie kann man für solche parallele Rechenkapazitäten programmieren?
+\hl{Paralleles Rechnen ist die Königsklasse der Forschung}. Warum eigentlich? Das Wettrennen der Taktfrequenzen ist im großen und ganzen vorbei, mehr als \textasciitilde4\,GHz ist nicht realistisch. Also ist \hl{der Trend weg von hochgetakteten Einzelprozessoren und hin zu vielen (2-8, teilweise 16) Prozessoren}, die aber weniger schnell getaktet werden. Dadurch erreicht man mehr Rechenleistung. Aber wie kann man für solche parallele Rechenkapazitäten programmieren?
 
-Erste praktische Ansätze sind OpenMP, mit dem man für parallele CPUs programmieren kann. {OpenCL} kann mit heterogenen Systemen (GPUs, CPUs, experimentell auch FPGAs) arbeiten, und für NVidia Grafikkarten gibt es {CUDA}. \hl{Diese Lösungen erfordern aber aktuell noch, dass der Programmierer explizit für ein paralleles System programmiert. Es gibt noch keine automatische Parallelisierung}.
+Erste praktische Ansätze sind OpenMP, mit dem man für parallele CPUs programmieren kann. {OpenCL} kann mit heterogenen Systemen (GPUs, CPUs, experimentell auch FPGAs) arbeiten, und für NVidia Grafikkarten gibt es CUDA. \hl{Diese Lösungen erfordern aber aktuell noch, dass der Programmierer explizit für ein paralleles System programmiert. Es gibt noch keine automatische Parallelisierung}.
 
 \subsection{Compilerbau in der Lehre}
 
-Warum wird der Compilerbau so früh gelehrt? Es handelt sich hierbei um eine Kombination von verschiedenen Disziplinen. Zum Compilerbau benötigt man einen \emph{Parser}, welcher zur theoretischen Informatik gehört. Man braucht auch das Hintergrundwissen der \emph{Architektur der Zielmaschine}, welches zur technischen Informatik gehört. Außerdem braucht man zum Compilerbau Kenntnisse von Software-Engineering, was zur praktischen Informatik gehört. Damit vereint der Compilerbau drei wichtige Disziplinen.
+Warum wird der Compilerbau so früh gelehrt? Es handelt sich hierbei um eine Kombination von verschiedenen Disziplinen. Zum Compilerbau benötigt man einen \emph{Parser}, welcher zur theoretischen Informatik gehört. Man braucht auch das Hintergrundwissen der \emph{Architektur der Zielmaschine}, welches zur technischen Informatik gehört. Außerdem braucht man zum Compilerbau Kenntnisse von Software-Engineering, was zur praktischen Informatik gehört. Damit vereint der Compilerbau drei wichtige Disziplinen. Außerdem werden Compiler von vielen Firmen in vielen unterschiedlichen Kontexten gebraucht. 
 
 \section{Aufbau}
-
-\subsection{Vorgehen}
 
 Compiler arbeiten generell in mehreren Phasen. In Abbildung \ref{fig:compilerstages} sind diese Phasen aufgezeigt. Außerdem sind die  Zwischendarstellungen, die zum Informationsaustausch zwischen den Phasen genutzt werden, dargestellt.
 
 \begin{figure}\centering
 \begin{tikzpicture}[
-  stage/.style={diamond, draw=black, thick, text width=6em, text centered, inner sep=0.1em, rounded corners},
-  repr/.style={rectangle, draw=black, thick, text width=6em, text badly centered, inner sep=0.5em, rounded corners},
-  line/.style={draw, thick, ->, shorten >=2pt, rounded corners}]
+  stage/.style={diamond, draw=black, text width=6em, text centered, inner sep=0.1em, rounded corners},
+  repr/.style={rectangle, draw=black, text width=6em, text badly centered, inner sep=0.5em, rounded corners},
+  line/.style={draw, ->, shorten >=1pt, rounded corners}]
 \matrix[column sep=2em, row sep=1em]{
   \node[repr] (source) {Source Code};
   & \node[stage] (syntax) {Syntactic Analysis};
@@ -234,12 +223,55 @@ Compiler arbeiten generell in mehreren Phasen. In Abbildung \ref{fig:compilersta
 \end{figure}
 
 \subsection{Syntaxanalyse}
+\begin{figure}
+\begin{tikzpicture}
+  \node (programm) {\begin{minipage}{4.7cm}
+  \begin{lstlisting}
+let
+    var i : Integer;
+in
+    i := 1;
+  \end{lstlisting}
+  \end{minipage}};
+  \begin{scope}[
+    every node/.style={rectangle, draw=black, text width=3.5cm, rounded corners, text centered},
+    edge from parent path={(\tikzparentnode.south) -- ++(0,-0.25cm)
+			-| (\tikzchildnode.north)},
+			level 1/.style={level distance=1cm},
+			level 2/.style={sibling distance=8cm},
+			level 3/.style={sibling distance=4cm}]
+  \node[right=of programm] (ast) {Program} 
+    child[grow=down] {node {LetCommand}
+      child {node {VarDeclaration}
+        child {node {Identifier}
+          child {node {\color{blue!70!black}\texttt{i}}}}
+        child {node {SimpleTypeDenoter}
+          child {node {Identifier}
+            child {node {Integer}}}}}
+      child {node {AssignCommand}
+        child {node {SimpleVname}
+          child {node {Identifier}
+            child {node {\color{blue!70!black}\texttt{i}}}}}
+        child {node {IntegerExpression}
+          child {node {IntegerLiteral}
+            child {node {\color{green!70!black}1}}}}}};
+  \draw[shorten >=1pt, ->] (programm) -- (ast);
+  \path (programm.north east) ++(0, -0.3cm) coordinate (ptop);
+  \path (programm.south east) ++(0, 0.3cm) coordinate (pbot);
+  \draw (ptop) +(-0.2cm,0) -- +(0,0) -- (pbot) -- +(-0.2cm,0);
+  \end{scope}
+\end{tikzpicture}
+\caption{Beispiel der Syntaxanalyse}\label{fig:syntaxanalyse}
+\end{figure}
 
-Bei der Syntaxanalyse wird überprüft, ob das Programm Syntaxgerecht aufgebaut ist. 
+Bei der Syntaxanalyse wird überprüft, ob das Programm Syntaxgerecht aufgebaut ist. Das Programm wird in einer geeigneten Darstellung gespeichert. Das Resultat ist dann ein \emph{Abstract Syntax Tree}, kurz AST. Abbildung \ref{fig:syntaxanalyse} zeigt anhand eines Beispiels, wie das Resultat der Syntaxanalyse aussehen könnte.
+
 
 \subsection{Kontextanalyse}
 
-Bei der Kontextanalyse werden Variablen ihren Deklarationen zugeordnet. Ausßerdem werden die Typen von Ausdrücken berechnet.
+Bei der Kontextanalyse werden Variablen ihren Deklarationen zugeordnet. Außerdem werden die Typen von Ausdrücken berechnet. Hier wird ein \emph{Decorated Abstract Syntax Tree}, kurz DAST, generiert. Dieser ist wie ein AST, nur mit Zusatzinformationen.
+
+
 
 % TODO graphics, text.
 
