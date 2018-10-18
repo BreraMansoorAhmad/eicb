@@ -31,7 +31,7 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 
 ## Folien
 
-*   [Intro Handout](folien/into-handout.pdf)
+*   [Intro Handout](folien/intro-handout.pdf)
     *   Einleitung
     *   Auswirkungen der Zielmaschine
     *   Aufbau von Compilern
