@@ -9,7 +9,7 @@
 *   Vorlesung: Dienstags 16:15–17:55 in S1|02 A03.
 *   Prüfungsart: Mehrere bewertete und testierte Abgaben über das Semester.
 *   Betreuer: Julian Oppermann, Lukas Sommer.
-*   Links: [Moodle](https://moodle.informatik.tu-darmstadt.de/), [Vorlesungswebseite](https://www.esa.informatik.tu-darmstadt.de/twiki/bin/view/Lectures/EiCB18De.html).
+*   Links: [Moodle](https://moodle.informatik.tu-darmstadt.de/course/view.php?id=440), [Vorlesungswebseite](https://www.esa.informatik.tu-darmstadt.de/twiki/bin/view/Lectures/EiCB18De.html).
 *   Notizen zur Vorlesung: [PDF](notizen.pdf) (*work-in-progress*).
 
 Diese Veranstaltung wird aufgezeichnet, die Aufzeichnungen sind auf der Vorlesungswebseite verfügber.
