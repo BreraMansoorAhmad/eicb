@@ -18,6 +18,10 @@ Diese Veranstaltung wird aufgezeichnet, die Aufzeichnungen sind auf der Vorlesun
 
 Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlagen des Compilerbaus, speziell der benötigten Algorithmen und Datenstrukturen. Dabei werden alle Phasen der Übersetzung, vom Lexing/Parsing über die semantische Analyse bis hin zur Codeerzeugung behandelt. Weitere Themen umfassen die automatische Erzeugung von Lexern/Parsern durch Werkzeuge wie ANTLR und JavaCC, sowie die Laufzeitumgebung bei der Ausführung von Hochsprachen. Die Verfahren werden anhand eines in Java verfassten Beispielcompilers für die einfache Hochsprache Triangle erklärt.
 
+## Nützliches
+
+*   [Triangle Compiler](material/triangle-2.1-esa5a.zip)
+
 ## Vorlesungen
 
 *   2018-10-16: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181016.avi).
@@ -27,7 +31,6 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
     *   Aufbau
     *   Optimierung
     *   Syntax
-
 
 ## Folien
 
@@ -43,7 +46,6 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
     *   Semantik
     *   Zusammenfassung
 
-## Materialien
+## Literatur
 
 *   Programming Language Processors in Java. [PDF](http://www.cin.ufpe.br/~jml/programming-language-processors-in-java-compilers-and-interpreters.9780130257864.25356.pdf)
-
