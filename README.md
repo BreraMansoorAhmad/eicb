@@ -24,27 +24,14 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 
 ## Vorlesungen
 
-*   2018-10-16: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181016.avi).
+*   2018-10-16: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181016.avi). [Folien](folien/intro-handout.pdf).
     *   Einführung
     *   Zielmaschine
     *   Organisatorisches
     *   Aufbau
     *   Optimierung
     *   Syntax
-
-## Folien
-
-*   [Intro Handout](folien/intro-handout.pdf)
-    *   Einleitung
-    *   Auswirkungen der Zielmaschine
-    *   Aufbau von Compilern
-    *   Optimierung
-    *   Organisatorisches
-    *   Syntax
-    *   Triangle
-    *   Kontextuelle Einschränkungen
-    *   Semantik
-    *   Zusammenfassung
+*   2018-10-23. [Folien](folien/lexparse-handout.pdf)
 
 ## Literatur
 
