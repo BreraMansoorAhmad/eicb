@@ -21,6 +21,7 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 ## Nützliches
 
 *   [Triangle Compiler](material/triangle-2.1-esa5a.zip)
+*   [Regular Expressions Pocket Reference](https://www.geos.ed.ac.uk/~bmg/software/Perl%20Books/RegExp_perl_python_java_etc.pdf)
 
 ## Vorlesungen
 
