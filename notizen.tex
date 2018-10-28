@@ -1,4 +1,7 @@
-\documentclass[ngerman,abstract=true]{scrartcl}
+\documentclass[
+  ngerman,
+  DIV=12
+]{scrartcl}
 \usepackage{babel}
 \usepackage{csquotes}
 
@@ -58,9 +61,13 @@
   urlcolor={blue!80!black}
 ]{hyperref}
 
-\title{Einführung in den Compilerbau}
+\title{Vorlesungsnotizen}
 \date{Wintersemester 2018-2019}
 \author{Andreas Koch}
+\subject{Einführung in den Compilerbau}
+\subtitle{von Patrick Elsen, Viola und Michael Matthé}
+\publishers{Technische Universität Darmstadt}
+
 
 \begin{document}
 \maketitle
@@ -386,16 +393,82 @@ L &= \{x^n | n > 0\} && \text{beschreibt \textbf{x}, \textbf{xx}, \textbf{xxx}.}
 L &= \{x^ny^m|n > 0, m > 0\} && \text{beschreibt \textbf{xxy}, \textbf{xyy}, \textbf{xxxyy}.}\\
 L &= \{x^ny^n|n > 0\} && \text{beschreibt \textbf{xy}, \textbf{xxyy}, \textbf{xxxyyy}.}\\
 \end{align*}
+Diese Art der Spezifikation ist leider nicht sonderlich nützlich bei der Spezifikation komplexerer Sprachen.
+
+\subsection{Reguläre Ausdrücke}
+
+\begin{table}[htbp]\centering\tablespacing{1.3}
+\begin{tabular}{@{}lp{7cm}ll@{}}
+\toprule
+\small\bfseries\caps{OPERATOR} & \small\bfseries\caps{BEDEUTUNG} & \small\bfseries\caps{BEISPIEL}\\
+\midrule
+$\varepsilon$ & Leere Zeichenkette & $\varepsilon$ & $\varepsilon$\\
+$|$ & Alternativen & $a|b|c$ & \textbf{a}, \textbf{b}, \textbf{c}\\
+$+$ & Ein oder mehr Vorkommen & $a+$ & \textbf{a}, \textbf{aa}, \textbf{aaa}, \dots\\
+$*$ & Null oder mehr Vorkommen & $ab*$ & \textbf{a}, \textbf{ab}, \textbf{abb}, \dots\\
+$(...)$ & Gruppierung von Teilausdrücken & $(ab)*$ & $\varepsilon$, \textbf{ab}, \textbf{abab}, \dots\\
+\bottomrule
+\end{tabular}
+\caption{Liste von Operatoren von regulären Ausdrücken}\label{tbl:regexops}
+\end{table}
+
+Reguläre Ausdrücke bestehen aus Zeichen und Operatoren. Tabelle \ref{tbl:regexops} zeigt einige der Operatoren von regulären Ausdrücken. Wie mächtig sind regulären Ausdrücke eigentlich? Kann man die Menge aller regulären Ausdrücke als regulären Ausdruck beschreiben? Leider ist das nicht möglich. Reguläre Ausdrücke sind also nicht mächtig genug und deswegen ungeeignet zur Beschreibung der Syntax komplexer Programmiersprachen. Dennoch sind diese innerhalb von Compilern nützlich.
+
+\subsection{Kontextfreie Grammatiken}
+
+Eine kontextfreie Grammatik besteht aus vier Teilen: eine Menge von Terminalsybolen $T$ aus dem Alphabet, eine Menge von Nicht-Terminalsymbolen $N$, eine Menge von Produktionen $P$ sowie einem Startsybol $S \in N$. Die Menge von Produktionen beschreibt, wie die Nicht-Terminalsymbole aus den Terminalsymbolen zusammengesetzt sind. 
+
+Eine Möglichkeit, diese Produktionen anzugeben, ist die Backus-Naur-Form. Dabei wird jede Produktion als Tupel angegeben, bei dem auf der linken Seite ein Nicht-Terminalsymbol steht, und auf der rechten Seite eine Zeichenkette aus Terminal und Nicht-Terminalsybolen.
+\begin{align*}
+  ‹\mathrm{Nicht\text{-}Terminal}› ::= \text{Zeichenkette aus } ‹\mathrm{Terminal}› \text{ und } ‹\mathrm{Nicht\text{-}Terminal}›
+\end{align*}
+Kompakter und übersichtlicher ist es aber, wenn man statt der BNF die \emph{Erweiterte Backus-Naur-Form}, kurz EBNF, verwendet. Diese ist fast genauso wie die BNF aufgebaut, hier nimmt man aber auf der rechten Seite einen regulären Ausdruck von Terminal- und Nicht-Terminalsymbolen.
+\begin{align*}
+  ‹\mathrm{Nicht\text{-}Terminal}› ::= \text{Regulärer Ausdruck aus } ‹\mathrm{Terminal}› \text{ und } ‹\mathrm{Nicht\text{-}Terminal}›
+\end{align*}
+Der Unterschied zu einer \emph{kontextbehafteten Grammatik} ist, dass t
+
+\subsection{BNF Beispiel}
+
+Eine mit BNF spezifizierte Grammatik könnte also folgendermaßen aussehen.
+\begin{align*}
+  T &= \{x, y\}\\
+  N &= \{S, B\}\\
+  S &= S\\
+  P &= \{\}\\  
+\end{align*}
+
+% TODO FIXME
+
+\subsection{Mehrdeutigkeit in BNF}
+
+% TODO FIXME
+
+
+\section{Triangle}
+
+In der Vorlesung beschäftigen wir uns mit der Sprache \emph{Triangle}. Triangle ist eine Pascal-artige Sprache als Anschauungsobjekt. Die Version von Triangle, die wir in der Vorlesung verwenden, ist im Vergleich zu der regulären Version sehr abgespeckt. Der Compiler-Quellcode ist auf der Kurswebseite verfügbar. 
+
+\begin{figure}[!h]
+\begin{tikzpicture}
+\node (code) {\begin{minipage}{4cm}
+\begin{lstlisting}
+let
+   const MAX ~ 10;
+   var n: Integer
+in begin
+   getint(var n);
+   if (n > 0) \/ (n <= MAX) then
+      while n > 0 do begin
+         putint(n); puteol();
+         n := n - 1
+      end
+   else
+end
+\end{lstlisting}
+\end{minipage}};
+\end{tikzpicture}
+\end{figure}
 
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
