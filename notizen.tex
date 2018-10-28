@@ -449,16 +449,18 @@ Eine mit BNF spezifizierte Grammatik könnte also folgendermaßen aussehen.
 
 In der Vorlesung beschäftigen wir uns mit der Sprache \emph{Triangle}. Triangle ist eine Pascal-artige Sprache als Anschauungsobjekt. Die Version von Triangle, die wir in der Vorlesung verwenden, ist im Vergleich zu der regulären Version sehr abgespeckt. Der Compiler-Quellcode ist auf der Kurswebseite verfügbar. 
 
+% TODO anmerkungen
+
 \begin{figure}[!h]
-\begin{tikzpicture}
-\node (code) {\begin{minipage}{4cm}
+\begin{tikzpicture}[y=-\baselineskip]
+\node[anchor=north] (code) {\begin{minipage}{4cm}
 \begin{lstlisting}
 let
    const MAX ~ 10;
    var n: Integer
 in begin
    getint(var n);
-   if (n > 0) \/ (n <= MAX) then
+   if (n > 0) /\ (n <= MAX) then
       while n > 0 do begin
          putint(n); puteol();
          n := n - 1
@@ -467,8 +469,115 @@ in begin
 end
 \end{lstlisting}
 \end{minipage}};
+\node[anchor=west] (lokal) at (6,1.4) {Lokale Deklarationen};
+\draw (lokal) -- ++(-9,0);
+\node[anchor=west] (const) at (6,2.4) {Konstante (hässliches \textasciitilde)};
+\draw (const) -- ++(-5.7,0);
+\node[anchor=west] (proc) at (6,5.4) {Prozedur};
+\draw (proc) -- ++(-4.7,0);
+\node[anchor=west] (stmt) at (6,8.4) {Anweisungen};
+\draw (stmt) -- ++(-2,0) -- ++(0,-0.5) -- ++(-0.1,0) ++(0,2) -- ++(0.1,0) -- ++(0,-1.5);
+\node[anchor=west] (else) at (6,11.4) {Else};
+\draw (else) -- ++(-6.4,0);
 \end{tikzpicture}
 \end{figure}
 
+Was man bei diesem Codebeispiel sieht, sind einige Designfeatures der Triangle-Sprache. So kann man innerhalb eines \verb|let|-Blockes lokale Deklarationen angeben, die in dem darauffolgenden \verb|begin|-Block gültig sind. Man kann sowohl Konstanten als auch Variablen deklarieren. Interessant beim Prozedurenaufruf ist, dass Variablen, die von der Prozedur verändert werden können, mit dem Keyword \verb|var| übergeben werden müssen. Die etwas kurios wirkende Konstruktion aus zwei Schrägstrichen, \verb|/\|, soll den boole'schen UND-Operator darstellen. Eine weitere Besonderheit ist der \verb|else|-Zweig, der \emph{immer} mit angegeben werden muss, was den Compiler vereinfacht.
+
+\begin{anmerkung}
+Die Triangle-Sprache ist nicht darauf ausgelegt, eine nützliche Sprache darzustellen. Vielmehr geht es hierbei darum, eine stark vereinfachte Sprache anzubieten, anhand deren der Compilerbau gelernt und geübt werden kann.   
+\end{anmerkung}
+
+\begin{figure}
+\begin{align*}
+‹\textrm{Program}› ::=&\ ‹\textrm{single-Command}›\\
+‹\textrm{single-Command}› ::=&\ empty\\
+  |&\ ‹\textrm{V-name}›\ \texttt{:=}\ ‹\textrm{Expression}›\\
+  |&\ ‹\textrm{Identifier}› \texttt{(} ‹\textrm{Expression}› \texttt{)}\\
+  |&\ \texttt{if}\ ‹\textrm{Expression}›\ \texttt{then}\ ‹\textrm{single-Command}›\ \texttt{else}\ ‹\textrm{single-Command}›\\
+  |&\ \texttt{while}\ ‹\textrm{Expression}›\ \texttt{do}\ ‹\textrm{single-Command}›\\
+  |&\ \texttt{let}\ ‹\textrm{Declaration}›\ \texttt{in}\ ‹\textrm{single-Command}›\\
+  |&\ \texttt{begin}\ ‹\textrm{Command}›\ \texttt{end}\\
+‹\textrm{Command}› ::=&\ ‹\textrm{single-Command}›\\
+  |&\ ‹\textrm{Command}›\ \texttt{;}\ ‹\textrm{single-Command}›\\
+‹\textrm{Expression}› ::=&\ ‹\textrm{primary-Expression}›\\
+  |&\ ‹\textrm{Expression}›\ ‹\textrm{Operator}›\ ‹\textrm{primary-Expression}›\\
+‹\textrm{primary-Expression}› ::=&\ ‹\textrm{Integer-Literal}›\\
+  |&\ ‹\textrm{V-name}›\\
+  |&\ ‹\textrm{Operator}›\ ‹\textrm{primary-Expression}›\\
+  |&\ \texttt{(} ‹\textrm{Expression}› \texttt{)}\\
+‹\textrm{V-name}› ::=&\ ‹\textrm{Identifier}›\\
+‹\textrm{Identifier}› ::=&\ ‹\textrm{Letter}›\\
+  |&\ ‹\textrm{Identifier}›\ ‹\textrm{Letter}›\\
+  |&\ ‹\textrm{Identifier}›\ ‹\textrm{Number}›\\
+‹\textrm{Integer-Literal}› ::=&\ ‹\textrm{Digit}›\\
+  |&\ ‹\textrm{Integer-Literal}›\ ‹\textrm{Digit}›\\
+‹\textrm{Operator}› ::=&\ \texttt{+}\ |\ \texttt{-}\ |\ \texttt{*}\ |\ \texttt{/}\ |\ \texttt{<}\ |\ \texttt{>}\ |\ \texttt{=}\\
+‹\textrm{Declaration}› ::=&\ ‹\textrm{single-Declaration}›\\
+  |&\ ‹\textrm{Declaration}›\ \texttt{;}\ ‹\textrm{single-Declaration}›\\
+‹\textrm{single-Declaration}› ::=&\ \texttt{const}\ ‹\textrm{Identifier}\ \texttt{\textasciitilde}\ ‹\textrm{Expression}›\\
+  |&\ \texttt{var}\ ‹\textrm{Identifier}\ \texttt{:}\ ‹\textrm{Type-denoter}›\\
+‹\textrm{Type-denoter}› ::=&\ ‹\textrm{Identifier}›\\
+‹\textrm{Comment}› ::=&\ \texttt{!}\ ‹\textrm{CommentLine}›\ \texttt{eol}\\
+‹\textrm{CommentLine}› ::=&\ ‹\textrm{Graphic}›\ ‹\textrm{CommentLine}›\\
+‹\textrm{Graphic}› ::=&\ \text{any printable character or space}\\
+‹\textrm{Digit}› ::=&\ \texttt{0}\ |\ \texttt{1}\ |\ \texttt{2}\ |\ \texttt{3}\ |\ \texttt{4}\ |\ \texttt{5}\ |\ \texttt{6}\ |\ \texttt{7}\ |\ \texttt{8}\ |\ \texttt{9}
+\end{align*}
+\caption{Syntax von Triangle in BNF}\label{fig:trianglesyntax}
+\end{figure}
+
+\subsection{Syntax von Triangle}
+
+In Abbildung \ref{fig:trianglesyntax} ist der Syntax von Triangle\footnote{So, wie er in den Folien gezeigt wird.} sichtbar. Man erkennt, dass Triangle im Vergleich zu gewissen anderen Programmiersprachen einen recht überschaubaren Syntax besitzt. 
+
+Es wird ein wenig Terminologie eingeführt, die beim Verständnis und zur Kommunikation wichtig ist. \hl{Eine \emph{Phrase} ist eine von einem gegebenen Nicht-Terminalsymbol herleitbare Kette von Terminalsymbolen. Zum Beispiel eine \emph{Expression-Phrase}, \emph{Command-Phrase}. Ein \emph{Satz} ist eine \emph{$S$-Phrase}, wobei $S$ das Startsymbol der kontextfreien Grammatik ist}.
+
+\subsection{Syntaxbaum}
+
+Aufbauend auf die Konzepte der Phrasen und Sätze kann man den Syntax in Form eines Baumes darstellen. Diese Darstellung nennt man einen \emph{Syntaxbaum}. Ein solcher Syntaxbaum ist ein geordneter, markierter Baum, bei dem die Blätter mit Terminalsymbolen markiert sind, die inneren Knoten mit Nicht-Terminalsymbolen markiert sind, und jeder Knoten Kinder hat, die mit der rechten Seite seiner Produktion übereinstimmen. Abbildung~\ref{fig:syntaxtree} zeigt ein Beispiel für einen solchen Baum.
+
+\begin{figure}[!tbp]\centering
+\begin{tikzpicture}[y=-1cm,x=2cm]\rmfamily
+\node (expr0) at (2,0) {Expression};
+\node (expr1) at (1,1) {Expression};
+\node (expr2) at (0,2) {Expression};
+\node (pexpr0) at (4,3) {primary-Expr};
+\node (pexpr1) at (2,3) {primary-Expr};
+\node (pexpr2) at (0,3) {primary-Expr};
+\node (vname0) at (4,4) {V-name};
+\node (vname1) at (0,4) {V-name};
+\node (oper0) at (3,5) {Operator};
+\node (oper1) at (1,5) {Operator};
+\node (ident0) at (4,5) {Identifier};
+\node (ident1) at (0,5) {Identifier};
+\node (intlit) at (2,5) {Int. Lit};
+\node (d) at (0,6) {\texttt{d}};
+\node (plus) at (1,6) {\texttt{+}};
+\node (ten) at (2,6) {\texttt{10}};
+\node (star) at (3,6) {\texttt{*}};
+\node (n) at (4,6) {\texttt{n}};
+\draw (expr0) -- ++(0,0.5) -- ++(2,0) -- (pexpr0) -- (vname0) -- (ident0) -- (n);
+\draw (expr0) -- ++(0,0.5) -- ++(1,0) -- (oper0) -- (star);
+\draw (expr0) -- ++(0,0.5) -- ++(-1,0) -- (expr1);
+\draw (expr1) -- ++(0,0.5) -- ++(1,0) -- (pexpr1) -- (intlit) -- (ten);
+\draw (expr1) -- (oper1) -- (plus);
+\draw (expr1) -- ++(0,0.5) -- ++(-1,0) -- (expr2) -- (pexpr2) -- (vname1) -- (ident1) -- (d);
+\end{tikzpicture}
+\caption{Syntaxbaum}\label{fig:syntaxtree}
+\end{figure}
+
+Ein weiteres Beispiel für einen Syntaxbaum hat kann man anhand des folgenden Ausdruckes zeigen.
+
+% TODO insert larger syntax tree
+
+
+
+\subsection{Konkrete und Abstrakte Syntax}
+
+Mit einer solchen Baumstruktur kann man relativ leicht und intuitiv den Syntax eines Programmes repräsentieren. Doch diese Struktur enthält immer noch viele Details, die dem Compiler nicht wirklich wichtig sind. Eine solche Syntax nennt man \emph{konkret}.
+
+Möchte man diese Daten weiterverarbeiten, zum Beispiel bei der Codegenerierung, so kann man vieles weglassen. Man spricht dann von einer \emph{abstrakten Syntax}. Der Unterschied zwischen konkreter und abstrakter Syntax ist also, dass die erstgenannte das Programm fast Eins-zu-Eins wiedergibt, während letztere unwichtige Details weggelassen hat. \hl{Der konkrete Syntax hat keinen Einfluss auf die Semantik}. 
+
+% 00:55:30, zweite Vorlesung.
 
 \end{document}
