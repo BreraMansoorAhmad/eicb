@@ -4,13 +4,14 @@
 
 % typography
 \usepackage{fontspec}
-\setmainfont{Open Sans}[
-  BoldFont={Open Sans Bold},
-  ItalicFont={Open Sans Italic}]
+%\setmainfont{Open Sans}[
+%  BoldFont={Open Sans Bold},
+%  ItalicFont={Open Sans Italic}]
 \setsansfont{Open Sans}[
   BoldFont={Open Sans Bold},
   ItalicFont={Open Sans Italic}]
 \setmonofont{Menlo}
+\renewcommand\familydefault{\sfdefault}
 \usepackage[factor=2000]{microtype}
 
 % graphics, drawings, etc.
@@ -344,10 +345,47 @@ Nicht jede Aussage, die syntaktisch korrekt ist, ist in dem Kontext auch erlaubt
 \begin{lstlisting}[language=C]
 int y = 2 * x;
 \end{lstlisting}
-Bei dem Satz \enquote{Ein Kreis hat zwei Ecken} ist der Fehler, dass ein Kreis keine Ecken besitzt. Hier passen die Typen nicht, ein Objekt der klasse \emph{eckige Geometrische Formen}, wie zum Beispiel das Dreieck, würde hier kontextuell passen (aber der Satz wäre dann semantisch immer noch falsch).
+Bei dem Satz \enquote{Ein Kreis hat zwei Ecken} ist der Fehler, dass ein Kreis keine Ecken besitzt. Hier passen die Typen nicht, ein Objekt der Klasse \emph{eckige geometrische Formen}, wie zum Beispiel das Dreieck, würde hier kontextuell passen (aber der Satz wäre dann semantisch immer noch falsch).
 
 \subsection{Semantik}
 
+Bei der Semantik geht es um die \emph{Bedeutung} einer Anweisung oder Aussage einer Sprache. 
+
+Bei Programmiersprachen wird die Semantik häufig auf zwei Arten beschrieben. 
+
+\begin{description}
+\item[Operationell] Welche Schritte laufen ab, wenn das Programm gestartet wird? Wird unter Anderem in Form von \emph{Pseudocode} angegeben.
+\item[Denotational] Abbildung von Eingaben auf Ausgaben. Hier gibt man funktional an, was geändert wird, aber nicht, wie dies geschieht. Als Beispiel kann man die Anweisung $ x := 1$ nehmen. Diese könnte man denotational als $v := i$ so spezifizieren, dass man eine Funktion $f$ auf den Speicher angewendet wird, so dass nach der Anweisung an der Stelle $v$ im Speicher der Wert $i$ steht.
+\begin{align*}
+  f(\mathrm{MEM}) = \mathrm{MEM'} \doteq \mathrm{MEM'}[v] = i
+\end{align*}
+\end{description}
+
+\subsection{Art der Spezifikation}
+
+Für alle drei Teile (Syntax, kontextuelle Eingschränkungen und Semantik) gibt es jeweils zwei Spezifikationsarten: \emph{Formal} und \emph{Informal}.
+
+Für die Sprache Triangle, die in dieser Vorlesung verwendet wird, gibt es eine formale Syntaxbeschreibung (als regulären Ausdrücke in der EBNF\footnote{Erweiterte Backus-Naur-Form, kurz EBNF, ist eine Erweiterung der Backus-Naur-Form (BNF), die ursprünglich von Niklaus Wirth zur Darstellung der Syntax der Programmiersprache Pascal eingeführt wurde.}, sowie informale kontextuelle Einschränkungen und Semantik.
+
+Der Unterschied zwischen einer formalen und informalen Spezifikation ist, dass formale Beschreibungen automatisiert gelesen werden können und mit bestimmten Tools (Parser-Generatoren, wie zum Beispiel ANTLR\footnote{ANTLR unterstützt die Erzeugung von Parsern, Lexern und TreeParsern für LL(k)-Grammatiken mit beliebigen k. Die verwendete Eingabe-Sprache ist eine Mischung aus formaler Grammatik und Elementen aus objektorientierten Sprachen.}) automatisch verarbeitet werden können. 
+
+Mit einer formal beschriebenen Semantik kann man auch wieder automatisierte Tools verwenden, die zum Beispiel automatisiert Codegeneratoren schreiben können oder gewisse Eigenschaften von Programmen beweisen können. Leider werden in der Praxis Semantiken fast nie formal beschrieben, weil das zu kompliziert ist. Deswegen hat man meistens eine informelle Spezifizierung (einen Sprachstandard). Diese sind menschenlesbar. Der Nachteil hierbei ist, dass unter Umständen unterschiedliche Menschen den Standard unterschiedlich interpretieren, was zu Inkompatibilitäten führen kann. 
+
+\subsection{Formale Syntax}
+
+\hl{Eine Sprache ist eine Menge von Zeichenketten aus einem Alphabet}. Wie ist diese Menge angegeben? Bei endlichen Sprachen kann man einfach alle Elemente aufzählen, zum Beispiel \{\verb|true|, \verb|false|\} für die Sprache der booleschen Literale. Das geht aber nicht bei unendlichen Sprachen. In der Praxis sind aber alle Programmiersprachen unendlich.
+
+Es gibt mehrere mögliche Vorgehensweisen, um Sprachen zu notieren. Man könnte die mathematische Mengennotation benutzen, reguläre Ausdrücke, oder eine kontextfreie Grammatik.
+
+\subsection{Syntax durch Mengenbeschreibung}
+
+Man kann eine Sprache durch mathematische Mengennotation beschreiben. Das kann zum Beispiel folgendermaßen aussehen.
+\begin{align*}
+L &= \{a, b, c\} && \text{beschreibt \textbf{a}, \textbf{b}, \textbf{c}.}\\
+L &= \{x^n | n > 0\} && \text{beschreibt \textbf{x}, \textbf{xx}, \textbf{xxx}.}\\
+L &= \{x^ny^m|n > 0, m > 0\} && \text{beschreibt \textbf{xxy}, \textbf{xyy}, \textbf{xxxyy}.}\\
+L &= \{x^ny^n|n > 0\} && \text{beschreibt \textbf{xy}, \textbf{xxyy}, \textbf{xxxyyy}.}\\
+\end{align*}
 
 
 \end{document}
