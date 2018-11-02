@@ -82,7 +82,7 @@
 \date{Wintersemester 2018-2019}
 \author{Andreas Koch}
 \subject{Einführung in den Compilerbau}
-\subtitle{von Patrick Elsen, Viola und Michael Matthé}
+\subtitle{Patrick Elsen, Viola Hofmeister und Michael Matthé}
 \publishers{Technische Universität Darmstadt}
 
 \begin{document}
@@ -101,13 +101,13 @@ Die MAVL-Sprachspezifikation enthält nur eine informelle Beschreibung der Synt
 Geben Sie Produktionen für die Nichtterminale \texttt{mulExpr} (Multiplikations-Operator), \texttt{subvectorExpr} (Subvektor-Operator), sowie \texttt{recordElementSelectExpr} (Selektion von Record-Elementen) an.
 
 \bigskip\noindent
-Ein Multiplikationsausdruck ist in der Sprachspezifikation unter \emph{§~7.5 Ternärer Operator} definiert. Ein solcher Ausdruck nimmt \verb|int| oder \verb|float|-Werte als Parameter und ist Linksassoziativ. Also kann man diesen grammatikalisch folgendermaßen definieren.
+Ein Multiplikationsausdruck ist in der Sprachspezifikation unter \emph{§~7.5 Ternärer Operator} definiert. Ein solcher Ausdruck nimmt \verb|int| oder \verb|float|-Ausdrücke als Parameter und ist Linksassoziativ. Also kann man diesen grammatikalisch folgendermaßen definieren. 
 \begin{verbatim}
     mulExpr ::= expr '*' expr
 \end{verbatim}
-Die \verb|subvectorExpr| ist in dem Sprachstandard unter \emph{§~7.7.4 Submatrix und Subvektor} definiert. Hier wird definiert, dass eine solche Beispielsweise als \verb|v{-1:i:1}| geschrieben werden kann, wobei \verb|v| ein Vektor und \verb|i| eine Zahl sein muss. Dieser Ausdruck extrahiert einen Subvektor mit den Elementen $[i-1, i+1]$. 
+Die \verb|subvectorExpr| ist in dem Sprachstandard unter \emph{§~7.7.4 Submatrix und Subvektor} definiert. Hier wird definiert, dass eine solche Beispielsweise als \verb|v{-1:i:1}| geschrieben werden kann, wobei \verb|v| ein Vektor und \verb|i| eine Zahl sein muss. Dieser Ausdruck extrahiert einen Subvektor mit den Elementen $[i-1, i+1]$. Der Vektor kann also eine ID sein, oder ein anderer Ausdruck, der einen Vektor zurückgibt. Also nehmen wir \texttt{expr}. In dem Subvektorausdruck selbst kann der mittlere Term ein beliebiger Ausdruck sein, die ersten beiden Terme aber müssen konstante Ausdrücke sein. Das bedeutet, dass diese sich nur aus Zahlen (mit Vorzeichen) und Operatoren bestehen dürfen. Um die Grammatik kompakt zu beschreiben, wird auf diese Einschränkung verzichtet und wir nehmen auch hier \texttt{expr}.
 \begin{verbatim}
-    subvectorExpr ::= '{' expr ':' expr ':' expr '}'  
+    subvectorExpr ::= expr '{' expr ':' expr ':' expr '}'  
 \end{verbatim}
 Unter \emph{§~7.8 Selektion von Record-Elementen} ist definiert, wie der Syntax funktioniert.
 \begin{verbatim}
