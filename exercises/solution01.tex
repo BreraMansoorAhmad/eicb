@@ -103,15 +103,15 @@ Geben Sie Produktionen für die Nichtterminale \texttt{mulExpr} (Multiplikation
 \bigskip\noindent
 Ein Multiplikationsausdruck ist in der Sprachspezifikation unter \emph{§~7.5 Ternärer Operator} definiert. Ein solcher Ausdruck nimmt \verb|int| oder \verb|float|-Ausdrücke als Parameter und ist Linksassoziativ. Also kann man diesen grammatikalisch folgendermaßen definieren. 
 \begin{verbatim}
-    mulExpr ::= expr '*' expr
+mulExpr ::= expr '*' expr
 \end{verbatim}
 Die \verb|subvectorExpr| ist in dem Sprachstandard unter \emph{§~7.7.4 Submatrix und Subvektor} definiert. Hier wird definiert, dass eine solche Beispielsweise als \verb|v{-1:i:1}| geschrieben werden kann, wobei \verb|v| ein Vektor und \verb|i| eine Zahl sein muss. Dieser Ausdruck extrahiert einen Subvektor mit den Elementen $[i-1, i+1]$. Der Vektor kann also eine ID sein, oder ein anderer Ausdruck, der einen Vektor zurückgibt. Also nehmen wir \texttt{expr}. In dem Subvektorausdruck selbst kann der mittlere Term ein beliebiger Ausdruck sein, die ersten beiden Terme aber müssen konstante Ausdrücke sein. Das bedeutet, dass diese sich nur aus Zahlen (mit Vorzeichen) und Operatoren bestehen dürfen. Um die Grammatik kompakt zu beschreiben, wird auf diese Einschränkung verzichtet und wir nehmen auch hier \texttt{expr}.
 \begin{verbatim}
-    subvectorExpr ::= expr '{' expr ':' expr ':' expr '}'  
+subvectorExpr ::= expr '{' expr ':' expr ':' expr '}'  
 \end{verbatim}
-Unter \emph{§~7.8 Selektion von Record-Elementen} ist definiert, wie der Syntax funktioniert.
+Unter \emph{§~7.8 Selektion von Record-Elementen} ist definiert, wie der Syntax funktioniert. Hier kann man aus einem Ausdruck, der eine Instanz eines Record darstellt, auf ein einzelnes Element zugreifen. Mit dem Ausdruck \texttt{person@name} greift man zum Beispiel auf das Namenselement einer Person zu. 
 \begin{verbatim}
-    recordElementSelectExpr ::= ID '@' ID  
+recordElementSelectExpr ::= expr '@' ID  
 \end{verbatim}
 
 \subsection*{Aufgabe 1.1b}
@@ -121,25 +121,26 @@ Geben Sie Produktionen für die Nichtterminale \verb|primitiveType| (primitive 
 \bigskip\noindent
 Die primitiven Typen sind unter \emph{§~4.2 Primitive Datentypen} definiert. Hier sind nur \texttt{int}, \texttt{float} und \texttt{bool} als eingebaute, primitive Typen angegeben. Also könnte eine Grammatik folgendermaßen aussehen:
 \begin{verbatim}
-    primitiveType ::= 'int' | 'float' | 'bool'
+primitiveType ::= 'int' | 'float' | 'bool'
 \end{verbatim}
 Der \texttt{vectorType} ist bei \emph{§~4.5 Vektoren} definiert. Ein Vektor muss, mit einem Elementtyp (entweder \texttt{int} oder \texttt{float}) und einer Länge (positive, ganze Zahl) definiert werden.
 \begin{verbatim}
-    vectorType ::= 'vector' '<' ('int' | 'float') '>' '[' constExpr ']'
+vectorType ::= 'vector' '<' ('int' | 'float') '>' '[' expr ']'
 \end{verbatim}
 
 \subsection*{Aufgabe 1.1c}
 
 Geben Sie Produktionen für die Nichtterminale \texttt{returnStmt} (Rückgabebefehl), \texttt{varDecl} Variablendeklaration), \texttt{callStmt} (Aufruf-Befehl, ohne Rückgabewert) sowie \texttt{forStmt} (For-Schleife) an.
 
-
+\bigskip\noindent
+Der Rückgabebefehl ist unter \emph{§~6.8 Rückgabe} im Sprachstandard definiert. Ein solcher Befehl besteht aus dem Keyword \texttt{'return'}, einem Ausdruck und einem abschließenden Semikolon. Also kann man einen solchen folgendermaßen definieren.
+\begin{lstlisting}
+returnStmt ::= 'return' expr ';'
+\end{lstlisting}
 
 
 \subsection*{Aufgabe 1.2: AST zu MAVL}
-Abstrakte Syntaxbäume (engl. \emph{Abstract Syntax Trees, AST}) sind eine weitverbreitete Zwischendarstellung, die nur essentielle Informationen enthält und Details der konkreten Syntax einer Programmiersprache abstrahiert.
-
-\medskip\noindent
-In dieser Aufgabe zeigen wie Ihnen eine mögliche Repräsentation von MAVL-Code als AST. Die darin verwendeten AST-Knoten korrespondieren auf natürliche Weise mit den in der Spezifikation beschriebenen Syntaxelementen. 
+Abstrakte Syntaxbäume (engl. \emph{Abstract Syntax Tree}) sind eine weitverbreitete Zwischendarstellung, die nur essentielle Informationen enthält und Details der konkreten Syntax einer Programmiersprache abstrahiert. In dieser Aufgabe zeigen wie Ihnen eine mögliche Repräsentation von MAVL-Code als AST. Die darin verwendeten AST-Knoten korrespondieren auf natürliche Weise mit den in der Spezifikation beschriebenen Syntaxelementen. 
 
 \subsection*{Artikel 1.2a}
 Geben Sie den zum folgenden AST zugehörigen MAVL-Code an.  
@@ -176,18 +177,56 @@ Zeichnen Sie den AST für den MAVL-Ausdruck \texttt{q \& a == b \# c}.
 
 
 \bigskip\noindent
-Antwort.
+\begin{tikzpicture}[level distance=1.5cm,
+level 1/.style={sibling distance=3cm},
+level 2/.style={sibling distance=1.5cm}
+]
+\node{Compare}
+child {node {And}
+	child {node {q}}
+	child {node {a}}
+}
+child {node {MatrixMultiplication}
+	child {node {b}}
+	child {node {c}}
+};
+\end{tikzpicture}
+
 
 \subsection*{Artikel 1.3b}
-Zeichnen Sie den AST für den MAVL-Ausdruck \texttt{- v2 .* v1 + (v2 \# m)[0]}.
+Zeichnen Sie den AST für den MAVL-Ausdruck\texttt{ - v2 .* v1 + (v2 \# m)[0]}.
 
 
 \bigskip\noindent
-Antwort.
+\begin{tikzpicture}[level distance=1.5cm,
+level 1/.style={sibling distance=6cm},
+level 2/.style={sibling distance=3cm}
+]
+\node{Add}
+child {node {Negation}
+	child {node {DotProduct}
+		child {node {v2}}
+		child {node {v1}}		
+	}
+}
+child {node {ElementSelect}
+	child {node {MatrixMultiplication}
+		child {node {v2}}
+		child {node {m}}
+	}
+	child {node {0}}
+};
+
+\end{tikzpicture}
 
 \subsection*{Aufgabe 1.3c}
 Gegeben seien folgende Wertedefinitionen.
-
+\begin{lstlisting}
+val matrix <int>[2][2] m = [[1, 2],
+                            [3, 4]];
+val vector<int>[2]    v1 = [4, 2];
+val vector<int>[2]    v2 = [2, 3];
+\end{lstlisting}
 Welchen Wert liefert der Ausdruck aus Teilaufgabe 1.3b?
 
 \bigskip\noindent
