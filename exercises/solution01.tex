@@ -7,6 +7,7 @@
 
 % typography
 \usepackage{fontspec}
+\usepackage[utopia]{mathdesign}
 \setsansfont{Open Sans}[
   BoldFont={Open Sans Bold},
   ItalicFont={Open Sans Italic}]
@@ -63,7 +64,7 @@
 \capsdef{////}{\scshape}{.16em}{.4em}{.2em}
 
 % math
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath}
 
 % nice tables
 \usepackage{booktabs}
@@ -95,58 +96,11 @@ Auf diesem Aufgabenblatt sollen Sie sich mit der Matrix and Vector Language, kur
 
 Die MAVL-Sprachspezifikation enthält nur eine informelle Beschreibung der Syntaxelemente der Sprache. In den folgenden Teilaufgaben sollen Sie einige der Syntaxelemente in Produktionen einer kontextfreien Grammatik überführen.
 
-\medskip\noindent
-Abweichend von den Vorlesungsfolien soll die Grammatik jedoch in erweiterter Backus-Naur-Form (EBNF) beschrieben werden: Sie können und sollen in den Produktionen den \verb|?|-Operator (0 oder 1 Wiederholung) und den \verb|*|-Operator (0 oder mehr Wiederholungen) verwenden. Beispielsweise können Sie eine Sequenz eines Nichtterminals A statt durch
-\begin{verbatim}
-    A ::= A single-A
-        | single-A
-\end{verbatim}
-auch einfacher durch
-\begin{verbatim}
-    A ::= single-A (single-A)*
-\end{verbatim}
-ausdrücken.
-
-\medskip\noindent
-Verwenden Sie bitte folgende Terminalsymbole (Tokens):
-
-\begin{table}[!htbp]\centering\tablespacing{1.3}
-\begin{tabular}{@{}p{8cm}p{8cm}@{}}
-\toprule
-\textbf{Terminalsymbole} & \textbf{Bedeutung}\\
-\midrule
-\verb|ID| & Berzeichner, z. B. \verb|someVar_42|.\\
-\verb|INT|, \verb|FLOAT|, \verb|BOOL|, \verb|STRING| & Vorzeichenlose Literale des entsprechenden Typs, z. B. \verb|17|, \verb|3.14|, \verb|false|, \verb|"foo"|.\\
-\verb|'function'|, \verb|'val'|, \verb|'var'|, \verb|'for'|, \verb|'if'|, \verb|'else'|, \verb|'return'|, \verb|'foreach'|, \verb|'switch'|, \verb|'case'|, \verb|'default'|, \verb|'record'| & Schlüsselwörter.\\
-\verb|'int'|, \verb|'float'|, \verb|'bool'|, \verb|'void'|, \verb|'string'|, \verb|'matrix'|, \verb|'vector'| & Schlüsselwörter für eingebaute Typen.\\
-\verb|'('|, \verb|')'|, \verb|'{'|, \verb|'}'|, \verb|'['|, \verb|']'|, \verb|'<'|, \verb|'>'| & Klammern.\\
-\bottomrule
-\end{tabular}
-\end{table}
-\noindent
-Whitespace-Symbole und Kommentare brauchen Sie nicht zu beachten. Lassen Sie in Ihrer Lösung nicht die einfachen Anführungsstriche weg -- sie dienen zur Unterscheidung der Tokens von den Operatoren der EBNF.
-
-\begin{hinweis}
-Beachten Sie, dass Sie die in der Spezifikation angegebenen kontextuellen Einschränkungen, z.B. Typkompatibilität, hier nicht prüfen müssen. Verwenden Sie eine möglichst kompakte Beschreibung der Syntaxelemente. Die Grammatik darf durch Ihre Produktionen mehrdeutig werden. Ignorieren Sie für diese Aufgabe außerdem § 7.9 der MAVL-Spezifikation: Ihre Produktionen müssen nicht die Mehrfachanwendung von unären Operatoren ausschließen.
-\end{hinweis}
-
-\begin{enumerate}
-\item[a)]
-Das Nichtterminal \verb|expr| dient zur Erkennung eines beliebig komplexen Ausdrucks wie z.~B.\ \verb|a * b + (c - m[3][1])|. In einer kontextfreien Grammatik lassen sich Ausdrücke als rekursive Produktionen beschreiben: Ein Ausdruck ist entweder ein atomarer Ausdruck oder entsteht durch die Anwendung eines Operators auf weitere (atomare oder zusammengesetzte) Ausdrücke.
-
-\verb|expr| wird durch folgende Produktion beschrieben:
-\begin{verbatim}
-    expr ::= ID | INT | FLOAT | STRING
-           | '(' expr ')'
-           | ...
-           | mulExpr
-           | subvectorExpr
-           | recordElementSelectExpr
-           | ...
-\end{verbatim}
+\subsection*{Aufgabe 1.1a: Produktionen}
 
 Geben Sie Produktionen für die Nichtterminale \texttt{mulExpr} (Multiplikations-Operator), \texttt{subvectorExpr} (Subvektor-Operator), sowie \texttt{recordElementSelectExpr} (Selektion von Record-Elementen) an.
-\end{enumerate}
+
+\bigskip\noindent
 Ein Multiplikationsausdruck ist in der Sprachspezifikation unter \emph{§~7.5 Ternärer Operator} definiert. Ein solcher Ausdruck nimmt \verb|int| oder \verb|float|-Werte als Parameter und ist Linksassoziativ. Also kann man diesen grammatikalisch folgendermaßen definieren.
 \begin{verbatim}
     mulExpr ::= (INT | FLOAT) '*' expr
@@ -159,16 +113,12 @@ Unter \emph{§~7.8 Selektion von Record-Elementen} ist definiert, wie der Syntax
 \begin{verbatim}
     recordElementSelectExpr ::= ID '@' ID  
 \end{verbatim}
-\begin{enumerate}
-\item[b)]
-Das Nichtterminal \texttt{type} dient zur Erkennung von Typbezeichnern wie z.~B. \texttt{vector<float>[5]}. \texttt{type} wird durch folgende Produktion beschrieben:
-\begin{verbatim}
-    type ::= primitiveType
-           | vectorType
-           | ...
-\end{verbatim}
+
+\subsection*{Aufgabe 1.1b}
+
 Geben Sie Produktionen für die Nichtterminale \verb|primitiveType| (primitive Typen) und \verb|vectorType| (Vektortypen) an.
-\end{enumerate}
+
+\bigskip\noindent
 Die primitiven Typen sind unter \emph{§~4.2 Primitive Datentypen} definiert. Hier sind nur \texttt{int}, \texttt{float} und \texttt{bool} als eingebaute, primitive Typen angegeben. Also könnte eine Grammatik folgendermaßen aussehen:
 \begin{verbatim}
     primitiveType ::= 'int' | 'float' | 'bool'
@@ -177,18 +127,11 @@ Der \texttt{vectorType} ist bei \emph{§~4.5 Vektoren} definiert. Ein Vektor mus
 \begin{verbatim}
     vectorType ::= 'vector' '<' ('int' | 'float') '>' '[' constExpr ']'
 \end{verbatim}
-\begin{enumerate}
-\item[c)]
-Das Nichtterminal \texttt{statement} dient zur Erkennung von Befehlen und wird durch folgende Produktion beschrieben:
-\begin{verbatim}
-    statement ::= returnStmt
-                | varDecl
-                | callStmt
-                | forStmt
-                | ...
-\end{verbatim}
+
+\subsection*{Aufgabe 1.1c}
+
 Geben Sie Produktionen für die Nichtterminale \texttt{returnStmt} (Rückgabebefehl), \texttt{varDecl} Variablendeklaration), \texttt{callStmt} (Aufruf-Befehl, ohne Rückgabewert) sowie \texttt{forStmt} (For-Schleife) an.
-\end{enumerate}
+
 
 
 
@@ -197,10 +140,11 @@ Abstrakte Syntaxbäume (engl. \emph{Abstract Syntax Trees, AST}) sind eine weitv
 
 \medskip\noindent
 In dieser Aufgabe zeigen wie Ihnen eine mögliche Repräsentation von MAVL-Code als AST. Die darin verwendeten AST-Knoten korrespondieren auf natürliche Weise mit den in der Spezifikation beschriebenen Syntaxelementen. 
-\begin{enumerate}
-\item [a)]
+
+\subsection*{Artikel 1.2a}
 Geben Sie den zum folgenden AST zugehörigen MAVL-Code an.  
-\end{enumerate}
+
+\bigskip\noindent
 Den Syntaxbaum kann man, von oben nach unten und links nach rechts, einfach wie Code lesen.
 \begin{lstlisting}
 if(id && r > q) {
@@ -211,5 +155,36 @@ if(id && r > q) {
 }
 \end{lstlisting}
 
+
+\subsection*{Artikel 1.2b}
+Geben Sie den zum folgenden AST zugehörigen MAVL-Code an.  
+
+\bigskip\noindent
+Antwort.
+
+\subsection*{Artikel 1.3: Ausdrücke}
+Ausdrücke in typischen Programmiersprachen lassen sich einfach durch mehrdeutige Grammatiken beschreiben, die aber als Grundlage für die syntaktische Analyse ungeeignet sind.
+
+\subsection*{Artikel 1.3a}
+Zeichnen Sie den AST für den MAVL-Ausdruck \texttt{q \& a == b \# c}.
+
+
+\bigskip\noindent
+Antwort.
+
+\subsection*{Artikel 1.3b}
+Zeichnen Sie den AST für den MAVL-Ausdruck \texttt{- v2 .* v1 + (v2 \# m)[0]}.
+
+
+\bigskip\noindent
+Antwort.
+
+\subsection*{Aufgabe 1.3c}
+Gegeben seien folgende Wertedefinitionen.
+
+Welchen Wert liefert der Ausdruck aus Teilaufgabe 1.3b?
+
+\bigskip\noindent
+Antwort.
 
 \end{document}
