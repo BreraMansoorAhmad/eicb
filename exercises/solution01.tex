@@ -103,7 +103,7 @@ Geben Sie Produktionen für die Nichtterminale \texttt{mulExpr} (Multiplikation
 \bigskip\noindent
 Ein Multiplikationsausdruck ist in der Sprachspezifikation unter \emph{§~7.5 Ternärer Operator} definiert. Ein solcher Ausdruck nimmt \verb|int| oder \verb|float|-Werte als Parameter und ist Linksassoziativ. Also kann man diesen grammatikalisch folgendermaßen definieren.
 \begin{verbatim}
-    mulExpr ::= (INT | FLOAT) '*' expr
+    mulExpr ::= expr '*' expr
 \end{verbatim}
 Die \verb|subvectorExpr| ist in dem Sprachstandard unter \emph{§~7.7.4 Submatrix und Subvektor} definiert. Hier wird definiert, dass eine solche Beispielsweise als \verb|v{-1:i:1}| geschrieben werden kann, wobei \verb|v| ein Vektor und \verb|i| eine Zahl sein muss. Dieser Ausdruck extrahiert einen Subvektor mit den Elementen $[i-1, i+1]$. 
 \begin{verbatim}
@@ -160,7 +160,13 @@ if(id && r > q) {
 Geben Sie den zum folgenden AST zugehörigen MAVL-Code an.  
 
 \bigskip\noindent
-Antwort.
+\begin{lstlisting}
+var vector<int>[3 + 1] p;
+for(var int i : p) {
+  i = k;
+}  
+\end{lstlisting}
+
 
 \subsection*{Artikel 1.3: Ausdrücke}
 Ausdrücke in typischen Programmiersprachen lassen sich einfach durch mehrdeutige Grammatiken beschreiben, die aber als Grundlage für die syntaktische Analyse ungeeignet sind.
