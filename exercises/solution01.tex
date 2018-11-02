@@ -6,13 +6,14 @@
 \usepackage{csquotes}
 
 % typography
-\usepackage{mathpazo}
 \usepackage{fontspec}
 \setsansfont{Open Sans}[
   BoldFont={Open Sans Bold},
   ItalicFont={Open Sans Italic}]
-\setmonofont{Menlo}
-\renewcommand\familydefault{\sfdefault}
+\setmonofont[Scale=0.85]{Menlo}
+\setmainfont{Palatino}
+\linespread{1.15}
+%\renewcommand\familydefault{\sfdefault}
 \usepackage[factor=2000]{microtype}
 
 % graphics, drawings, etc.
