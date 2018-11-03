@@ -157,8 +157,6 @@ forStmt ::= 'for' '(' ID '=' expr ';' expr ';' ID '=' expr ')'
             (statement | '{' statement* '}')
 \end{lstlisting}
 
-
-
 \subsection*{Aufgabe 1.2: AST zu MAVL}
 Abstrakte Syntaxbäume (engl. \emph{Abstract Syntax Tree}) sind eine weitverbreitete Zwischendarstellung, die nur essentielle Informationen enthält und Details der konkreten Syntax einer Programmiersprache abstrahiert. In dieser Aufgabe zeigen wir Ihnen eine mögliche Repräsentation von MAVL-Code als AST. Die darin verwendeten AST-Knoten korrespondieren auf natürliche Weise mit den in der Spezifikation beschriebenen Syntaxelementen. 
 
@@ -174,7 +172,6 @@ if(flag & r > q) {
   r = a - (q * d);
 }
 \end{lstlisting}
-
 
 \subsection*{Artikel 1.2b}
 \emph{Geben Sie den zum AST zugehörigen MAVL-Code an.}
@@ -239,16 +236,28 @@ child {node {ElementSelect}
 \end{tikzpicture}
 
 \subsection*{Aufgabe 1.3c}
-Gegeben seien folgende Wertedefinitionen.
+\emph{Gegeben seien folgende Wertedefinitionen.}
 \begin{lstlisting}
 val matrix <int>[2][2] m = [[1, 2],
                             [3, 4]];
 val vector<int>[2]    v1 = [4, 2];
 val vector<int>[2]    v2 = [2, 3];
 \end{lstlisting}
-Welchen Wert liefert der Ausdruck aus Teilaufgabe 1.3b?
+\emph{Welchen Wert liefert der Ausdruck aus Teilaufgabe 1.3b?}
 
 \bigskip\noindent
-Antwort.
+Dieses Programm kann man als ein kleines Ruby-Skript ausdrücken, was (hoffentlich) das richtige Ergebnis liefert. Wichtig ist hier, dass Ruby andere Operatopräzedenzregeln hat, weswegen anders geklammert werden muss.
+\begin{lstlisting}[language=ruby,morekeywords={require,puts}]
+require "matrix"
+\end{lstlisting}
+\begin{lstlisting}[language=ruby,morekeywords={require,puts}]
+m = Matrix[[1, 2], [3, 4]]
+v1 = Vector[4, 2]
+v2 = Vector[2, 3]
+\end{lstlisting}
+\begin{lstlisting}[language=ruby,morekeywords={require,puts}]
+puts (-v1.inner_product(v2) + (v2.covector * m)[0,0])  
+\end{lstlisting}
+Dieses Programm liefert als Resultat der Berechnung das Ergebis \texttt{-3}. 
 
 \end{document}
