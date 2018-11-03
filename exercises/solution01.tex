@@ -21,55 +21,21 @@
 % graphics, drawings, etc.
 \usepackage{xcolor}
 \usepackage{graphicx}
-\usepackage[most]{tcolorbox}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{shapes.arrows}
 \usetikzlibrary{positioning}
-\newtcolorbox{anmerkung}{%
-  grow to left by=10pt,
-  colback=black!10,
-  colframe=white,
-  coltitle=black,
-  borderline west={4pt}{0pt}{black!30},
-  boxrule=0pt,
-  boxsep=0pt,
-  %breakable,
-  enhanced jigsaw,
-  title={Anmerkung\par},
-  fonttitle={\bfseries},
-  attach title to upper={}}
-\newtcolorbox{hinweis}{%
-  grow to left by=10pt,
-  colback=black!10,
-  colframe=white,
-  coltitle=black,
-  borderline west={4pt}{0pt}{black!30},
-  boxrule=0pt,
-  boxsep=0pt,
-  %breakable,
-  enhanced jigsaw,
-  title={Hinweis\par},
-  fonttitle={\bfseries},
-  attach title to upper={}}
 
 % highlighting, lists, code
-\usepackage{soul}
-\usepackage{enumitem}
 \usepackage{listings}
 \lstset{
   basicstyle=\ttfamily,
   %escapeinside=||,
   keywordstyle=\color{blue!50!black},
   stringstyle=\color{green!50!black}}
-\capsdef{////}{\scshape}{.16em}{.4em}{.2em}
 
 % math
 \usepackage{amsmath}
-
-% nice tables
-\usepackage{booktabs}
-\newcommand{\tablespacing}[1]{\renewcommand{\arraystretch}{#1}}
 
 % links
 \usepackage[
@@ -193,7 +159,7 @@ Ausdrücke in typischen Programmiersprachen lassen sich einfach durch mehrdeuti
 
 
 \bigskip\noindent
-\begin{tikzpicture}[level distance=1.5cm,
+{\centering\begin{tikzpicture}[level distance=1.5cm,
 level 1/.style={sibling distance=3cm},
 level 2/.style={sibling distance=1.5cm}
 ]
@@ -206,7 +172,7 @@ child {node {MatrixMultiplication}
 	child {node {b}}
 	child {node {c}}
 };
-\end{tikzpicture}
+\end{tikzpicture}\par}
 
 
 \subsection*{Artikel 1.3b}
@@ -214,7 +180,7 @@ child {node {MatrixMultiplication}
 
 
 \bigskip\noindent
-\begin{tikzpicture}[level distance=1.5cm,
+{\centering\begin{tikzpicture}[level distance=1.5cm,
 level 1/.style={sibling distance=6cm},
 level 2/.style={sibling distance=3cm}
 ]
@@ -233,7 +199,7 @@ child {node {ElementSelect}
 	child {node {0}}
 };
 
-\end{tikzpicture}
+\end{tikzpicture}\par}
 
 \subsection*{Aufgabe 1.3c}
 \emph{Gegeben seien folgende Wertedefinitionen.}
@@ -256,7 +222,7 @@ v1 = Vector[4, 2]
 v2 = Vector[2, 3]
 \end{lstlisting}
 \begin{lstlisting}[language=ruby,morekeywords={require,puts}]
-puts (-v1.inner_product(v2) + (v2.covector * m)[0,0])  
+puts -v1.inner_product(v2) + (v2.covector * m)[0,0] 
 \end{lstlisting}
 Dieses Programm liefert als Resultat der Berechnung das Ergebis \texttt{-3}. 
 
