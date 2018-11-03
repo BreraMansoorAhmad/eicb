@@ -108,7 +108,7 @@ mulExpr ::= expr '*' expr
 \end{lstlisting}
 Die \verb|subvectorExpr| ist in dem Sprachstandard unter \emph{§~7.7.4 Submatrix und Subvektor} definiert. Hier wird definiert, dass eine solche Beispielsweise als $v\{l:e:u\}$ geschrieben werden kann, wobei $v$ ein Vektor, $e$ eine \texttt{int}-Ausdruck, und $l$ und $u$ konstante \texttt{int}-Ausdrücke sein müssen, so dass $l < u$. Dieser Ausdruck extrahiert einen Subvektor mit den Elementen $[i+l, i+u]$. Zuerst brauchen wir also ein Hilfs-Nichtterminalsymbol \texttt{constExpr} für $l$ und $u$.
 \begin{lstlisting}
-constExpr ::= '-'? INT (('*' | '+' | '-' | '/') constExpr)*
+constExpr ::= '-'? INT (('*' | '+' | '-' | '/' | '^') constExpr)?
             | '(' constExpr ')'
 \end{lstlisting}
 Mit diesem Hilfsausdruck können wir nun die \texttt{subvectorExpr} definieren. Da $e$ ein beliebiger Ausdruck sein kann, können wir hier eine \texttt{expr} verwenden. 
@@ -143,17 +143,18 @@ Der Rückgabebefehl ist unter \emph{§~6.8 Rückgabe} im Sprachstandard definier
 \begin{lstlisting}
 returnStmt ::= 'return' expr ';'
 \end{lstlisting}
-Die Variablendeklaration ist unter \emph{§~6.2 Variablendeklaration} im Sprachstandard definiert. Eine solche Deklaration besteht aus dem Keyword \texttt{var}, dem Typen der Variablen (primitiver Typ wie \texttt{int}, \texttt{float} oder \texttt{bool}, Vektor, Matrix oder Record), sowie ein Variablenname. {\color{red!80!black}Ist die ID als Type hier legal? Müsste eigentlich, sonst kann man ja keinen Record deklarieren?}
+Die Variablendeklaration ist unter \emph{§~6.2 Variablendeklaration} im Sprachstandard definiert. Eine solche Deklaration besteht aus dem Keyword \texttt{var}, dem Typen der Variablen (primitiver Typ wie \texttt{int}, \texttt{float} oder \texttt{bool}, Vektor, Matrix oder Record), sowie ein Variablenname.
 \begin{lstlisting}
 varDecl ::= 'var' (primitiveType | vectorType | matrixType | ID) ID ';'  
 \end{lstlisting}
-Aufrufe sind unter \emph{§~6.4 Aufrufe} im Sprachstandard definiert. Diese bestehen aus dem Namen einer Funktion, einer Klammer \texttt{'('}, den Parametern (durch Kommata separiert) und einer Klammer \texttt{')'}. {\color{red!80!black}Ist das hier richtig? Ich bin davon ausgegangen, dass Funktionen null Argumente haben können (deswegen das Fragezeichen), und ansonsten mindestens eins (die erste expr), und jedes Folgende mit einem Komma separiert.}
+Aufrufe sind unter \emph{§~6.4 Aufrufe} im Sprachstandard definiert. Diese bestehen aus dem Namen einer Funktion, einer Klammer \texttt{'('}, den Parametern (durch Kommata separiert) und einer Klammer \texttt{')'}.
 \begin{lstlisting}
 callStmt ::= ID '(' (expr (',' expr)*)? ')' ';'
 \end{lstlisting}
-Die For-Schleife ist unter \emph{§~6.6.1 For-Schleife} definiert. {\color{red!80!black}Was ist mit den Ausdrücken in der For-Schleife? Es dürfen ja geschweifte Klammern mit mehreren Ausdrücken oder ein einzelner Ausdruck mit einem abschließenden Semikolon vorkommen?}
+Die For-Schleife ist unter \emph{§~6.6.1 For-Schleife} definiert. Es besteht aus dem Keyword \texttt{for}, einer offenen Klammer, einer initialen Zuweisung, einer Kondition (boolscher Ausdruck, der bei jedem Durchlauf ausgewertet wird), eine Zuweisung, die nach jeden Durchlauf ausgeführt wird (typischerweise, um eine Zählervariable zu inkrementieren), eine schließende Klammer, sowie entweder ein einzelner Ausdruck oder mehrere Ausdrücke in geschweiften Klammern. Daraus ergibt sich folgende Grammatik.
 \begin{lstlisting}
-forStmt ::= 'for' '(' ID '=' expr ';' expr ';' ID '=' expr ')'  
+forStmt ::= 'for' '(' ID '=' expr ';' expr ';' ID '=' expr ')'
+            (statement | '{' statement* '}')
 \end{lstlisting}
 
 
