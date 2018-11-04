@@ -12,7 +12,7 @@
 *   Links: [Moodle](https://moodle.informatik.tu-darmstadt.de/course/view.php?id=440), [Vorlesungswebseite](https://www.esa.informatik.tu-darmstadt.de/twiki/bin/view/Lectures/EiCB18De.html).
 *   Notizen zur Vorlesung: [PDF](notizen.pdf) (*work-in-progress*).
 
-Diese Veranstaltung wird aufgezeichnet, die Aufzeichnungen sind auf der Vorlesungswebseite verfügber. [Termine](termine_studierende.pdf).
+Diese Veranstaltung wird aufgezeichnet, die Aufzeichnungen sind auf der Vorlesungswebseite verfügber. Die Übungen und Praktika sind verpflichtend und gelten als Klausurersatz.
 
 ## Inhalt
 
