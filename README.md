@@ -25,14 +25,13 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 
 ## Vorlesungen
 
-*   2018-10-16: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181016.avi). [Folien](folien/intro-handout.pdf).
-    *   Einführung
-    *   Zielmaschine
-    *   Organisatorisches
-    *   Aufbau
-    *   Optimierung
-    *   Syntax
-*   2018-10-23. [Folien](folien/lexparse-handout.pdf)
+*   2018-10-16: Einleitung, Beschreibung von Programmiersprachen. [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181016.avi). [Folien](folien/intro-handout.pdf).
+*   2018-10-23. [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181023.mp4).
+*   2018-10-30: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181030.mp4). [Folien](folien/lexparse-handout.pdf)
+
+## Übungen
+
+*   Theorieblatt 1 (30.10.2018 -- 04.11.2018). [Handout](https://moodle.informatik.tu-darmstadt.de/mod/resource/view.php?id=16467). [Solution](exercises/solution01.pdf).
 
 ## Literatur
 
