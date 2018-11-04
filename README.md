@@ -33,7 +33,12 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 
 ## Übungen
 
-*   Theorieblatt 1 (30.10.2018 – 04.11.2018). [Handout](https://moodle.informatik.tu-darmstadt.de/mod/resource/view.php?id=16467). [Solution](exercises/solution01.pdf).
+*   Theorieblatt 1 (29.10.2018 – 04.11.2018). [Handout](https://moodle.informatik.tu-darmstadt.de/mod/resource/view.php?id=16467). [Solution](exercises/solution01.pdf).
+*   Praktikum 1 (05.11.2018 – 18.11.2018).
+*   Theorieblatt 2 (26.11.2018 – 02.12.2018).
+*   Praktikum 2 (03.12.2018 – 16.12.2018).
+*   Theorieblatt 3 (14.01.2019 – 20.01.2019).
+*   Praktikum 3 (21.01.2019 – 03.02.2019).
 
 ## Folien
 
