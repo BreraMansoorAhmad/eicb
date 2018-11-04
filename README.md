@@ -20,8 +20,10 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 
 ## Nützliches
 
-*   [Triangle Compiler](material/triangle-2.1-esa5a.zip)
+*   [Triangle Compiler](https://moodle.informatik.tu-darmstadt.de/mod/url/view.php?id=16278).
 *   [Regular Expressions Pocket Reference](https://www.geos.ed.ac.uk/~bmg/software/Perl%20Books/RegExp_perl_python_java_etc.pdf)
+*   [MAVL Sprachspezifikation](https://moodle.informatik.tu-darmstadt.de/mod/resource/view.php?id=16465).
+*   [Terminübersicht](https://moodle.informatik.tu-darmstadt.de/pluginfile.php/92005/mod_resource/content/0/termine_studierende.pdf).
 
 ## Vorlesungen
 
@@ -32,6 +34,12 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 ## Übungen
 
 *   Theorieblatt 1 (30.10.2018 -- 04.11.2018). [Handout](https://moodle.informatik.tu-darmstadt.de/mod/resource/view.php?id=16467). [Solution](exercises/solution01.pdf).
+
+## Folien
+
+*   Organisaton: [PDF](https://moodle.informatik.tu-darmstadt.de/pluginfile.php/92004/mod_resource/content/0/orga_slides_studenten.pdf).
+*   Beschreibung von Programmiersprachen: [PDF](https://www.esa.informatik.tu-darmstadt.de/twiki/pub/Lectures/EiCB18De/intro-handout.pdf).
+*   Syntaktische Analyse: [PDF](https://www.esa.informatik.tu-darmstadt.de/twiki/pub/Lectures/EiCB18De/lexparse-handout.pdf).
 
 ## Literatur
 
