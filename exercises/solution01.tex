@@ -75,7 +75,7 @@ mulExpr ::= expr '*' expr
 Die \verb|subvectorExpr| ist in dem Sprachstandard unter \emph{§~7.7.4 Submatrix und Subvektor} definiert. Hier wird definiert, dass eine solche Beispielsweise als $v\{l:e:u\}$ geschrieben werden kann, wobei $v$ ein Vektor, $e$ eine \texttt{int}-Ausdruck, und $l$ und $u$ konstante \texttt{int}-Ausdrücke sein müssen, so dass $l < u$. Dieser Ausdruck extrahiert einen Subvektor mit den Elementen $[i+l, i+u]$. Zuerst brauchen wir also ein Hilfs-Nichtterminalsymbol \texttt{constExpr} für $l$ und $u$.
 \begin{lstlisting}
 constExpr ::= INT
-			| '-'? INT (('*' | '+' | '-' | '/' | '^') constExpr)?
+            | '-'? INT (('*' | '+' | '-' | '/' | '^') constExpr)?
             | '(' constExpr ')'
 \end{lstlisting}
 Mit diesem Hilfsausdruck können wir nun die \texttt{subvectorExpr} definieren. Da $e$ ein beliebiger Ausdruck sein kann, können wir hier eine \texttt{expr} verwenden. 
