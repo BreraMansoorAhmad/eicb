@@ -21,55 +21,21 @@
 % graphics, drawings, etc.
 \usepackage{xcolor}
 \usepackage{graphicx}
-\usepackage[most]{tcolorbox}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{shapes.arrows}
 \usetikzlibrary{positioning}
-\newtcolorbox{anmerkung}{%
-  grow to left by=10pt,
-  colback=black!10,
-  colframe=white,
-  coltitle=black,
-  borderline west={4pt}{0pt}{black!30},
-  boxrule=0pt,
-  boxsep=0pt,
-  %breakable,
-  enhanced jigsaw,
-  title={Anmerkung\par},
-  fonttitle={\bfseries},
-  attach title to upper={}}
-\newtcolorbox{hinweis}{%
-  grow to left by=10pt,
-  colback=black!10,
-  colframe=white,
-  coltitle=black,
-  borderline west={4pt}{0pt}{black!30},
-  boxrule=0pt,
-  boxsep=0pt,
-  %breakable,
-  enhanced jigsaw,
-  title={Hinweis\par},
-  fonttitle={\bfseries},
-  attach title to upper={}}
 
 % highlighting, lists, code
-\usepackage{soul}
-\usepackage{enumitem}
 \usepackage{listings}
 \lstset{
   basicstyle=\ttfamily,
   %escapeinside=||,
   keywordstyle=\color{blue!50!black},
   stringstyle=\color{green!50!black}}
-\capsdef{////}{\scshape}{.16em}{.4em}{.2em}
 
 % math
 \usepackage{amsmath}
-
-% nice tables
-\usepackage{booktabs}
-\newcommand{\tablespacing}[1]{\renewcommand{\arraystretch}{#1}}
 
 % links
 \usepackage[
@@ -109,7 +75,7 @@ mulExpr ::= expr '*' expr
 Die \verb|subvectorExpr| ist in dem Sprachstandard unter \emph{§~7.7.4 Submatrix und Subvektor} definiert. Hier wird definiert, dass eine solche Beispielsweise als $v\{l:e:u\}$ geschrieben werden kann, wobei $v$ ein Vektor, $e$ eine \texttt{int}-Ausdruck, und $l$ und $u$ konstante \texttt{int}-Ausdrücke sein müssen, so dass $l < u$. Dieser Ausdruck extrahiert einen Subvektor mit den Elementen $[i+l, i+u]$. Zuerst brauchen wir also ein Hilfs-Nichtterminalsymbol \texttt{constExpr} für $l$ und $u$.
 \begin{lstlisting}
 constExpr ::= INT
-			| '-'? INT (('*' | '+' | '-' | '/') constExpr)*
+			| '-'? INT (('*' | '+' | '-' | '/' | '^') constExpr)?
             | '(' constExpr ')'
 \end{lstlisting}
 Mit diesem Hilfsausdruck können wir nun die \texttt{subvectorExpr} definieren. Da $e$ ein beliebiger Ausdruck sein kann, können wir hier eine \texttt{expr} verwenden. 
@@ -144,20 +110,19 @@ Der Rückgabebefehl ist unter \emph{§~6.8 Rückgabe} im Sprachstandard definier
 \begin{lstlisting}
 returnStmt ::= 'return' expr ';'
 \end{lstlisting}
-Die Variablendeklaration ist unter \emph{§~6.2 Variablendeklaration} im Sprachstandard definiert. Eine solche Deklaration besteht aus dem Keyword \texttt{var}, dem Typen der Variablen (primitiver Typ wie \texttt{int}, \texttt{float} oder \texttt{bool}, Vektor, Matrix oder Record), sowie ein Variablenname. {\color{red!80!black}Ist die ID als Type hier legal? Müsste eigentlich, sonst kann man ja keinen Record deklarieren?}
+Die Variablendeklaration ist unter \emph{§~6.2 Variablendeklaration} im Sprachstandard definiert. Eine solche Deklaration besteht aus dem Keyword \texttt{var}, dem Typen der Variablen (primitiver Typ wie \texttt{int}, \texttt{float} oder \texttt{bool}, Vektor, Matrix oder Record), sowie ein Variablenname.
 \begin{lstlisting}
 varDecl ::= 'var' (primitiveType | vectorType | matrixType | ID) ID ';'  
 \end{lstlisting}
-Aufrufe sind unter \emph{§~6.4 Aufrufe} im Sprachstandard definiert. Diese bestehen aus dem Namen einer Funktion, einer Klammer \texttt{'('}, den Parametern (durch Kommata separiert) und einer Klammer \texttt{')'}. {\color{red!80!black}Ist das hier richtig? Ich bin davon ausgegangen, dass Funktionen null Argumente haben können (deswegen das Fragezeichen), und ansonsten mindestens eins (die erste expr), und jedes Folgende mit einem Komma separiert.}
+Aufrufe sind unter \emph{§~6.4 Aufrufe} im Sprachstandard definiert. Diese bestehen aus dem Namen einer Funktion, einer Klammer \texttt{'('}, den Parametern (durch Kommata separiert) und einer Klammer \texttt{')'}.
 \begin{lstlisting}
 callStmt ::= ID '(' (expr (',' expr)*)? ')' ';'
 \end{lstlisting}
-Die For-Schleife ist unter \emph{§~6.6.1 For-Schleife} definiert. {\color{red!80!black}Was ist mit den Ausdrücken in der For-Schleife? Es dürfen ja geschweifte Klammern mit mehreren Ausdrücken oder ein einzelner Ausdruck mit einem abschließenden Semikolon vorkommen?}
+Die For-Schleife ist unter \emph{§~6.6.1 For-Schleife} definiert. Es besteht aus dem Keyword \texttt{for}, einer offenen Klammer, einer initialen Zuweisung, einer Kondition (boolscher Ausdruck, der bei jedem Durchlauf ausgewertet wird), eine Zuweisung, die nach jeden Durchlauf ausgeführt wird (typischerweise, um eine Zählervariable zu inkrementieren), eine schließende Klammer, sowie entweder ein einzelner Ausdruck oder mehrere Ausdrücke in geschweiften Klammern. Daraus ergibt sich folgende Grammatik.
 \begin{lstlisting}
-forStmt ::= 'for' '(' ID '=' expr ';' expr ';' ID '=' expr ')'  
+forStmt ::= 'for' '(' ID '=' expr ';' expr ';' ID '=' expr ')'
+            (statement | '{' statement* '}')
 \end{lstlisting}
-
-
 
 \subsection*{Aufgabe 1.2: AST zu MAVL}
 Abstrakte Syntaxbäume (engl. \emph{Abstract Syntax Tree}) sind eine weitverbreitete Zwischendarstellung, die nur essentielle Informationen enthält und Details der konkreten Syntax einer Programmiersprache abstrahiert. In dieser Aufgabe zeigen wir Ihnen eine mögliche Repräsentation von MAVL-Code als AST. Die darin verwendeten AST-Knoten korrespondieren auf natürliche Weise mit den in der Spezifikation beschriebenen Syntaxelementen. 
@@ -174,7 +139,6 @@ if(flag & r > q) {
   r = a - (q * d);
 }
 \end{lstlisting}
-
 
 \subsection*{Artikel 1.2b}
 \emph{Geben Sie den zum AST zugehörigen MAVL-Code an.}
@@ -196,7 +160,7 @@ Ausdrücke in typischen Programmiersprachen lassen sich einfach durch mehrdeuti
 
 
 \bigskip\noindent
-\begin{tikzpicture}[level distance=1.5cm,
+{\centering\begin{tikzpicture}[level distance=1.5cm,
 level 1/.style={sibling distance=3cm},
 level 2/.style={sibling distance=1.5cm}
 ]
@@ -209,7 +173,7 @@ child {node {MatrixMultiplication}
 	child {node {b}}
 	child {node {c}}
 };
-\end{tikzpicture}
+\end{tikzpicture}\par}
 
 
 \subsection*{Artikel 1.3b}
@@ -217,7 +181,7 @@ child {node {MatrixMultiplication}
 
 
 \bigskip\noindent
-\begin{tikzpicture}[level distance=1.5cm,
+{\centering\begin{tikzpicture}[level distance=1.5cm,
 level 1/.style={sibling distance=6cm},
 level 2/.style={sibling distance=3cm}
 ]
@@ -236,19 +200,31 @@ child {node {ElementSelect}
 	child {node {0}}
 };
 
-\end{tikzpicture}
+\end{tikzpicture}\par}
 
 \subsection*{Aufgabe 1.3c}
-Gegeben seien folgende Wertedefinitionen.
+\emph{Gegeben seien folgende Wertedefinitionen.}
 \begin{lstlisting}
 val matrix <int>[2][2] m = [[1, 2],
                             [3, 4]];
 val vector<int>[2]    v1 = [4, 2];
 val vector<int>[2]    v2 = [2, 3];
 \end{lstlisting}
-Welchen Wert liefert der Ausdruck aus Teilaufgabe 1.3b?
+\emph{Welchen Wert liefert der Ausdruck aus Teilaufgabe 1.3b?}
 
 \bigskip\noindent
-Antwort.
+Dieses Programm kann man als ein kleines Ruby-Skript ausdrücken, was (hoffentlich) das richtige Ergebnis liefert. Wichtig ist hier, dass Ruby andere Operatopräzedenzregeln hat, weswegen anders geklammert werden muss.
+\begin{lstlisting}[language=ruby,morekeywords={require,puts}]
+require "matrix"
+\end{lstlisting}
+\begin{lstlisting}[language=ruby,morekeywords={require,puts}]
+m = Matrix[[1, 2], [3, 4]]
+v1 = Vector[4, 2]
+v2 = Vector[2, 3]
+\end{lstlisting}
+\begin{lstlisting}[language=ruby,morekeywords={require,puts}]
+puts -v1.inner_product(v2) + (v2.covector * m)[0,0] 
+\end{lstlisting}
+Dieses Programm liefert als Resultat der Berechnung das Ergebis \texttt{-3}. 
 
 \end{document}
