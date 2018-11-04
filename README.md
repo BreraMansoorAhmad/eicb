@@ -27,9 +27,9 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 
 ## Vorlesungen
 
-*   2018-10-16: Einleitung, Beschreibung von Programmiersprachen. [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181016.avi). [Folien](folien/intro-handout.pdf).
-*   2018-10-23. [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181023.mp4).
-*   2018-10-30: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181030.mp4). [Folien](folien/lexparse-handout.pdf)
+*   2018-10-16: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181016.avi).
+*   2018-10-23: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181023.mp4).
+*   2018-10-30: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181030.mp4).
 
 ## Übungen
 
