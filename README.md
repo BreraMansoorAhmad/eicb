@@ -33,7 +33,7 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 
 ## Übungen
 
-*   Theorieblatt 1 (30.10.2018 -- 04.11.2018). [Handout](https://moodle.informatik.tu-darmstadt.de/mod/resource/view.php?id=16467). [Solution](exercises/solution01.pdf).
+*   Theorieblatt 1 (30.10.2018 – 04.11.2018). [Handout](https://moodle.informatik.tu-darmstadt.de/mod/resource/view.php?id=16467). [Solution](exercises/solution01.pdf).
 
 ## Folien
 
