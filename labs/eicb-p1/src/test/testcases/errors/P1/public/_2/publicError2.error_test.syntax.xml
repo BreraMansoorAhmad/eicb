@@ -1,0 +1,60 @@
+<mavlc.test__wrapper.ErrorTestWrapper>
+  <stackTrace>
+    <trace>mavlc.Main.main(Main.java:154)</trace>
+  </stackTrace>
+  <suppressedExceptions class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+    <c class="list"/>
+    <list reference="../c"/>
+  </suppressedExceptions>
+  <error class="mavlc.error_reporting.SyntaxError">
+    <stackTrace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseAtom(Parser.java:765)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseRecordElementSelect(Parser.java:708)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseElementSelect(Parser.java:690)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseSubrange(Parser.java:660)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseMatrixMul(Parser.java:647)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseDotProd(Parser.java:634)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseDim(Parser.java:620)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseExponentiation(Parser.java:593)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseUnaryMinus(Parser.java:583)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseMulDiv(Parser.java:561)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseAddSub(Parser.java:548)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseCompare(Parser.java:515)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseNot(Parser.java:506)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseAnd(Parser.java:488)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseOr(Parser.java:476)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseSelect(Parser.java:461)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseExpr(Parser.java:452)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseValueDef(Parser.java:257)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseStatement(Parser.java:231)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parseFunction(Parser.java:113)</trace>
+      <trace>mavlc.parser.recursive_descent.Parser.parse(Parser.java:61)</trace>
+      <trace>mavlc.Main.main(Main.java:149)</trace>
+    </stackTrace>
+    <suppressedExceptions class="java.util.Collections$UnmodifiableRandomAccessList" reference="../../suppressedExceptions"/>
+    <message>Syntax error in line 2, column 18
+Got token &lt;ADD +&gt; but expected one of AT, BOOLLIT, FLOATLIT, ID, INTLIT, LBRACKET, LPAREN, STRINGLIT</message>
+    <line>2</line>
+    <column>18</column>
+    <actual>
+      <type>ADD</type>
+      <spelling>+</spelling>
+      <line>2</line>
+      <column>18</column>
+    </actual>
+    <expected class="java.util.Arrays$ArrayList">
+      <a class="mavlc.parser.recursive_descent.Token$TokenType-array">
+        <mavlc.parser.recursive__descent.Token_-TokenType>AT</mavlc.parser.recursive__descent.Token_-TokenType>
+        <mavlc.parser.recursive__descent.Token_-TokenType>BOOLLIT</mavlc.parser.recursive__descent.Token_-TokenType>
+        <mavlc.parser.recursive__descent.Token_-TokenType>FLOATLIT</mavlc.parser.recursive__descent.Token_-TokenType>
+        <mavlc.parser.recursive__descent.Token_-TokenType>ID</mavlc.parser.recursive__descent.Token_-TokenType>
+        <mavlc.parser.recursive__descent.Token_-TokenType>INTLIT</mavlc.parser.recursive__descent.Token_-TokenType>
+        <mavlc.parser.recursive__descent.Token_-TokenType>LBRACKET</mavlc.parser.recursive__descent.Token_-TokenType>
+        <mavlc.parser.recursive__descent.Token_-TokenType>LPAREN</mavlc.parser.recursive__descent.Token_-TokenType>
+        <mavlc.parser.recursive__descent.Token_-TokenType>STRINGLIT</mavlc.parser.recursive__descent.Token_-TokenType>
+      </a>
+    </expected>
+  </error>
+  <onlySyntax>true</onlySyntax>
+  <testFile>publicError2.mavl</testFile>
+</mavlc.test__wrapper.ErrorTestWrapper>
