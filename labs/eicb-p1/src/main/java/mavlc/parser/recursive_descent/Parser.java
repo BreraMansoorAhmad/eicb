@@ -242,12 +242,30 @@ public final class Parser {
 
 	private ValueDefinition parseValueDef() throws SyntaxError {
 		/* TODO: implement (exercise 1.1) */
-		throw new UnsupportedOperationException();
+		int line = currentToken.line;
+		int column = currentToken.column;
+		
+		accept(VAL);
+		Type type = parseType();
+		String name = accept(ID);
+		accept(ASSIGN);
+		Expression expression = parseExpr();
+		accept(SEMICOLON);
+		
+		return new ValueDefinition(line, column, type, name, expression);
 	}
 
 	private VariableDeclaration parseVarDecl() throws SyntaxError {
 		/* TODO: implement (exercise 1.1) */
-		throw new UnsupportedOperationException();
+		int line = currentToken.line;
+		int column = currentToken.column;
+		
+		accept(VAR);
+		Type type = parseType();
+		String name = accept(ID);
+		accept(SEMICOLON);
+		
+		return  new VariableDeclaration(line, column, type, name);
 	}
 
 	private ReturnStatement parseReturn() throws SyntaxError {
@@ -278,7 +296,29 @@ public final class Parser {
 
 	private VariableAssignment parseAssign(String name, int line, int column) throws SyntaxError {
 		/* TODO: implement (exercise 1.1) */
-		throw new UnsupportedOperationException();
+		
+		switch(currentToken.type) {
+			case LBRACKET: 
+				acceptIt();
+				parseExpr();
+				accept(RBRACKET);
+				if(currentToken.type == LBRACKET) {
+					acceptIt();
+					parseExpr();
+					accept(RBRACKET);
+				}
+				break;
+			case AT: 
+				acceptIt();
+				accept(ID);
+				break;
+			default:
+				break;
+		}
+		
+		accept(ASSIGN);
+		return new VariableAssignment(line, column, new LeftHandIdentifier(line, column, name), parseExpr());
+		
 	}
 
 	private CallExpression parseCall(String name, int line, int column) {
@@ -330,27 +370,86 @@ public final class Parser {
 
 	private IfStatement parseIf() throws SyntaxError {
 		/* TODO: implement (exercise 1.5) */
-		throw new UnsupportedOperationException();
+		int line = currentToken.line;
+		int column = currentToken.column;
+		
+		accept(IF);
+		accept(LPAREN);
+		Expression expr = parseExpr();
+		accept(RPAREN);
+		Statement ifStatement = parseStatement();
+		
+		if(currentToken.type == ELSE) {
+			acceptIt();
+			Statement elseStatement = parseStatement();
+			return new IfStatement(line, column, expr, ifStatement, elseStatement);
+		}
+		else {
+			return new IfStatement(line, column, expr, ifStatement);
+		}
 	}
 
 	private SwitchStatement parseSwitch() throws SyntaxError {
 		/* TODO: implement (exercise 1.6) */
-		throw new UnsupportedOperationException();
+		int line = currentToken.line;
+		int column = currentToken.column;
+		
+		SwitchStatement switchStatement = new SwitchStatement(line, column);
+		
+		accept(SWITCH);
+		accept(LPAREN);
+		switchStatement.setTestExpression(parseExpr());
+		accept(RPAREN);
+		accept(LBRACE);
+		while(currentToken.type != RBRACE) {
+			switch(currentToken.type) {
+				case CASE: switchStatement.addCase(parseCase()); break;
+				case DEFAULT: switchStatement.addDefault(parseDefault()); break;
+				default: throw new SyntaxError(currentToken, CASE, DEFAULT);
+			}
+		}
+		acceptIt();
+		return switchStatement;
 	}
 
 	private Case parseCase() throws SyntaxError {
 		/* TODO: implement (exercise 1.6) */
-		throw new UnsupportedOperationException();
+		int line = currentToken.line;
+		int column = currentToken.column;
+		
+		accept(CASE);
+		Expression expression = parseExpr();
+		accept(COLON);
+		Statement statement = parseStatement();
+		
+		return new Case(line, column, expression, statement);		
 	}
 
 	private Default parseDefault() throws SyntaxError {
 		/* TODO: implement (exercise 1.6) */
-		throw new UnsupportedOperationException();
+		int line = currentToken.line;
+		int column = currentToken.column;
+		
+		accept(DEFAULT);
+		accept(COLON);
+		Statement statement = parseStatement();
+		
+		return new Default(line, column, statement);	
 	}
 
 	private CompoundStatement parseCompound() throws SyntaxError {
 		/* TODO: implement (exercise 1.3) */
-		throw new UnsupportedOperationException();
+		int line = currentToken.line;
+		int column = currentToken.column;
+		CompoundStatement compoundStatement = new CompoundStatement(line, column);
+		
+		accept(LBRACE);
+		while(currentToken.type != RBRACE) {
+			compoundStatement.addStatement(parseStatement());
+		}
+		acceptIt();
+		
+		return compoundStatement;
 	}
 
 	private Expression parseExpr() throws SyntaxError {
@@ -402,24 +501,65 @@ public final class Parser {
 
 		if (currentToken.type == NOT) {
 			acceptIt();
-			return new BoolNot(line, column, /* TODO: insert call to the appropriate parse method (exercise 1.2) */ null);
+			return new BoolNot(line, column, parseCompare());
 		}
-		return /* TODO: insert call to the appropriate parse method (exercise 1.2) */ null;
+		return parseCompare();
 	}
 
 	private Expression parseCompare() throws SyntaxError {
 		/* TODO: implement (exercise 1.2) */
-		throw new UnsupportedOperationException();
+		int line = currentToken.line;
+		int column = currentToken.column;
+		
+		Expression expression = parseAddSub();
+		while(currentToken.type == RANGLE || currentToken.type == LANGLE  || currentToken.type == CMPLE ||
+				 currentToken.type == CMPGE || currentToken.type == CMPEQ || currentToken.type == CMPNE) {
+			switch(currentToken.type) {
+			case RANGLE: acceptIt(); expression = new Compare(line, column, expression, parseAddSub(), GREATER); break;
+			case LANGLE: acceptIt(); expression = new Compare(line, column, expression, parseAddSub(), LESS); break;
+			case CMPLE: acceptIt(); expression = new Compare(line, column, expression, parseAddSub(), LESS_EQUAL); break;
+			case CMPGE: acceptIt(); expression = new Compare(line, column, expression, parseAddSub(), GREATER_EQUAL); break;
+			case CMPEQ: acceptIt(); expression = new Compare(line, column, expression, parseAddSub(), EQUAL); break;
+			case CMPNE: acceptIt(); expression = new Compare(line, column, expression, parseAddSub(), NOT_EQUAL); break;
+			default: break;
+			}
+		}
+		
+		return expression;
 	}
 
 	private Expression parseAddSub() throws SyntaxError {
-		/* TODO: implement (exercise 1.2) */
-		throw new UnsupportedOperationException();
+		/* TODO: implement (exercise 1.2) */		
+		int line = currentToken.line;
+		int column = currentToken.column;
+		
+		Expression expression = parseMulDiv();
+		while (currentToken.type == ADD || currentToken.type == SUB) {
+			switch(currentToken.type) {
+			case ADD: acceptIt(); return new Addition(line, column, expression, parseMulDiv());
+			case SUB: acceptIt(); return new Subtraction(line, column, expression, parseMulDiv());
+			default: break;
+			}
+		}
+		
+		return expression;
 	}
 
 	private Expression parseMulDiv() throws SyntaxError {
 		/* TODO: implement (exercise 1.2) */
-		throw new UnsupportedOperationException();
+		int line = currentToken.line;
+		int column = currentToken.column;
+		
+		Expression expression = parseUnaryMinus();
+		while (currentToken.type == MULT || currentToken.type == DIV) {
+			switch(currentToken.type) {
+			case MULT: acceptIt(); return new Multiplication(line, column, expression, parseMulDiv());
+			case DIV: acceptIt(); return new Division(line, column, expression, parseMulDiv());
+			default: break;
+			}
+		}
+		
+		return expression;
 	}
 
 	private Expression parseUnaryMinus() throws SyntaxError {
@@ -428,15 +568,24 @@ public final class Parser {
 
 		if (currentToken.type == SUB) {
 			acceptIt();
-			return new UnaryMinus(line, column, /* TODO: insert call to the appropriate parse method (exercise 1.2) */ null);
+			return new UnaryMinus(line, column, parseExponentiation());
 		} else {
-			return /* TODO: insert call to the appropriate parse method (exercise 1.2) */ null;
+			return parseExponentiation();
 		}
 	}
 
 	private Expression parseExponentiation() throws SyntaxError {
 		/* TODO: implement (exercise 1.2) */
-		throw new UnsupportedOperationException();
+		int line = currentToken.line;
+		int column = currentToken.column;
+		
+		Expression expression = parseDim();
+		while (currentToken.type == EXP) {
+			acceptIt();
+			expression = new Exponentiation(line, column, expression, parseDim()); 
+		}
+		
+		return expression;
 	}
 
 	private Expression parseDim() throws SyntaxError {
@@ -481,7 +630,37 @@ public final class Parser {
 
 	private Expression parseSubrange() throws SyntaxError {
 		/* TODO: implement (exercise 1.4) */
-		throw new UnsupportedOperationException();
+		int line = currentToken.line;
+		int column = currentToken.column;
+		
+		Expression expression = parseElementSelect();
+		
+		if(currentToken.type == LBRACE) {
+			acceptIt();
+			Expression start1 = parseExpr();
+			accept(COLON);
+			Expression base1 = parseExpr();
+			accept(COLON);
+			Expression end1 = parseExpr();
+			accept(RBRACE);
+			
+			if(currentToken.type == LBRACE) {
+				acceptIt();
+				Expression start2 = parseExpr();
+				accept(COLON);
+				Expression base2 = parseExpr();
+				accept(COLON);
+				Expression end2 = parseExpr();
+				accept(RBRACE);
+				return new SubMatrix(line, column, expression, base1, start1, end1, base2, start2, end2);
+			}
+			else {
+				return new SubVector(line, column, expression, base1, start1, end1);
+			}
+		}
+		
+		return expression;
+		
 	}
 
 	private Expression parseElementSelect() throws SyntaxError {
