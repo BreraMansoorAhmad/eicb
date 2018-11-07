@@ -29,8 +29,8 @@ import static mavlc.parser.recursive_descent.Token.TokenType.*;
 
 /* TODO: Please fill this out!
  *
- * EiCB group number:
- * Names and student ID numbers of group members:
+ * EiCB group number: 43
+ * Names and student ID numbers of group members: Michael Matthe (2716677), Viola Hofmeister (ID), Patrick Elsen (ID)
  */
 
 /**
