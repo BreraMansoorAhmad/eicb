@@ -528,7 +528,7 @@ public final class Parser {
 	}
 
 	private Expression parseAddSub() throws SyntaxError {
-		/* TODO: implement (exercise 1.2) */		
+		/* TODO: implement (exercise 1.2) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
@@ -552,9 +552,8 @@ public final class Parser {
 		Expression expression = parseUnaryMinus();
 		while (currentToken.type == MULT || currentToken.type == DIV) {
 			switch(currentToken.type) {
-			case MULT: acceptIt(); return new Multiplication(line, column, expression, parseMulDiv());
-			case DIV: acceptIt(); return new Division(line, column, expression, parseMulDiv());
-			default: break;
+			case MULT: acceptIt(); expression = new Multiplication(line, column, expression, parseUnaryMinus()); break;
+			case DIV: acceptIt(); expression = new Division(line, column, expression, parseUnaryMinus()); break;
 			}
 		}
 		
