@@ -578,10 +578,16 @@ public final class Parser {
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
-		Expression expression = parseDim();
+		Stack<Expression> exprStack = new Stack<Expression>();
+		exprStack.push(parseDim());
 		while (currentToken.type == EXP) {
 			acceptIt();
-			expression = new Exponentiation(line, column, expression, parseDim()); 
+			exprStack.push(parseDim()); 
+		}
+		
+		Expression expression = exprStack.pop();
+		while(!exprStack.empty()) {
+			expression = new Exponentiation(line, column, exprStack.pop(), expression);
 		}
 		
 		return expression;
