@@ -405,7 +405,6 @@ public final class Parser {
 			switch(currentToken.type) {
 				case CASE: switchStatement.addCase(parseCase()); break;
 				case DEFAULT: switchStatement.addDefault(parseDefault()); break;
-				default: throw new SyntaxError(currentToken, CASE, DEFAULT);
 			}
 		}
 		acceptIt();
