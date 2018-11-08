@@ -536,8 +536,8 @@ public final class Parser {
 		Expression expression = parseMulDiv();
 		while (currentToken.type == ADD || currentToken.type == SUB) {
 			switch(currentToken.type) {
-			case ADD: acceptIt(); return new Addition(line, column, expression, parseMulDiv());
-			case SUB: acceptIt(); return new Subtraction(line, column, expression, parseMulDiv());
+			case ADD: acceptIt(); expression = new Addition(line, column, expression, parseMulDiv()); break;
+			case SUB: acceptIt(); expression = new Subtraction(line, column, expression, parseMulDiv()); break;
 			default: break;
 			}
 		}
