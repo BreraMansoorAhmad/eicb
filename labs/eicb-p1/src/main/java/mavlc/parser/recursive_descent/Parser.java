@@ -27,7 +27,7 @@ import mavlc.parser.recursive_descent.Token.TokenType;
 import static mavlc.ast.nodes.expression.Compare.Comparison.*;
 import static mavlc.parser.recursive_descent.Token.TokenType.*;
 
-/* TODO: Please fill this out!
+/* 
  *
  * EiCB group number: 43
  * Names and student ID numbers of group members: Michael Matthe (2716677), Viola Hofmeister (ID), Patrick Elsen (ID)
@@ -239,12 +239,17 @@ public final class Parser {
 
 		return s;
 	}
-
+	
+	/**
+	 * Parses a value definition.
+	 * @return parsed ValueDefinition
+	 * @throws SyntaxError, if a parsing error occurred
+	 */
 	private ValueDefinition parseValueDef() throws SyntaxError {
-		/* TODO: implement (exercise 1.1) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
+		// ’val’ type ID ’=’ expr ’;’
 		accept(VAL);
 		Type type = parseType();
 		String name = accept(ID);
@@ -255,11 +260,16 @@ public final class Parser {
 		return new ValueDefinition(line, column, type, name, expression);
 	}
 
+	/**
+	 * Parses a variable declaration.
+	 * @return VariableDeclaration
+	 * @throws SyntaxError
+	 */
 	private VariableDeclaration parseVarDecl() throws SyntaxError {
-		/* TODO: implement (exercise 1.1) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
+		// ’var’ type ID ’;’
 		accept(VAR);
 		Type type = parseType();
 		String name = accept(ID);
@@ -294,9 +304,15 @@ public final class Parser {
 		return s;
 	}
 
+	/**
+	 * Parses a variable assignment.
+	 * @param name: name of the variable
+	 * @param line: the line in which the variable is specified
+	 * @param column: the column in which the variable is specified
+	 * @return VariableAssignment
+	 * @throws SyntaxError
+	 */
 	private VariableAssignment parseAssign(String name, int line, int column) throws SyntaxError {
-		/* TODO: implement (exercise 1.1) */
-		
 		switch(currentToken.type) {
 			case LBRACKET: 
 				acceptIt();
@@ -368,8 +384,12 @@ public final class Parser {
 		return new ForEachLoop(line, column, param, struct, parseStatement());
 	}
 
+	/**
+	 * Parses an if statement.
+	 * @return  IfStatement
+	 * @throws SyntaxError
+	 */
 	private IfStatement parseIf() throws SyntaxError {
-		/* TODO: implement (exercise 1.5) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
@@ -389,8 +409,12 @@ public final class Parser {
 		}
 	}
 
+	/**
+	 * Parses a switch statement for switch-case.
+	 * @return SwitchStatement
+	 * @throws SyntaxError
+	 */
 	private SwitchStatement parseSwitch() throws SyntaxError {
-		/* TODO: implement (exercise 1.6) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
@@ -411,8 +435,12 @@ public final class Parser {
 		return switchStatement;
 	}
 
+	/**
+	 * Parses a case for switch-case.
+	 * @return Case
+	 * @throws SyntaxError
+	 */
 	private Case parseCase() throws SyntaxError {
-		/* TODO: implement (exercise 1.6) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
@@ -424,8 +452,12 @@ public final class Parser {
 		return new Case(line, column, expression, statement);		
 	}
 
+	/**
+	 * Parses the default case for switch-case.
+	 * @return Default
+	 * @throws SyntaxError
+	 */
 	private Default parseDefault() throws SyntaxError {
-		/* TODO: implement (exercise 1.6) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
@@ -436,8 +468,12 @@ public final class Parser {
 		return new Default(line, column, statement);	
 	}
 
+	/**
+	 * Parses a compound statement.
+	 * @return CompoundStatement
+	 * @throws SyntaxError
+	 */
 	private CompoundStatement parseCompound() throws SyntaxError {
-		/* TODO: implement (exercise 1.3) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		CompoundStatement compoundStatement = new CompoundStatement(line, column);
@@ -505,8 +541,12 @@ public final class Parser {
 		return parseCompare();
 	}
 
+	/**
+	 * Parses a compare expression
+	 * @return Expression
+	 * @throws SyntaxError
+	 */
 	private Expression parseCompare() throws SyntaxError {
-		/* TODO: implement (exercise 1.2) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
@@ -527,8 +567,12 @@ public final class Parser {
 		return expression;
 	}
 
+	/**
+	 * Parses an addition / subtraction expression.
+	 * @return Expression
+	 * @throws SyntaxError
+	 */
 	private Expression parseAddSub() throws SyntaxError {
-		/* TODO: implement (exercise 1.2) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
@@ -544,8 +588,12 @@ public final class Parser {
 		return expression;
 	}
 
+	/**
+	 * Parses a multiplication / division expression.
+	 * @return Expression
+	 * @throws SyntaxError
+	 */
 	private Expression parseMulDiv() throws SyntaxError {
-		/* TODO: implement (exercise 1.2) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
@@ -572,8 +620,12 @@ public final class Parser {
 		}
 	}
 
+	/**
+	 * Parses an exponentiation expression.
+	 * @return Expression
+	 * @throws SyntaxError
+	 */
 	private Expression parseExponentiation() throws SyntaxError {
-		/* TODO: implement (exercise 1.2) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
@@ -631,9 +683,13 @@ public final class Parser {
 		return x;
 
 	}
-
+	
+	/**
+	 * Parses a sub vector / sub matrix expression.
+	 * @return Expression
+	 * @throws SyntaxError
+	 */
 	private Expression parseSubrange() throws SyntaxError {
-		/* TODO: implement (exercise 1.4) */
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
