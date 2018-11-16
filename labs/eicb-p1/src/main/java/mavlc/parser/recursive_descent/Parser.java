@@ -16,6 +16,7 @@ import static mavlc.parser.recursive_descent.Token.TokenType.*;
 
 import java.util.*;
 import mavlc.ast.nodes.expression.*;
+import mavlc.ast.nodes.expression.Compare.Comparison;
 import mavlc.ast.nodes.function.FormalParameter;
 import mavlc.ast.nodes.function.Function;
 import mavlc.ast.nodes.module.Module;
@@ -602,6 +603,12 @@ public final class Parser {
   /**
    * Parses a compare expression
    *
+   * Parses an expression of the form:
+   *
+   * <pre>
+   * expression ::= addSub (( '>' | '<' | '<=' | '>=' | '==' | '!=' ) addSub)*
+   * </pre>
+   *
    * @return Expression
    * @throws SyntaxError
    */
@@ -611,40 +618,23 @@ public final class Parser {
 
     // addSub (( '>' | '<' | '<=' | '>=' | '==' | '!=' ) addSub)*
     Expression expression = parseAddSub();
-    while (currentToken.type == RANGLE
-        || currentToken.type == LANGLE
-        || currentToken.type == CMPLE
-        || currentToken.type == CMPGE
-        || currentToken.type == CMPEQ
-        || currentToken.type == CMPNE) {
+    Comparison type;
+    out: while (true) {
+      // find out what type of comparison this is.
       switch (currentToken.type) {
-        case RANGLE:
-          acceptIt();
-          expression = new Compare(line, column, expression, parseAddSub(), GREATER);
-          break;
-        case LANGLE:
-          acceptIt();
-          expression = new Compare(line, column, expression, parseAddSub(), LESS);
-          break;
-        case CMPLE:
-          acceptIt();
-          expression = new Compare(line, column, expression, parseAddSub(), LESS_EQUAL);
-          break;
-        case CMPGE:
-          acceptIt();
-          expression = new Compare(line, column, expression, parseAddSub(), GREATER_EQUAL);
-          break;
-        case CMPEQ:
-          acceptIt();
-          expression = new Compare(line, column, expression, parseAddSub(), EQUAL);
-          break;
-        case CMPNE:
-          acceptIt();
-          expression = new Compare(line, column, expression, parseAddSub(), NOT_EQUAL);
-          break;
-        default:
-          break;
+        case RANGLE:    type = GREATER; break;
+        case LANGLE:    type = LESS;    break;
+        case CMPLE:     type = LESS_EQUAL;  break;
+        case CMPGE:     type = GREATER_EQUAL;   break;
+        case CMPEQ:     type = EQUAL;   break;
+        case CMPNE:     type = NOT_EQUAL;   break;
+        // well, shit, if this isn't a comparison at all we're done.
+        default: break out;
       }
+
+      // accept the comparison token and update expression.
+      acceptIt();
+      expression = new Compare(line, column, expression, parseAddSub(), type);
     }
 
     return expression;
