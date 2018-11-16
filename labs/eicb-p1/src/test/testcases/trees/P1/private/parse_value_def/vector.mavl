@@ -1,0 +1,3 @@
+function void main(){
+    val vector<int>[10] vec = 0;
+}

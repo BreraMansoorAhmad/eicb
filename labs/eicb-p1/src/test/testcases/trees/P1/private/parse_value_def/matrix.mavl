@@ -1,0 +1,3 @@
+function void main(){
+    val matrix<float>[10][15] mat = 0;
+}
