@@ -554,6 +554,7 @@ public final class Parser {
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
+		// addSub (( '>' | '<' | '<=' | '>=' | '==' | '!=' ) addSub)*
 		Expression expression = parseAddSub();
 		while(currentToken.type == RANGLE || currentToken.type == LANGLE  || currentToken.type == CMPLE ||
 				 currentToken.type == CMPGE || currentToken.type == CMPEQ || currentToken.type == CMPNE) {
@@ -634,7 +635,11 @@ public final class Parser {
 	private Expression parseExponentiation() throws SyntaxError {
 		int line = currentToken.line;
 		int column = currentToken.column;
-		
+
+		// dim ('^' dim)*
+        // we push all of the exponents into a stack to make sure they are evaluated
+        // in the correct order.
+        // todo: could we do this recursively?
 		Stack<Expression> exprStack = new Stack<Expression>();
 		exprStack.push(parseDim());
 		while (currentToken.type == EXP) {
