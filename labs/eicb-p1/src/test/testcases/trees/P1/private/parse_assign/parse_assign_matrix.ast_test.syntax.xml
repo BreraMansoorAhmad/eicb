@@ -1,0 +1,45 @@
+<mavlc.test__wrapper.ASTTestWrapper>
+  <srcLine>-1</srcLine>
+  <srcColumn>-1</srcColumn>
+  <AST>
+    <srcLine>1</srcLine>
+    <srcColumn>0</srcColumn>
+    <function>
+      <srcLine>1</srcLine>
+      <srcColumn>0</srcColumn>
+      <name>main</name>
+      <returnType class="voidType"/>
+      <parameters/>
+      <functionBody>
+        <varAssign>
+          <srcLine>2</srcLine>
+          <srcColumn>4</srcColumn>
+          <identifier class="matrixId">
+            <srcLine>2</srcLine>
+            <srcColumn>4</srcColumn>
+            <name>my_matrix</name>
+            <xIndex class="intVal">
+              <srcLine>2</srcLine>
+              <srcColumn>14</srcColumn>
+              <val>1</val>
+            </xIndex>
+            <yIndex class="intVal">
+              <srcLine>2</srcLine>
+              <srcColumn>17</srcColumn>
+              <val>2</val>
+            </yIndex>
+          </identifier>
+          <value class="intVal">
+            <srcLine>2</srcLine>
+            <srcColumn>22</srcColumn>
+            <val>9</val>
+          </value>
+        </varAssign>
+      </functionBody>
+      <sourceCodeOffset>-1</sourceCodeOffset>
+    </function>
+    <records class="linked-list"/>
+  </AST>
+  <testFile>parse_assign_matrix.mavl</testFile>
+  <onlySyntax>true</onlySyntax>
+</mavlc.test__wrapper.ASTTestWrapper>

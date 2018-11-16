@@ -1,0 +1,36 @@
+<mavlc.test__wrapper.ASTTestWrapper>
+  <srcLine>-1</srcLine>
+  <srcColumn>-1</srcColumn>
+  <AST>
+    <srcLine>1</srcLine>
+    <srcColumn>0</srcColumn>
+    <function>
+      <srcLine>1</srcLine>
+      <srcColumn>0</srcColumn>
+      <name>main</name>
+      <returnType class="voidType"/>
+      <parameters/>
+      <functionBody>
+        <varAssign>
+          <srcLine>2</srcLine>
+          <srcColumn>4</srcColumn>
+          <identifier class="recordId">
+            <srcLine>2</srcLine>
+            <srcColumn>4</srcColumn>
+            <name>my_record</name>
+            <elementName>artist</elementName>
+          </identifier>
+          <value class="stringVal">
+            <srcLine>2</srcLine>
+            <srcColumn>23</srcColumn>
+            <val>The Beatles</val>
+          </value>
+        </varAssign>
+      </functionBody>
+      <sourceCodeOffset>-1</sourceCodeOffset>
+    </function>
+    <records class="linked-list"/>
+  </AST>
+  <testFile>parse_assign_record.mavl</testFile>
+  <onlySyntax>true</onlySyntax>
+</mavlc.test__wrapper.ASTTestWrapper>

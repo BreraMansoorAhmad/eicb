@@ -1,0 +1,40 @@
+<mavlc.test__wrapper.ASTTestWrapper>
+  <srcLine>-1</srcLine>
+  <srcColumn>-1</srcColumn>
+  <AST>
+    <srcLine>1</srcLine>
+    <srcColumn>0</srcColumn>
+    <function>
+      <srcLine>1</srcLine>
+      <srcColumn>0</srcColumn>
+      <name>main</name>
+      <returnType class="voidType"/>
+      <parameters/>
+      <functionBody>
+        <varAssign>
+          <srcLine>2</srcLine>
+          <srcColumn>4</srcColumn>
+          <identifier class="vectorId">
+            <srcLine>2</srcLine>
+            <srcColumn>4</srcColumn>
+            <name>my_vector</name>
+            <index class="intVal">
+              <srcLine>2</srcLine>
+              <srcColumn>14</srcColumn>
+              <val>0</val>
+            </index>
+          </identifier>
+          <value class="intVal">
+            <srcLine>2</srcLine>
+            <srcColumn>19</srcColumn>
+            <val>0</val>
+          </value>
+        </varAssign>
+      </functionBody>
+      <sourceCodeOffset>-1</sourceCodeOffset>
+    </function>
+    <records class="linked-list"/>
+  </AST>
+  <testFile>parse_assign_vector.mavl</testFile>
+  <onlySyntax>true</onlySyntax>
+</mavlc.test__wrapper.ASTTestWrapper>

@@ -1,0 +1,3 @@
+function void main() {
+    my_int = 3;
+}
