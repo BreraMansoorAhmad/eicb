@@ -14,13 +14,13 @@
         <valDef>
           <srcLine>2</srcLine>
           <srcColumn>1</srcColumn>
-          <type class="floatType"/>
+          <type class="intType"/>
           <name>pi</name>
           <localBaseOffset>0</localBaseOffset>
-          <value class="floatVal">
+          <value class="intVal">
             <srcLine>2</srcLine>
-            <srcColumn>16</srcColumn>
-            <val>3.142</val>
+            <srcColumn>14</srcColumn>
+            <val>3</val>
           </value>
         </valDef>
       </functionBody>
@@ -28,6 +28,6 @@
     </function>
     <records class="linked-list"/>
   </AST>
-  <testFile>float.mavl</testFile>
+  <testFile>parse_value_def_int.mavl</testFile>
   <onlySyntax>true</onlySyntax>
 </mavlc.test__wrapper.ASTTestWrapper>

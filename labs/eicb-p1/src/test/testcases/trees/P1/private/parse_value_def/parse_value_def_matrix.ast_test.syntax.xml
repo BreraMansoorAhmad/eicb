@@ -40,6 +40,6 @@
     </function>
     <records class="linked-list"/>
   </AST>
-  <testFile>matrix.mavl</testFile>
+  <testFile>parse_value_def_matrix.mavl</testFile>
   <onlySyntax>true</onlySyntax>
 </mavlc.test__wrapper.ASTTestWrapper>

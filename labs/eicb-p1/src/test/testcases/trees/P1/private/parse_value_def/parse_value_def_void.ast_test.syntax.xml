@@ -13,14 +13,14 @@
       <functionBody>
         <valDef>
           <srcLine>2</srcLine>
-          <srcColumn>1</srcColumn>
-          <type class="intType"/>
-          <name>pi</name>
+          <srcColumn>4</srcColumn>
+          <type class="voidType" reference="../../../returnType"/>
+          <name>name</name>
           <localBaseOffset>0</localBaseOffset>
           <value class="intVal">
             <srcLine>2</srcLine>
-            <srcColumn>14</srcColumn>
-            <val>3</val>
+            <srcColumn>20</srcColumn>
+            <val>0</val>
           </value>
         </valDef>
       </functionBody>
@@ -28,6 +28,6 @@
     </function>
     <records class="linked-list"/>
   </AST>
-  <testFile>int.mavl</testFile>
+  <testFile>parse_value_def_void.mavl</testFile>
   <onlySyntax>true</onlySyntax>
 </mavlc.test__wrapper.ASTTestWrapper>
