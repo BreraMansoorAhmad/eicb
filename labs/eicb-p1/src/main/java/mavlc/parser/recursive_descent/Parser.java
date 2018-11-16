@@ -249,7 +249,7 @@ public final class Parser {
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
-		// ’val’ type ID ’=’ expr ’;’
+		// 'val' type ID '=' expr ';'
 		accept(VAL);
 		Type type = parseType();
 		String name = accept(ID);
@@ -269,7 +269,7 @@ public final class Parser {
 		int line = currentToken.line;
 		int column = currentToken.column;
 		
-		// ’var’ type ID ’;’
+		// 'var' type ID ';'
 		accept(VAR);
 		Type type = parseType();
 		String name = accept(ID);
