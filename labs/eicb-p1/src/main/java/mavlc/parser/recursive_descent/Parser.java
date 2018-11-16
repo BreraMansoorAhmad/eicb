@@ -603,7 +603,7 @@ public final class Parser {
   /**
    * Parses a compare expression
    *
-   * Parses an expression of the form:
+   * <p>Parses an expression of the form:
    *
    * <pre>
    * expression ::= addSub (( '>' | '<' | '<=' | '>=' | '==' | '!=' ) addSub)*
@@ -619,17 +619,31 @@ public final class Parser {
     // addSub (( '>' | '<' | '<=' | '>=' | '==' | '!=' ) addSub)*
     Expression expression = parseAddSub();
     Comparison type;
-    out: while (true) {
+    out:
+    while (true) {
       // find out what type of comparison this is.
       switch (currentToken.type) {
-        case RANGLE:    type = GREATER; break;
-        case LANGLE:    type = LESS;    break;
-        case CMPLE:     type = LESS_EQUAL;  break;
-        case CMPGE:     type = GREATER_EQUAL;   break;
-        case CMPEQ:     type = EQUAL;   break;
-        case CMPNE:     type = NOT_EQUAL;   break;
-        // well, shit, if this isn't a comparison at all we're done.
-        default: break out;
+        case RANGLE:
+          type = GREATER;
+          break;
+        case LANGLE:
+          type = LESS;
+          break;
+        case CMPLE:
+          type = LESS_EQUAL;
+          break;
+        case CMPGE:
+          type = GREATER_EQUAL;
+          break;
+        case CMPEQ:
+          type = EQUAL;
+          break;
+        case CMPNE:
+          type = NOT_EQUAL;
+          break;
+          // well, shit, if this isn't a comparison at all we're done.
+        default:
+          break out;
       }
 
       // accept the comparison token and update expression.
