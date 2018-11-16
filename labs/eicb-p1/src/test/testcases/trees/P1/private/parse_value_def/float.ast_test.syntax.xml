@@ -28,6 +28,6 @@
     </function>
     <records class="linked-list"/>
   </AST>
-  <testFile>value_definition1.mavl</testFile>
+  <testFile>float.mavl</testFile>
   <onlySyntax>true</onlySyntax>
 </mavlc.test__wrapper.ASTTestWrapper>
