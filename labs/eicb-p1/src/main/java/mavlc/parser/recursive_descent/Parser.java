@@ -313,28 +313,32 @@ public final class Parser {
 	 * @throws SyntaxError
 	 */
 	private VariableAssignment parseAssign(String name, int line, int column) throws SyntaxError {
+        // ( ( '[' expr ']' ( '[' expr ']')? | @ ID)? '=' expr
 		switch(currentToken.type) {
 			case LBRACKET: 
+                // my_vector[1] = 5
 				acceptIt();
 				parseExpr();
 				accept(RBRACKET);
 				if(currentToken.type == LBRACKET) {
+                    // my_matrix[1][3] = 9
 					acceptIt();
 					parseExpr();
 					accept(RBRACKET);
 				}
 				break;
 			case AT: 
+                // my_struct@number = 5
 				acceptIt();
 				accept(ID);
 				break;
 			default:
+                // my_variable = 9
 				break;
 		}
 		
 		accept(ASSIGN);
 		return new VariableAssignment(line, column, new LeftHandIdentifier(line, column, name), parseExpr());
-		
 	}
 
 	private CallExpression parseCall(String name, int line, int column) {
