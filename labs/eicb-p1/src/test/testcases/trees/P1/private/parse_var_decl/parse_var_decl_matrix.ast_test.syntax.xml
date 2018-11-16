@@ -1,0 +1,40 @@
+<mavlc.test__wrapper.ASTTestWrapper>
+  <srcLine>-1</srcLine>
+  <srcColumn>-1</srcColumn>
+  <AST>
+    <srcLine>1</srcLine>
+    <srcColumn>0</srcColumn>
+    <function>
+      <srcLine>1</srcLine>
+      <srcColumn>0</srcColumn>
+      <name>main</name>
+      <returnType class="voidType"/>
+      <parameters/>
+      <functionBody>
+        <varDecl>
+          <srcLine>2</srcLine>
+          <srcColumn>4</srcColumn>
+          <type class="matrixType">
+            <elemType class="intType"/>
+            <xDimExpr class="intVal">
+              <srcLine>2</srcLine>
+              <srcColumn>20</srcColumn>
+              <val>9</val>
+            </xDimExpr>
+            <yDimExpr class="intVal">
+              <srcLine>2</srcLine>
+              <srcColumn>23</srcColumn>
+              <val>4</val>
+            </yDimExpr>
+          </type>
+          <name>mat</name>
+          <localBaseOffset>0</localBaseOffset>
+        </varDecl>
+      </functionBody>
+      <sourceCodeOffset>-1</sourceCodeOffset>
+    </function>
+    <records class="linked-list"/>
+  </AST>
+  <testFile>parse_var_decl_matrix.mavl</testFile>
+  <onlySyntax>true</onlySyntax>
+</mavlc.test__wrapper.ASTTestWrapper>
