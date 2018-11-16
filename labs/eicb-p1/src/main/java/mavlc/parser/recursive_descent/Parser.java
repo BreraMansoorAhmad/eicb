@@ -30,7 +30,7 @@ import static mavlc.parser.recursive_descent.Token.TokenType.*;
 /* 
  *
  * EiCB group number: 43
- * Names and student ID numbers of group members: Michael Matthe (2716677), Viola Hofmeister (ID), Patrick Elsen (ID)
+ * Names and student ID numbers of group members: Michael Matthe (2716677), Viola Hofmeister (ID), Patrick Elsen (2656300)
  */
 
 /**
@@ -579,7 +579,8 @@ public final class Parser {
 	private Expression parseAddSub() throws SyntaxError {
 		int line = currentToken.line;
 		int column = currentToken.column;
-		
+
+		// mulDiv (('+' | '-') mulDiv)*
 		Expression expression = parseMulDiv();
 		while (currentToken.type == ADD || currentToken.type == SUB) {
 			switch(currentToken.type) {
@@ -600,7 +601,8 @@ public final class Parser {
 	private Expression parseMulDiv() throws SyntaxError {
 		int line = currentToken.line;
 		int column = currentToken.column;
-		
+
+		// unaryMinus (('*' | '/') unaryMinus)*
 		Expression expression = parseUnaryMinus();
 		while (currentToken.type == MULT || currentToken.type == DIV) {
 			switch(currentToken.type) {
