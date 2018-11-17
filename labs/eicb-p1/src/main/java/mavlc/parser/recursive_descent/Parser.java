@@ -493,13 +493,13 @@ public final class Parser {
     accept(RPAREN);
     Statement ifStatement = parseStatement();
 
-    if (currentToken.type == ELSE) {
-      acceptIt();
-      Statement elseStatement = parseStatement();
-      return new IfStatement(line, column, expr, ifStatement, elseStatement);
-    } else {
+    if (currentToken.type != ELSE) {
       return new IfStatement(line, column, expr, ifStatement);
     }
+
+    acceptIt();
+    Statement elseStatement = parseStatement();
+    return new IfStatement(line, column, expr, ifStatement, elseStatement);
   }
 
   /**
