@@ -34,7 +34,7 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 ## Übungen
 
 - [X]  Theorieblatt 1 (29.10.2018 – 04.11.2018). [Handout](https://moodle.informatik.tu-darmstadt.de/mod/resource/view.php?id=16467).
-    - [X] [Abgabe](exercises/solution01.pdf).
+    - [X] [Abgabe](exercises/solution01.pdf). Bewertung: 31/40.
 - [ ]  Praktikum 1 (Abgabe 18.11.2018).
 - [ ]  Theorieblatt 2 (Abgabe 02.12.2018).
 - [ ]  Praktikum 2 (Abgabe 16.12.2018).
