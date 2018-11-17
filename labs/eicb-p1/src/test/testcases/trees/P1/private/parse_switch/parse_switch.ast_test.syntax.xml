@@ -1,0 +1,86 @@
+<mavlc.test__wrapper.ASTTestWrapper>
+  <srcLine>-1</srcLine>
+  <srcColumn>-1</srcColumn>
+  <AST>
+    <srcLine>1</srcLine>
+    <srcColumn>0</srcColumn>
+    <function>
+      <srcLine>1</srcLine>
+      <srcColumn>0</srcColumn>
+      <name>main</name>
+      <returnType class="voidType"/>
+      <parameters/>
+      <functionBody>
+        <switch>
+          <srcLine>2</srcLine>
+          <srcColumn>4</srcColumn>
+          <testExpression class="intVal">
+            <srcLine>2</srcLine>
+            <srcColumn>11</srcColumn>
+            <val>5</val>
+          </testExpression>
+          <cases>
+            <case>
+              <srcLine>3</srcLine>
+              <srcColumn>8</srcColumn>
+              <statement class="callStmt">
+                <srcLine>3</srcLine>
+                <srcColumn>16</srcColumn>
+                <call>
+                  <srcLine>3</srcLine>
+                  <srcColumn>16</srcColumn>
+                  <name>foo</name>
+                  <actualParameters/>
+                </call>
+              </statement>
+              <conditionExpr class="intVal">
+                <srcLine>3</srcLine>
+                <srcColumn>13</srcColumn>
+                <val>9</val>
+              </conditionExpr>
+            </case>
+            <case>
+              <srcLine>4</srcLine>
+              <srcColumn>8</srcColumn>
+              <statement class="callStmt">
+                <srcLine>4</srcLine>
+                <srcColumn>16</srcColumn>
+                <call>
+                  <srcLine>4</srcLine>
+                  <srcColumn>16</srcColumn>
+                  <name>bar</name>
+                  <actualParameters/>
+                </call>
+              </statement>
+              <conditionExpr class="intVal">
+                <srcLine>4</srcLine>
+                <srcColumn>13</srcColumn>
+                <val>0</val>
+              </conditionExpr>
+            </case>
+          </cases>
+          <defaultCases>
+            <default>
+              <srcLine>5</srcLine>
+              <srcColumn>8</srcColumn>
+              <statement class="callStmt">
+                <srcLine>5</srcLine>
+                <srcColumn>17</srcColumn>
+                <call>
+                  <srcLine>5</srcLine>
+                  <srcColumn>17</srcColumn>
+                  <name>baz</name>
+                  <actualParameters/>
+                </call>
+              </statement>
+            </default>
+          </defaultCases>
+        </switch>
+      </functionBody>
+      <sourceCodeOffset>-1</sourceCodeOffset>
+    </function>
+    <records class="linked-list"/>
+  </AST>
+  <testFile>parse_switch.mavl</testFile>
+  <onlySyntax>true</onlySyntax>
+</mavlc.test__wrapper.ASTTestWrapper>

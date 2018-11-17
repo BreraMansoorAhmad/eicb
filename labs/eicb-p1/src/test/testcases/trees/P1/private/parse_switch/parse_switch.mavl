@@ -1,0 +1,7 @@
+function void main() {
+    switch(5) {
+        case 9: foo();
+        case 0: bar();
+        default: baz();
+    }
+}
