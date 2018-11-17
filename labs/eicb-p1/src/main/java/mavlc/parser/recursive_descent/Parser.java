@@ -30,7 +30,7 @@ import mavlc.parser.recursive_descent.Token.TokenType;
 /* EiCB group number: 43
  * Authors: 
  * - Michael Matthe (2716677)
- * - Viola Hofmeister (ID)
+ * - Viola Hofmeister (2684741)
  * - Patrick Elsen (2656300)
  */
 
