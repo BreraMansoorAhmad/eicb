@@ -493,10 +493,12 @@ public final class Parser {
     accept(RPAREN);
     Statement ifStatement = parseStatement();
 
+    // if there is no else statement, we're done here.
     if (currentToken.type != ELSE) {
       return new IfStatement(line, column, expr, ifStatement);
     }
 
+    // parse else statement
     acceptIt();
     Statement elseStatement = parseStatement();
     return new IfStatement(line, column, expr, ifStatement, elseStatement);
@@ -514,11 +516,14 @@ public final class Parser {
 
     SwitchStatement switchStatement = new SwitchStatement(line, column);
 
+    // parse test expression
     accept(SWITCH);
     accept(LPAREN);
     switchStatement.setTestExpression(parseExpr());
     accept(RPAREN);
     accept(LBRACE);
+
+    // parse cases
     while (currentToken.type != RBRACE) {
       switch (currentToken.type) {
         case CASE:
@@ -529,6 +534,7 @@ public final class Parser {
           break;
       }
     }
+
     acceptIt();
     return switchStatement;
   }
