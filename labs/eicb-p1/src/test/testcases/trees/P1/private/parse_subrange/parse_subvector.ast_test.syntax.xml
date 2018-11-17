@@ -1,0 +1,76 @@
+<mavlc.test__wrapper.ASTTestWrapper>
+  <srcLine>-1</srcLine>
+  <srcColumn>-1</srcColumn>
+  <AST>
+    <srcLine>1</srcLine>
+    <srcColumn>0</srcColumn>
+    <function>
+      <srcLine>1</srcLine>
+      <srcColumn>0</srcColumn>
+      <name>main</name>
+      <returnType class="voidType"/>
+      <parameters/>
+      <functionBody>
+        <return>
+          <srcLine>2</srcLine>
+          <srcColumn>4</srcColumn>
+          <returnValue class="subVector">
+            <srcLine>2</srcLine>
+            <srcColumn>11</srcColumn>
+            <struct class="idRef">
+              <srcLine>2</srcLine>
+              <srcColumn>11</srcColumn>
+              <idName>vec</idName>
+            </struct>
+            <base class="addition">
+              <srcLine>2</srcLine>
+              <srcColumn>19</srcColumn>
+              <leftOp class="idRef">
+                <srcLine>2</srcLine>
+                <srcColumn>19</srcColumn>
+                <idName>i</idName>
+              </leftOp>
+              <rightOp class="intVal">
+                <srcLine>2</srcLine>
+                <srcColumn>21</srcColumn>
+                <val>2</val>
+              </rightOp>
+            </base>
+            <start class="addition">
+              <srcLine>2</srcLine>
+              <srcColumn>15</srcColumn>
+              <leftOp class="intVal">
+                <srcLine>2</srcLine>
+                <srcColumn>15</srcColumn>
+                <val>1</val>
+              </leftOp>
+              <rightOp class="intVal">
+                <srcLine>2</srcLine>
+                <srcColumn>17</srcColumn>
+                <val>1</val>
+              </rightOp>
+            </start>
+            <end class="multiplication">
+              <srcLine>2</srcLine>
+              <srcColumn>23</srcColumn>
+              <leftOp class="intVal">
+                <srcLine>2</srcLine>
+                <srcColumn>23</srcColumn>
+                <val>3</val>
+              </leftOp>
+              <rightOp class="intVal">
+                <srcLine>2</srcLine>
+                <srcColumn>25</srcColumn>
+                <val>1</val>
+              </rightOp>
+            </end>
+          </returnValue>
+        </return>
+      </functionBody>
+      <sourceCodeOffset>-1</sourceCodeOffset>
+    </function>
+    <records class="linked-list"/>
+  </AST>
+  <testFile>parse_subvector.mavl</testFile>
+  <onlySyntax>true</onlySyntax>
+</mavlc.test__wrapper.ASTTestWrapper>
