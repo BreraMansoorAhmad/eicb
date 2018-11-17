@@ -648,7 +648,13 @@ public final class Parser {
    * <p>Parses an expression of the form:
    *
    * <pre>
-   * expression ::= addSub (( '>' | '<' | '<=' | '>=' | '==' | '!=' ) addSub)*
+   * addSub (( '&gt;' | '&lt;' | '&lt;=' | '&gt;=' | '==' | '!=' ) addSub)*
+   * </pre>
+   *
+   * <p>Example:
+   *
+   * <pre>
+   * 5 &lt; 3 == true
    * </pre>
    *
    * @return Expression
@@ -658,7 +664,6 @@ public final class Parser {
     int line = currentToken.line;
     int column = currentToken.column;
 
-    // addSub (( '>' | '<' | '<=' | '>=' | '==' | '!=' ) addSub)*
     Expression expression = parseAddSub();
     Comparison type;
     out:
@@ -688,7 +693,7 @@ public final class Parser {
           break out;
       }
 
-      // accept the comparison token and update expression.
+      // this is a comparison of `type`, so we update the expression.
       acceptIt();
       expression = new Compare(line, column, expression, parseAddSub(), type);
     }
