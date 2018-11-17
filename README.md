@@ -30,6 +30,15 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 *   2018-10-16: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181016.avi).
 *   2018-10-23: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181023.mp4).
 *   2018-10-30: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181030.mp4).
+*   2018-11-06: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181106.mp4).
+*   2018-11-13: Multiple Technikpannen, Vorjahr: [ab 1h09](http://www.esa.cs.tu-darmstadt.de/campus/EiCB-20171108.mp4), [bis 1h22](http://www.esa.cs.tu-darmstadt.de/campus/EiCB-20171115.mp4).
+
+## Folien
+
+- [ ] Organisation: [PDF](https://moodle.informatik.tu-darmstadt.de/pluginfile.php/92004/mod_resource/content/0/orga_slides_studenten.pdf).
+- [ ] Beschreibung von Programmiersprachen: [PDF](https://www.esa.informatik.tu-darmstadt.de/twiki/pub/Lectures/EiCB18De/intro-handout.pdf).
+- [ ] Syntaktische Analyse: [PDF](https://www.esa.informatik.tu-darmstadt.de/twiki/pub/Lectures/EiCB18De/lexparse-handout.pdf).
+- [ ] Kontextanalyse: [PDF](https://www.esa.informatik.tu-darmstadt.de/twiki/pub/Lectures/EiCB18De/contextanalysis-handout.pdf).
 
 ## Übungen
 
@@ -40,12 +49,6 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 - [ ]  Praktikum 1 (Abgabe 18.11.2018).
 - [ ]  Praktikum 2 (Abgabe 16.12.2018).
 - [ ]  Praktikum 3 (Abgabe 03.02.2019).
-
-## Folien
-
-*   Organisaton: [PDF](https://moodle.informatik.tu-darmstadt.de/pluginfile.php/92004/mod_resource/content/0/orga_slides_studenten.pdf).
-*   Beschreibung von Programmiersprachen: [PDF](https://www.esa.informatik.tu-darmstadt.de/twiki/pub/Lectures/EiCB18De/intro-handout.pdf).
-*   Syntaktische Analyse: [PDF](https://www.esa.informatik.tu-darmstadt.de/twiki/pub/Lectures/EiCB18De/lexparse-handout.pdf).
 
 ## Literatur
 
