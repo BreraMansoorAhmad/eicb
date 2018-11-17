@@ -288,14 +288,25 @@ public final class Parser {
   /**
    * Parses a value definition.
    *
-   * @return parsed ValueDefinition
-   * @throws SyntaxError, if a parsing error occurred
+   * A value definition has the form:
+   *
+   * <pre>
+   * 'val' type ID '=' expr ';'
+   * </pre>
+   *
+   * An example for such a definition would be:
+   *
+   * <pre>
+   * val float pi = 3.14;
+   * </pre>
+   *
+   * @return ValueDefinition
+   * @throws SyntaxError, if a parsing error occurred.
    */
   private ValueDefinition parseValueDef() throws SyntaxError {
     int line = currentToken.line;
     int column = currentToken.column;
 
-    // 'val' type ID '=' expr ';'
     accept(VAL);
     Type type = parseType();
     String name = accept(ID);
@@ -309,6 +320,18 @@ public final class Parser {
   /**
    * Parses a variable declaration.
    *
+   * A variable declaration has the form
+   *
+   * <pre>
+   * 'var' type ID ';'
+   * </pre>
+   *
+   * An example for such a declaration would be:
+   *
+   * <pre>
+   * var int count;
+   * </pre>
+   *
    * @return VariableDeclaration
    * @throws SyntaxError
    */
@@ -316,7 +339,6 @@ public final class Parser {
     int line = currentToken.line;
     int column = currentToken.column;
 
-    // 'var' type ID ';'
     accept(VAR);
     Type type = parseType();
     String name = accept(ID);
@@ -350,18 +372,33 @@ public final class Parser {
   }
 
   /**
-   * Parses a variable assignment.
+   * Parses the right side (after the identifier) of a variable assignment.
    *
-   * @param name: name of the variable
-   * @param line: the line in which the variable is specified
-   * @param column: the column in which the variable is specified
+   * Variable Assignment has the form:
+   *
+   * <pre>
+   * ID (('[' expr ']' ('[' expr ']')? | '@' ID)? '=' expr ';'
+   * </pre>
+   *
+   * An example statement would be:
+   *
+   * <pre>
+   * my_vector[5] = 9;
+   * </pre>
+   *
+   * This pases the right part of this, everything after the `ID` except the
+   * semicolon.
+   *
+   * @see parseAssignOrCall()
+   * @param name: Name of the variable that is assigned.
+   * @param line: Line on which the variable is specified.
+   * @param column: Column in which the variable is specified.
    * @return VariableAssignment
    * @throws SyntaxError
    */
   private VariableAssignment parseAssign(String name, int line, int column) throws SyntaxError {
     LeftHandIdentifier lhs;
 
-    // ( ( '[' expr ']' ( '[' expr ']')? | @ ID)? '=' expr
     switch (currentToken.type) {
       case LBRACKET:
         // my_vector[1] = 5
@@ -391,6 +428,7 @@ public final class Parser {
 
     accept(ASSIGN);
     Expression expr = parseExpr();
+
     return new VariableAssignment(line, column, lhs, expr);
   }
 
