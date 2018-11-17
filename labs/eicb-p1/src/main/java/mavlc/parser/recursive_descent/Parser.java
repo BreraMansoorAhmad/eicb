@@ -408,9 +408,8 @@ public final class Parser {
         if (currentToken.type == LBRACKET) {
           // my_matrix[1][3] = 9
           acceptIt();
-          Expression y = parseExpr();
+          lhs = new MatrixLHSIdentifier(line, column, name, x, parseExpr());
           accept(RBRACKET);
-          lhs = new MatrixLHSIdentifier(line, column, name, x, y);
         } else {
           lhs = new VectorLHSIdentifier(line, column, name, x);
         }
