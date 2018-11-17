@@ -585,7 +585,7 @@ public final class Parser {
     int column = currentToken.column;
     CompoundStatement compoundStatement = new CompoundStatement(line, column);
     accept(LBRACE);
-    
+
     // read statements
     while (currentToken.type != RBRACE) {
       compoundStatement.addStatement(parseStatement());
