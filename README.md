@@ -27,24 +27,28 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 
 ## Vorlesungen
 
-*   2018-10-16: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181016.avi).
-*   2018-10-23: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181023.mp4).
-*   2018-10-30: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181030.mp4).
-
-## Übungen
-
-*   Theorieblatt 1 (29.10.2018 – 04.11.2018). [Handout](https://moodle.informatik.tu-darmstadt.de/mod/resource/view.php?id=16467). [Solution](exercises/solution01.pdf).
-*   Praktikum 1 (05.11.2018 – 18.11.2018).
-*   Theorieblatt 2 (26.11.2018 – 02.12.2018).
-*   Praktikum 2 (03.12.2018 – 16.12.2018).
-*   Theorieblatt 3 (14.01.2019 – 20.01.2019).
-*   Praktikum 3 (21.01.2019 – 03.02.2019).
+- [ ] 2018-10-16: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181016.avi).
+- [ ] 2018-10-23: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181023.mp4).
+- [ ] 2018-10-30: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181030.mp4).
+- [ ] 2018-11-06: [Aufzeichnung](http://www.esa.cs.tu-darmstadt.de/campus/C1-20181106.mp4).
+- [ ] 2018-11-13: Multiple Technikpannen, Vorjahr: [ab 1h09](http://www.esa.cs.tu-darmstadt.de/campus/EiCB-20171108.mp4), [bis 1h22](http://www.esa.cs.tu-darmstadt.de/campus/EiCB-20171115.mp4).
 
 ## Folien
 
-*   Organisaton: [PDF](https://moodle.informatik.tu-darmstadt.de/pluginfile.php/92004/mod_resource/content/0/orga_slides_studenten.pdf).
-*   Beschreibung von Programmiersprachen: [PDF](https://www.esa.informatik.tu-darmstadt.de/twiki/pub/Lectures/EiCB18De/intro-handout.pdf).
-*   Syntaktische Analyse: [PDF](https://www.esa.informatik.tu-darmstadt.de/twiki/pub/Lectures/EiCB18De/lexparse-handout.pdf).
+- [ ] Organisation: [PDF](https://moodle.informatik.tu-darmstadt.de/pluginfile.php/92004/mod_resource/content/0/orga_slides_studenten.pdf).
+- [ ] Beschreibung von Programmiersprachen: [PDF](https://www.esa.informatik.tu-darmstadt.de/twiki/pub/Lectures/EiCB18De/intro-handout.pdf).
+- [ ] Syntaktische Analyse: [PDF](https://www.esa.informatik.tu-darmstadt.de/twiki/pub/Lectures/EiCB18De/lexparse-handout.pdf).
+- [ ] Kontextanalyse: [PDF](https://www.esa.informatik.tu-darmstadt.de/twiki/pub/Lectures/EiCB18De/contextanalysis-handout.pdf).
+
+## Übungen
+
+- [X]  Theorieblatt 1 (29.10.2018 – 04.11.2018). [Handout](https://moodle.informatik.tu-darmstadt.de/mod/resource/view.php?id=16467).
+    - [X] [Abgabe](exercises/solution01.pdf). Bewertung: 31/40.
+- [ ]  Theorieblatt 2 (Abgabe 02.12.2018).
+- [ ]  Theorieblatt 3 (Abgabe 20.01.2019).
+- [ ]  Praktikum 1 (Abgabe 18.11.2018).
+- [ ]  Praktikum 2 (Abgabe 16.12.2018).
+- [ ]  Praktikum 3 (Abgabe 03.02.2019).
 
 ## Literatur
 
