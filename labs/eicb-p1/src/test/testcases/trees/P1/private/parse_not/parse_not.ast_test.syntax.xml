@@ -1,0 +1,34 @@
+<mavlc.test__wrapper.ASTTestWrapper>
+  <srcLine>-1</srcLine>
+  <srcColumn>-1</srcColumn>
+  <AST>
+    <srcLine>1</srcLine>
+    <srcColumn>0</srcColumn>
+    <function>
+      <srcLine>1</srcLine>
+      <srcColumn>0</srcColumn>
+      <name>main</name>
+      <returnType class="voidType"/>
+      <parameters/>
+      <functionBody>
+        <return>
+          <srcLine>2</srcLine>
+          <srcColumn>4</srcColumn>
+          <returnValue class="boolNot">
+            <srcLine>2</srcLine>
+            <srcColumn>11</srcColumn>
+            <op class="boolVal">
+              <srcLine>2</srcLine>
+              <srcColumn>12</srcColumn>
+              <val>true</val>
+            </op>
+          </returnValue>
+        </return>
+      </functionBody>
+      <sourceCodeOffset>-1</sourceCodeOffset>
+    </function>
+    <records class="linked-list"/>
+  </AST>
+  <testFile>parse_not.mavl</testFile>
+  <onlySyntax>true</onlySyntax>
+</mavlc.test__wrapper.ASTTestWrapper>
