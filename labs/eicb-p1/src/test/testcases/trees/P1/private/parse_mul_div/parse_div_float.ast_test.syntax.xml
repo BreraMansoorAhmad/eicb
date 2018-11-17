@@ -1,0 +1,52 @@
+<mavlc.test__wrapper.ASTTestWrapper>
+  <srcLine>-1</srcLine>
+  <srcColumn>-1</srcColumn>
+  <AST>
+    <srcLine>1</srcLine>
+    <srcColumn>0</srcColumn>
+    <function>
+      <srcLine>1</srcLine>
+      <srcColumn>0</srcColumn>
+      <name>main</name>
+      <returnType class="voidType"/>
+      <parameters/>
+      <functionBody>
+        <return>
+          <srcLine>2</srcLine>
+          <srcColumn>4</srcColumn>
+          <returnValue class="division">
+            <srcLine>2</srcLine>
+            <srcColumn>11</srcColumn>
+            <leftOp class="division">
+              <srcLine>2</srcLine>
+              <srcColumn>11</srcColumn>
+              <leftOp class="floatVal">
+                <srcLine>2</srcLine>
+                <srcColumn>11</srcColumn>
+                <val>3.134</val>
+              </leftOp>
+              <rightOp class="floatVal">
+                <srcLine>2</srcLine>
+                <srcColumn>19</srcColumn>
+                <val>0.1213</val>
+              </rightOp>
+            </leftOp>
+            <rightOp class="unaryMinus">
+              <srcLine>2</srcLine>
+              <srcColumn>28</srcColumn>
+              <op class="floatVal">
+                <srcLine>2</srcLine>
+                <srcColumn>29</srcColumn>
+                <val>1.0</val>
+              </op>
+            </rightOp>
+          </returnValue>
+        </return>
+      </functionBody>
+      <sourceCodeOffset>-1</sourceCodeOffset>
+    </function>
+    <records class="linked-list"/>
+  </AST>
+  <testFile>parse_div_float.mavl</testFile>
+  <onlySyntax>true</onlySyntax>
+</mavlc.test__wrapper.ASTTestWrapper>
