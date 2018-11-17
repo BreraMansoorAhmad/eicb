@@ -1,0 +1,35 @@
+<mavlc.test__wrapper.ASTTestWrapper>
+  <srcLine>-1</srcLine>
+  <srcColumn>-1</srcColumn>
+  <AST>
+    <srcLine>1</srcLine>
+    <srcColumn>0</srcColumn>
+    <function>
+      <srcLine>1</srcLine>
+      <srcColumn>0</srcColumn>
+      <name>main</name>
+      <returnType class="voidType"/>
+      <parameters/>
+      <functionBody>
+        <if>
+          <srcLine>2</srcLine>
+          <srcColumn>4</srcColumn>
+          <test class="boolVal">
+            <srcLine>2</srcLine>
+            <srcColumn>8</srcColumn>
+            <val>true</val>
+          </test>
+          <thenStatement class="compoundStmt">
+            <srcLine>2</srcLine>
+            <srcColumn>14</srcColumn>
+            <statements/>
+          </thenStatement>
+        </if>
+      </functionBody>
+      <sourceCodeOffset>-1</sourceCodeOffset>
+    </function>
+    <records class="linked-list"/>
+  </AST>
+  <testFile>parse_if_empty.mavl</testFile>
+  <onlySyntax>true</onlySyntax>
+</mavlc.test__wrapper.ASTTestWrapper>
