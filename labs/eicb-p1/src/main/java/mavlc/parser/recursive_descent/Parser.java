@@ -720,7 +720,7 @@ public final class Parser {
     int column = currentToken.column;
 
     Expression expression = parseMulDiv();
-    while (currentToken.type == ADD || currentToken.type == SUB) {
+    out: while (true) {
       switch (currentToken.type) {
         case ADD:
           acceptIt();
@@ -731,7 +731,7 @@ public final class Parser {
           expression = new Subtraction(line, column, expression, parseMulDiv());
           break;
         default:
-          break;
+          break out;
       }
     }
 
