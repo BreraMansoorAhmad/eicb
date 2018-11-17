@@ -584,13 +584,15 @@ public final class Parser {
     int line = currentToken.line;
     int column = currentToken.column;
     CompoundStatement compoundStatement = new CompoundStatement(line, column);
-
     accept(LBRACE);
+    
+    // read statements
     while (currentToken.type != RBRACE) {
       compoundStatement.addStatement(parseStatement());
     }
-    acceptIt();
 
+    // accept right closing brace
+    acceptIt();
     return compoundStatement;
   }
 
@@ -641,10 +643,12 @@ public final class Parser {
     int line = currentToken.line;
     int column = currentToken.column;
 
+    // create a negation if there is a NOT operator
     if (currentToken.type == NOT) {
       acceptIt();
       return new BoolNot(line, column, parseCompare());
     }
+
     return parseCompare();
   }
 
@@ -728,8 +732,8 @@ public final class Parser {
   private Expression parseAddSub() throws SyntaxError {
     int line = currentToken.line;
     int column = currentToken.column;
-
     Expression expression = parseMulDiv();
+
     out:
     while (true) {
       switch (currentToken.type) {
@@ -770,8 +774,8 @@ public final class Parser {
   private Expression parseMulDiv() throws SyntaxError {
     int line = currentToken.line;
     int column = currentToken.column;
-
     Expression expression = parseUnaryMinus();
+
     out:
     while (true) {
       switch (currentToken.type) {
@@ -795,12 +799,12 @@ public final class Parser {
     int line = currentToken.line;
     int column = currentToken.column;
 
-    if (currentToken.type == SUB) {
-      acceptIt();
-      return new UnaryMinus(line, column, parseExponentiation());
-    } else {
+    if (currentToken.type != SUB) {
       return parseExponentiation();
     }
+
+    acceptIt();
+    return new UnaryMinus(line, column, parseExponentiation());
   }
 
   /**
