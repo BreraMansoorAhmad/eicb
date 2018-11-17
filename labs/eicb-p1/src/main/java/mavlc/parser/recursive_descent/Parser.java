@@ -27,10 +27,11 @@ import mavlc.ast.type.*;
 import mavlc.error_reporting.SyntaxError;
 import mavlc.parser.recursive_descent.Token.TokenType;
 
-/*
- *
- * EiCB group number: 43
- * Names and student ID numbers of group members: Michael Matthe (2716677), Viola Hofmeister (ID), Patrick Elsen (2656300)
+/* EiCB group number: 43
+ * Authors: 
+ * - Michael Matthe (2716677)
+ * - Viola Hofmeister (ID)
+ * - Patrick Elsen (2656300)
  */
 
 /** A recursive-descent parser for MAVL. */
