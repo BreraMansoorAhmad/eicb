@@ -1,0 +1,50 @@
+<mavlc.test__wrapper.ASTTestWrapper>
+  <srcLine>-1</srcLine>
+  <srcColumn>-1</srcColumn>
+  <AST>
+    <srcLine>1</srcLine>
+    <srcColumn>0</srcColumn>
+    <function>
+      <srcLine>1</srcLine>
+      <srcColumn>0</srcColumn>
+      <name>main</name>
+      <returnType class="voidType"/>
+      <parameters/>
+      <functionBody>
+        <if>
+          <srcLine>2</srcLine>
+          <srcColumn>4</srcColumn>
+          <test class="boolVal">
+            <srcLine>2</srcLine>
+            <srcColumn>8</srcColumn>
+            <val>true</val>
+          </test>
+          <thenStatement class="callStmt">
+            <srcLine>2</srcLine>
+            <srcColumn>14</srcColumn>
+            <call>
+              <srcLine>2</srcLine>
+              <srcColumn>14</srcColumn>
+              <name>yes</name>
+              <actualParameters/>
+            </call>
+          </thenStatement>
+          <elseStatement class="callStmt">
+            <srcLine>2</srcLine>
+            <srcColumn>26</srcColumn>
+            <call>
+              <srcLine>2</srcLine>
+              <srcColumn>26</srcColumn>
+              <name>no</name>
+              <actualParameters/>
+            </call>
+          </elseStatement>
+        </if>
+      </functionBody>
+      <sourceCodeOffset>-1</sourceCodeOffset>
+    </function>
+    <records class="linked-list"/>
+  </AST>
+  <testFile>parse_if.mavl</testFile>
+  <onlySyntax>true</onlySyntax>
+</mavlc.test__wrapper.ASTTestWrapper>
