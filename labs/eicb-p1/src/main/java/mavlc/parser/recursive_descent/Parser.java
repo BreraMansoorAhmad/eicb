@@ -794,6 +794,20 @@ public final class Parser {
   /**
    * Parses an exponentiation expression.
    *
+   * Exponentiation expressions have the form
+   *
+   * <pre>
+   * dim ('^' dim)*
+   * </pre>
+   *
+   * An example of such an expression would be
+   *
+   * <pre>
+   * 2^4.5^9
+   * </pre>
+   *
+   * The important bit is that they are right-associative.
+   *
    * @return Expression
    * @throws SyntaxError
    */
@@ -801,23 +815,14 @@ public final class Parser {
     int line = currentToken.line;
     int column = currentToken.column;
 
-    // dim ('^' dim)*
-    // we push all of the exponents into a stack to make sure they are evaluated
-    // in the correct order.
-    // todo: could we do this recursively?
-    Stack<Expression> exprStack = new Stack<Expression>();
-    exprStack.push(parseDim());
-    while (currentToken.type == EXP) {
-      acceptIt();
-      exprStack.push(parseDim());
+    Expression dim = parseDim();
+
+    if(currentToken.type != EXP) {
+      return dim;
     }
 
-    Expression expression = exprStack.pop();
-    while (!exprStack.empty()) {
-      expression = new Exponentiation(line, column, exprStack.pop(), expression);
-    }
-
-    return expression;
+    acceptIt();
+    return new Exponentiation(line, column, dim, parseExponentiation());
   }
 
   private Expression parseDim() throws SyntaxError {
