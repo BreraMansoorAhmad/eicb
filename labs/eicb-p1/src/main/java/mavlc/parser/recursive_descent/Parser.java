@@ -741,6 +741,18 @@ public final class Parser {
   /**
    * Parses a multiplication / division expression.
    *
+   * These expressions have the form:
+   *
+   * <pre>
+   * unaryMinus (('*' | '/') unaryMinus)*
+   * </pre>
+   *
+   * An example of such an expression is
+   *
+   * <pre>
+   * 5 * 9 / 2
+   * </pre>
+   *
    * @return Expression
    * @throws SyntaxError
    */
@@ -748,9 +760,8 @@ public final class Parser {
     int line = currentToken.line;
     int column = currentToken.column;
 
-    // unaryMinus (('*' | '/') unaryMinus)*
     Expression expression = parseUnaryMinus();
-    while (currentToken.type == MULT || currentToken.type == DIV) {
+    out: while (true) {
       switch (currentToken.type) {
         case MULT:
           acceptIt();
@@ -760,6 +771,8 @@ public final class Parser {
           acceptIt();
           expression = new Division(line, column, expression, parseUnaryMinus());
           break;
+        default:
+          break out;
       }
     }
 
