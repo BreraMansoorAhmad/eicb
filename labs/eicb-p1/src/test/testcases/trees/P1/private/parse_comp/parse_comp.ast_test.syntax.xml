@@ -1,0 +1,90 @@
+<mavlc.test__wrapper.ASTTestWrapper>
+  <srcLine>-1</srcLine>
+  <srcColumn>-1</srcColumn>
+  <AST>
+    <srcLine>1</srcLine>
+    <srcColumn>0</srcColumn>
+    <function>
+      <srcLine>1</srcLine>
+      <srcColumn>0</srcColumn>
+      <name>main</name>
+      <returnType class="voidType"/>
+      <parameters/>
+      <functionBody>
+        <return>
+        <srcLine>2</srcLine>
+        <srcColumn>4</srcColumn>
+        <returnValue class="compare">
+          <srcLine>2</srcLine>
+          <srcColumn>11</srcColumn>
+          <leftOp class="compare">
+            <srcLine>2</srcLine>
+            <srcColumn>11</srcColumn>
+            <leftOp class="compare">
+              <srcLine>2</srcLine>
+              <srcColumn>11</srcColumn>
+              <leftOp class="compare">
+                <srcLine>2</srcLine>
+                <srcColumn>11</srcColumn>
+                <leftOp class="compare">
+                  <srcLine>2</srcLine>
+                  <srcColumn>11</srcColumn>
+                  <leftOp class="compare">
+                    <srcLine>2</srcLine>
+                    <srcColumn>11</srcColumn>
+                    <leftOp class="intVal">
+                      <srcLine>2</srcLine>
+                      <srcColumn>11</srcColumn>
+                      <val>4</val>
+                    </leftOp>
+                    <rightOp class="intVal">
+                      <srcLine>2</srcLine>
+                      <srcColumn>15</srcColumn>
+                      <val>2</val>
+                    </rightOp>
+                    <comparator>GREATER</comparator>
+                  </leftOp>
+                  <rightOp class="intVal">
+                    <srcLine>2</srcLine>
+                    <srcColumn>19</srcColumn>
+                    <val>5</val>
+                  </rightOp>
+                  <comparator>LESS</comparator>
+                </leftOp>
+                <rightOp class="intVal">
+                  <srcLine>2</srcLine>
+                  <srcColumn>24</srcColumn>
+                  <val>9</val>
+                </rightOp>
+                <comparator>LESS_EQUAL</comparator>
+              </leftOp>
+              <rightOp class="intVal">
+                <srcLine>2</srcLine>
+                <srcColumn>29</srcColumn>
+                <val>3</val>
+              </rightOp>
+              <comparator>GREATER_EQUAL</comparator>
+            </leftOp>
+            <rightOp class="boolVal">
+              <srcLine>2</srcLine>
+              <srcColumn>34</srcColumn>
+              <val>true</val>
+            </rightOp>
+            <comparator>EQUAL</comparator>
+          </leftOp>
+          <rightOp class="intVal">
+            <srcLine>2</srcLine>
+            <srcColumn>42</srcColumn>
+            <val>0</val>
+          </rightOp>
+          <comparator>NOT_EQUAL</comparator>
+        </returnValue>
+        </return>
+      </functionBody>
+      <sourceCodeOffset>-1</sourceCodeOffset>
+    </function>
+    <records class="linked-list"/>
+  </AST>
+  <testFile>parse_comp.mavl</testFile>
+  <onlySyntax>true</onlySyntax>
+</mavlc.test__wrapper.ASTTestWrapper>
