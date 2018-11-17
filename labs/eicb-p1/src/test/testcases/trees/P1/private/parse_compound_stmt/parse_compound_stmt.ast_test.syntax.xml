@@ -1,0 +1,49 @@
+<mavlc.test__wrapper.ASTTestWrapper>
+  <srcLine>-1</srcLine>
+  <srcColumn>-1</srcColumn>
+  <AST>
+    <srcLine>1</srcLine>
+    <srcColumn>0</srcColumn>
+    <function>
+      <srcLine>1</srcLine>
+      <srcColumn>0</srcColumn>
+      <name>main</name>
+      <returnType class="voidType"/>
+      <parameters/>
+      <functionBody>
+        <valDef>
+          <srcLine>2</srcLine>
+          <srcColumn>4</srcColumn>
+          <type class="intType"/>
+          <name>i</name>
+          <localBaseOffset>0</localBaseOffset>
+          <value class="intVal">
+            <srcLine>2</srcLine>
+            <srcColumn>16</srcColumn>
+            <val>0</val>
+          </value>
+        </valDef>
+        <varDecl>
+          <srcLine>3</srcLine>
+          <srcColumn>4</srcColumn>
+          <type class="floatType"/>
+          <name>j</name>
+          <localBaseOffset>0</localBaseOffset>
+        </varDecl>
+        <return>
+          <srcLine>4</srcLine>
+          <srcColumn>4</srcColumn>
+          <returnValue class="idRef">
+            <srcLine>4</srcLine>
+            <srcColumn>11</srcColumn>
+            <idName>i</idName>
+          </returnValue>
+        </return>
+      </functionBody>
+      <sourceCodeOffset>-1</sourceCodeOffset>
+    </function>
+    <records class="linked-list"/>
+  </AST>
+  <testFile>parse_compound_stmt.mavl</testFile>
+  <onlySyntax>true</onlySyntax>
+</mavlc.test__wrapper.ASTTestWrapper>
