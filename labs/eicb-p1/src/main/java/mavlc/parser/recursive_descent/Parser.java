@@ -700,6 +700,18 @@ public final class Parser {
   /**
    * Parses an addition / subtraction expression.
    *
+   * Addition and subtraction expressions have the form:
+   *
+   * <pre>
+   * mulDiv (('+' | '-') mulDiv)*
+   * </pre>
+   *
+   * Ein Beispiel für einen solchen Ausdruck ist
+   *
+   * <pre>
+   * 2 + 18 - 5;
+   * </pre>
+   *
    * @return Expression
    * @throws SyntaxError
    */
@@ -707,7 +719,6 @@ public final class Parser {
     int line = currentToken.line;
     int column = currentToken.column;
 
-    // mulDiv (('+' | '-') mulDiv)*
     Expression expression = parseMulDiv();
     while (currentToken.type == ADD || currentToken.type == SUB) {
       switch (currentToken.type) {
