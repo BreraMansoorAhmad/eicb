@@ -1,0 +1,3 @@
+function void main() {
+    return 3.134 - 0.1213 - -1.0;
+}
