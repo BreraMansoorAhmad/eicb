@@ -288,7 +288,7 @@ public final class Parser {
   /**
    * Parses a value definition.
    *
-   * A value definition has the form:
+   * <p>A value definition has the form:
    *
    * <pre>
    * 'val' type ID '=' expr ';'
@@ -320,7 +320,7 @@ public final class Parser {
   /**
    * Parses a variable declaration.
    *
-   * A variable declaration has the form
+   * <p>A variable declaration has the form
    *
    * <pre>
    * 'var' type ID ';'
@@ -374,7 +374,7 @@ public final class Parser {
   /**
    * Parses the right side (after the identifier) of a variable assignment.
    *
-   * Variable Assignment has the form:
+   * <p>Variable Assignment has the form:
    *
    * <pre>
    * ID (('[' expr ']' ('[' expr ']')? | '@' ID)? '=' expr ';'
@@ -386,8 +386,7 @@ public final class Parser {
    * my_vector[5] = 9;
    * </pre>
    *
-   * This pases the right part of this, everything after the `ID` except the
-   * semicolon.
+   * This pases the right part of this, everything after the `ID` except the semicolon.
    *
    * @see parseAssignOrCall()
    * @param name: Name of the variable that is assigned.
@@ -700,7 +699,7 @@ public final class Parser {
   /**
    * Parses an addition / subtraction expression.
    *
-   * Addition and subtraction expressions have the form:
+   * <p>Addition and subtraction expressions have the form:
    *
    * <pre>
    * mulDiv (('+' | '-') mulDiv)*
@@ -720,7 +719,8 @@ public final class Parser {
     int column = currentToken.column;
 
     Expression expression = parseMulDiv();
-    out: while (true) {
+    out:
+    while (true) {
       switch (currentToken.type) {
         case ADD:
           acceptIt();
@@ -741,7 +741,7 @@ public final class Parser {
   /**
    * Parses a multiplication / division expression.
    *
-   * These expressions have the form:
+   * <p>These expressions have the form:
    *
    * <pre>
    * unaryMinus (('*' | '/') unaryMinus)*
@@ -761,7 +761,8 @@ public final class Parser {
     int column = currentToken.column;
 
     Expression expression = parseUnaryMinus();
-    out: while (true) {
+    out:
+    while (true) {
       switch (currentToken.type) {
         case MULT:
           acceptIt();
@@ -794,7 +795,7 @@ public final class Parser {
   /**
    * Parses an exponentiation expression.
    *
-   * Exponentiation expressions have the form
+   * <p>Exponentiation expressions have the form
    *
    * <pre>
    * dim ('^' dim)*
@@ -817,7 +818,7 @@ public final class Parser {
 
     Expression dim = parseDim();
 
-    if(currentToken.type != EXP) {
+    if (currentToken.type != EXP) {
       return dim;
     }
 
