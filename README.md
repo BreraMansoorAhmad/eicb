@@ -47,7 +47,7 @@ Diese Veranstaltung gibt eine praktisch orientierte Einführung in die Grundlage
 - [ ]  Theorieblatt 2 (Abgabe 02.12.2018).
 - [ ]  Theorieblatt 3 (Abgabe 20.01.2019).
 - [X]  Praktikum 1 (Abgabe 18.11.2018).
-    - [X] [Abgabe](labs/eicb-p1/src/main/java/mavlc/parser/recursive_descent/Parser.java). *Noch nicht bewertet*.
+    - [X] [Abgabe](labs/eicb-p1/src/main/java/mavlc/parser/recursive_descent/Parser.java). Bewertung: 80/80.
 - [ ]  Praktikum 2 (Abgabe 16.12.2018).
 - [ ]  Praktikum 3 (Abgabe 03.02.2019).
 
